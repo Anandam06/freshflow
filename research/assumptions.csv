@@ -1,0 +1,31 @@
+id,category,parameter,value,unit,basis,limitation
+A01,SYNTHETIC,default_batches,2000,batches,User brief,Configurable
+A02,SYNTHETIC,default_duration,30,days,User brief,Daily independent allocations
+A03,SYNTHETIC,batch_quantity,200 to 800,kg,Illustrative uniform integer draw,No empirical calibration
+A04,SYNTHETIC,initial_rsl,28 to 100,hours,Illustrative uniform draw,Not a cultivar-specific model
+A05,SYNTHETIC,thermal_Q10,2,ratio,Illustrative coefficient at 20 C,Not fitted from R1
+A06,SYNTHETIC,uncertainty_buffer,6,hours,Conservative engineering margin,Not a statistical confidence interval
+A07,SYNTHETIC,disruption_probability,0.30,fraction,Illustrative Bernoulli draw,Configurable
+A08,SYNTHETIC,event_temperature,30 to 38,C,Uniform on disrupted batches; otherwise 20 C,No weather feed
+A09,SYNTHETIC,event_duration,6,hours,Illustrative thermal exposure,No sensor integration
+A10,SYNTHETIC,retailer_delay,8 to 18,hours,Uniform on disrupted batches; otherwise zero,No routing feed
+A11,SYNTHETIC,safety_hold_probability,0.01,fraction,Independent Bernoulli draw,Known hold enforced in all policies; no pathogen model
+A12,SYNTHETIC,buyer_prices,32;24;16,INR/kg,Retailer;wholesaler;processor,Not mandi quotes
+A13,SYNTHETIC,buyer_travel,12;5;2,hours,Retailer;wholesaler;processor,Illustrative routes
+A14,SYNTHETIC,buyer_minimum_rsl,24;8;2,hours,Retailer;wholesaler;processor,Illustrative quality specifications; not safety thresholds
+A15,SYNTHETIC,buyer_daily_capacity,14000;14000;10000,kg,Retailer;wholesaler;processor,Configurable common multiplier
+A16,SYNTHETIC,transport_cost,2;1.2;0.8,INR/kg,Retailer;wholesaler;processor,Original trip plus new trip charged on rescue
+A17,SYNTHETIC,procurement_cost,10 to 16,INR/kg,Uniform batch draw,Charged for all input kg
+A18,SYNTHETIC,handling_cost,0.5,INR/kg,All input kg,No inventory carryover
+A19,SYNTHETIC,rescue_cost,0.75,INR/kg,Charged per intervention attempt,Separate from transport
+A20,SYNTHETIC,operating_technology_cost,0;0.1;0.15;0.25,INR/kg,M0;M1;M2;M3,Not actual token or hardware billing
+A21,SYNTHETIC,vehicle_payload,1000,kg,One indivisible lot per vehicle,No multi-stop routing
+A22,SYNTHETIC,fleet_daily_capacity,40000,kg,Shared across channels,Configurable common multiplier
+A23,SYNTHETIC,loading_rate,12,batches/hour,Dispatch queue index divided by rate,No calibrated warehouse model
+A24,SYNTHETIC,fulfilment_deadline,24,hours,Queue plus actual route time,Denominator all input batches
+A25,SYNTHETIC,setup_cost,50000,INR,One-off M3 setup assumption,Configurable; excluded from operating profit
+A26,SYNTHETIC,T17,500 kg;52 h RSL;35 C for 6 h;12 h delay,mixed,Separate dedicated demo scenario,Not row T17 in a random dataset
+A27,SYNTHETIC,static_buyer_allocation,50;30;20,percent of batch IDs,Retailer;wholesale;processor fixed buckets,Shared by M0 and M1; not fitted contracts
+C02,CASE,case_baseline_spoilage,25 to 30,percent,User brief,Not forced into synthetic baseline
+C03,CASE,target_spoilage,less than 10,percent,User brief,Must be measured per run
+C04,CASE,target_margin_uplift,12,percent relative,Operational interpretation of user brief,Undefined if baseline margin is nonpositive

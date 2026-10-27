@@ -1,0 +1,209 @@
+{
+  "id": "T17",
+  "version": 2,
+  "status": "awaiting_approval",
+  "evidence_category": "SYNTHETIC",
+  "quantity_kg": 500.0,
+  "initial_rsl_hours": 52.0,
+  "rsl_hours": 35.02943725152286,
+  "rsl_lower_hours": 29.029437251522857,
+  "destination": "Retailer A",
+  "delay_hours": 12.0,
+  "safety_hold": false,
+  "event": {
+    "temperature_c": 35,
+    "duration_hours": 6,
+    "delay_hours": 12,
+    "safety_hold": false
+  },
+  "proposal": {
+    "id": "Wholesale B",
+    "price_inr_kg": 24.0,
+    "travel_hours": 5.0,
+    "minimum_rsl_hours": 8.0,
+    "capacity_kg": 14000.0,
+    "transport_inr_kg": 1.2,
+    "arrival_rsl_lower_hours": 24.029437251522857,
+    "feasible": true,
+    "reasons": [],
+    "available_capacity_kg": 14000.0,
+    "net_proceeds_inr": 11025.0,
+    "rescue_cost_inr_kg": 0.75
+  },
+  "agent_mode": "deterministic",
+  "monitoring": true,
+  "trace": [
+    {
+      "sequence": 1,
+      "timestamp": "2026-10-27T18:11:31.717364+00:00",
+      "tool": "seed",
+      "inputs": {},
+      "result": {
+        "scenario": "illustrative T17; dedicated single-batch capacity"
+      }
+    },
+    {
+      "sequence": 2,
+      "timestamp": "2026-10-27T18:11:31.836730+00:00",
+      "tool": "sense_event",
+      "inputs": {
+        "temperature_c": 35,
+        "duration_hours": 6,
+        "delay_hours": 12,
+        "safety_hold": false
+      },
+      "result": {
+        "rsl_hours": 35.02943725152286,
+        "rsl_lower_hours": 29.029437251522857,
+        "thermal_age_hours": 16.970562748477143,
+        "uncertainty_hours": 6,
+        "method": "synthetic thermal-age proxy; lower bound is not a confidence interval"
+      }
+    },
+    {
+      "sequence": 3,
+      "timestamp": "2026-10-27T18:11:31.849111+00:00",
+      "tool": "inspect_batch",
+      "inputs": {},
+      "result": {
+        "id": "T17",
+        "destination": "Retailer A",
+        "quantity_kg": 500.0,
+        "event": {
+          "temperature_c": 35,
+          "duration_hours": 6,
+          "delay_hours": 12,
+          "safety_hold": false
+        },
+        "safety_hold": false
+      }
+    },
+    {
+      "sequence": 4,
+      "timestamp": "2026-10-27T18:11:31.849124+00:00",
+      "tool": "predict_freshness",
+      "inputs": {},
+      "result": {
+        "rsl_hours": 35.02943725152286,
+        "rsl_lower_hours": 29.029437251522857,
+        "interpretation": "Synthetic quality estimate; safety hold is separate"
+      }
+    },
+    {
+      "sequence": 5,
+      "timestamp": "2026-10-27T18:11:31.849127+00:00",
+      "tool": "check_buyers_routes",
+      "inputs": {},
+      "result": {
+        "buyers": [
+          {
+            "id": "Retailer A",
+            "price_inr_kg": 32.0,
+            "travel_hours": 12.0,
+            "minimum_rsl_hours": 24.0,
+            "capacity_kg": 14000.0,
+            "transport_inr_kg": 2.0
+          },
+          {
+            "id": "Wholesale B",
+            "price_inr_kg": 24.0,
+            "travel_hours": 5.0,
+            "minimum_rsl_hours": 8.0,
+            "capacity_kg": 14000.0,
+            "transport_inr_kg": 1.2
+          },
+          {
+            "id": "Processor C",
+            "price_inr_kg": 16.0,
+            "travel_hours": 2.0,
+            "minimum_rsl_hours": 2.0,
+            "capacity_kg": 10000.0,
+            "transport_inr_kg": 0.8
+          }
+        ],
+        "retailer_delay_hours": 12,
+        "source": "SYNTHETIC dedicated T17 buyer capacities; not live market quotes"
+      }
+    },
+    {
+      "sequence": 6,
+      "timestamp": "2026-10-27T18:11:31.849148+00:00",
+      "tool": "rank_options",
+      "inputs": {},
+      "result": {
+        "options": [
+          {
+            "id": "Wholesale B",
+            "price_inr_kg": 24.0,
+            "travel_hours": 5.0,
+            "minimum_rsl_hours": 8.0,
+            "capacity_kg": 14000.0,
+            "transport_inr_kg": 1.2,
+            "arrival_rsl_lower_hours": 24.029437251522857,
+            "feasible": true,
+            "reasons": [],
+            "available_capacity_kg": 14000.0,
+            "net_proceeds_inr": 11025.0,
+            "rescue_cost_inr_kg": 0.75
+          },
+          {
+            "id": "Processor C",
+            "price_inr_kg": 16.0,
+            "travel_hours": 2.0,
+            "minimum_rsl_hours": 2.0,
+            "capacity_kg": 10000.0,
+            "transport_inr_kg": 0.8,
+            "arrival_rsl_lower_hours": 27.029437251522857,
+            "feasible": true,
+            "reasons": [],
+            "available_capacity_kg": 10000.0,
+            "net_proceeds_inr": 7225.0,
+            "rescue_cost_inr_kg": 0.75
+          },
+          {
+            "id": "Retailer A",
+            "price_inr_kg": 32.0,
+            "travel_hours": 24.0,
+            "minimum_rsl_hours": 24.0,
+            "capacity_kg": 14000.0,
+            "transport_inr_kg": 2.0,
+            "arrival_rsl_lower_hours": 5.029437251522857,
+            "feasible": false,
+            "reasons": [
+              "Insufficient conservative arrival shelf life"
+            ],
+            "available_capacity_kg": 14000.0,
+            "net_proceeds_inr": 14625.0,
+            "rescue_cost_inr_kg": 0.75
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 7,
+      "timestamp": "2026-10-27T18:11:31.849154+00:00",
+      "tool": "check_policy",
+      "inputs": {
+        "destination": "Wholesale B"
+      },
+      "result": {
+        "allowed": true,
+        "requires_human_approval": true,
+        "reasons": [],
+        "destination": "Wholesale B"
+      }
+    },
+    {
+      "sequence": 8,
+      "timestamp": "2026-10-27T18:11:31.849157+00:00",
+      "tool": "propose_action",
+      "inputs": {
+        "destination": "Wholesale B"
+      },
+      "result": {
+        "status": "awaiting_approval",
+        "destination": "Wholesale B"
+      }
+    }
+  ]
+}

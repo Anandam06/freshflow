@@ -1,0 +1,727 @@
+openapi: 3.1.0
+info:
+  title: FreshFlow API
+  description: Synthetic demonstration. All currency INR, mass kg, durations hours.
+    Ratios are fractions, not percentages.
+  version: 1.0.0
+paths:
+  /health:
+    get:
+      summary: Health
+      operationId: health_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/batches:
+    get:
+      summary: Batches
+      operationId: batches_api_v1_batches_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BatchState'
+                type: array
+                title: Response Batches Api V1 Batches Get
+  /api/v1/batches/{batch_id}:
+    get:
+      summary: Batch
+      operationId: batch_api_v1_batches__batch_id__get
+      parameters:
+      - name: batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Batch Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchState'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/batches/{batch_id}/events:
+    post:
+      summary: Event
+      operationId: event_api_v1_batches__batch_id__events_post
+      parameters:
+      - name: batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Batch Id
+      - name: x-operator-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Operator-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchState'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/batches/{batch_id}/investigate:
+    post:
+      summary: Investigation
+      operationId: investigation_api_v1_batches__batch_id__investigate_post
+      parameters:
+      - name: batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Batch Id
+      - name: x-operator-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Operator-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvestigateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchState'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/batches/{batch_id}/approval:
+    post:
+      summary: Approval
+      operationId: approval_api_v1_batches__batch_id__approval_post
+      parameters:
+      - name: batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Batch Id
+      - name: x-operator-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Operator-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApprovalRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchState'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/simulations:
+    post:
+      summary: Simulation
+      operationId: simulation_api_v1_simulations_post
+      parameters:
+      - name: x-operator-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Operator-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulationRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedSimulation'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/simulations/{run_id}:
+    get:
+      summary: Run
+      operationId: run_api_v1_simulations__run_id__get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationResult'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/evidence:
+    get:
+      summary: Evidence
+      operationId: evidence_api_v1_evidence_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    ApprovalRequest:
+      properties:
+        approve:
+          type: boolean
+          title: Approve
+        expected_version:
+          type: integer
+          minimum: 0.0
+          title: Expected Version
+      additionalProperties: false
+      type: object
+      required:
+      - approve
+      - expected_version
+      title: ApprovalRequest
+    BatchState:
+      properties:
+        id:
+          type: string
+          title: Id
+        version:
+          type: integer
+          title: Version
+        status:
+          type: string
+          title: Status
+        evidence_category:
+          type: string
+          const: SYNTHETIC
+          title: Evidence Category
+          default: SYNTHETIC
+        quantity_kg:
+          type: number
+          title: Quantity Kg
+        initial_rsl_hours:
+          type: number
+          title: Initial Rsl Hours
+        rsl_hours:
+          type: number
+          title: Rsl Hours
+        rsl_lower_hours:
+          type: number
+          title: Rsl Lower Hours
+        destination:
+          type: string
+          title: Destination
+        delay_hours:
+          type: number
+          title: Delay Hours
+        safety_hold:
+          type: boolean
+          title: Safety Hold
+        event:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Event
+        proposal:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Proposal
+        agent_mode:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Agent Mode
+        monitoring:
+          type: boolean
+          title: Monitoring
+        trace:
+          items:
+            $ref: '#/components/schemas/TraceEntry'
+          type: array
+          title: Trace
+      additionalProperties: false
+      type: object
+      required:
+      - id
+      - version
+      - status
+      - quantity_kg
+      - initial_rsl_hours
+      - rsl_hours
+      - rsl_lower_hours
+      - destination
+      - delay_hours
+      - safety_hold
+      - event
+      - proposal
+      - agent_mode
+      - monitoring
+      - trace
+      title: BatchState
+    CreatedSimulation:
+      properties:
+        id:
+          type: string
+          title: Id
+        result:
+          $ref: '#/components/schemas/SimulationResult'
+      additionalProperties: false
+      type: object
+      required:
+      - id
+      - result
+      title: CreatedSimulation
+    EventRequest:
+      properties:
+        temperature_c:
+          type: number
+          maximum: 50.0
+          minimum: 5.0
+          title: Temperature C
+          default: 35
+        duration_hours:
+          type: number
+          maximum: 72.0
+          exclusiveMinimum: 0.0
+          title: Duration Hours
+          default: 6
+        delay_hours:
+          type: number
+          maximum: 72.0
+          minimum: 0.0
+          title: Delay Hours
+          default: 12
+        safety_hold:
+          type: boolean
+          title: Safety Hold
+          default: false
+      additionalProperties: false
+      type: object
+      title: EventRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    InvestigateRequest:
+      properties:
+        mode:
+          type: string
+          enum:
+          - deterministic
+          - live
+          title: Mode
+          default: deterministic
+      additionalProperties: false
+      type: object
+      title: InvestigateRequest
+    Metrics:
+      properties:
+        model:
+          type: string
+          enum:
+          - M0
+          - M1
+          - M2
+          - M3
+          title: Model
+        input_kg:
+          type: number
+          title: Input Kg
+        sellable_kg:
+          type: number
+          title: Sellable Kg
+        spoiled_kg:
+          type: number
+          title: Spoiled Kg
+        spoilage_rate:
+          type: number
+          title: Spoilage Rate
+        gross_sales_revenue_inr:
+          type: number
+          title: Gross Sales Revenue Inr
+        procurement_inr:
+          type: number
+          title: Procurement Inr
+        transport_inr:
+          type: number
+          title: Transport Inr
+        handling_inr:
+          type: number
+          title: Handling Inr
+        rescue_inr:
+          type: number
+          title: Rescue Inr
+        agent_sensor_inr:
+          type: number
+          title: Agent Sensor Inr
+        net_realization_per_input_kg_inr:
+          type: number
+          title: Net Realization Per Input Kg Inr
+        net_batch_realization_margin:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Net Batch Realization Margin
+        operating_profit_inr:
+          type: number
+          title: Operating Profit Inr
+        operating_profit_margin:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Operating Profit Margin
+        buyer_rejection_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Buyer Rejection Rate
+        on_time_fulfilment_rate:
+          type: number
+          title: On Time Fulfilment Rate
+        successful_rescue_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Successful Rescue Rate
+        food_safety_violations:
+          type: integer
+          title: Food Safety Violations
+        setup_cost_inr:
+          type: number
+          title: Setup Cost Inr
+        incremental_profit_vs_m0_inr:
+          type: number
+          title: Incremental Profit Vs M0 Inr
+        margin_relative_uplift_vs_m0:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Margin Relative Uplift Vs M0
+        margin_percentage_point_change_vs_m0:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Margin Percentage Point Change Vs M0
+        roi_over_simulated_period:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Roi Over Simulated Period
+        payback_days:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Payback Days
+        meets_spoilage_target:
+          type: boolean
+          title: Meets Spoilage Target
+        meets_margin_target:
+          type: boolean
+          title: Meets Margin Target
+        incremental_agentic_policy_profit_vs_m2_inr:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Incremental Agentic Policy Profit Vs M2 Inr
+      additionalProperties: false
+      type: object
+      required:
+      - model
+      - input_kg
+      - sellable_kg
+      - spoiled_kg
+      - spoilage_rate
+      - gross_sales_revenue_inr
+      - procurement_inr
+      - transport_inr
+      - handling_inr
+      - rescue_inr
+      - agent_sensor_inr
+      - net_realization_per_input_kg_inr
+      - net_batch_realization_margin
+      - operating_profit_inr
+      - operating_profit_margin
+      - buyer_rejection_rate
+      - on_time_fulfilment_rate
+      - successful_rescue_rate
+      - food_safety_violations
+      - setup_cost_inr
+      - incremental_profit_vs_m0_inr
+      - margin_relative_uplift_vs_m0
+      - margin_percentage_point_change_vs_m0
+      - roi_over_simulated_period
+      - payback_days
+      - meets_spoilage_target
+      - meets_margin_target
+      title: Metrics
+    ModelSummary:
+      properties:
+        mean_operating_profit_inr:
+          type: number
+          title: Mean Operating Profit Inr
+        mean_spoilage_rate:
+          type: number
+          title: Mean Spoilage Rate
+        probability_meeting_both_targets:
+          type: number
+          title: Probability Meeting Both Targets
+        runs_meeting_both_targets:
+          type: integer
+          title: Runs Meeting Both Targets
+        repetitions:
+          type: integer
+          title: Repetitions
+      additionalProperties: false
+      type: object
+      required:
+      - mean_operating_profit_inr
+      - mean_spoilage_rate
+      - probability_meeting_both_targets
+      - runs_meeting_both_targets
+      - repetitions
+      title: ModelSummary
+    SimulationRequest:
+      properties:
+        seed:
+          type: integer
+          maximum: 2147483647.0
+          minimum: 0.0
+          title: Seed
+          default: 2026
+        batches:
+          type: integer
+          maximum: 10000.0
+          minimum: 1.0
+          title: Batches
+          default: 2000
+        days:
+          type: integer
+          maximum: 365.0
+          minimum: 1.0
+          title: Days
+          default: 30
+        repetitions:
+          type: integer
+          maximum: 30.0
+          minimum: 1.0
+          title: Repetitions
+          default: 3
+        disruption_probability:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Disruption Probability
+          default: 0.3
+        price_multiplier:
+          type: number
+          maximum: 3.0
+          minimum: 0.1
+          title: Price Multiplier
+          default: 1
+        capacity_multiplier:
+          type: number
+          maximum: 3.0
+          minimum: 0.1
+          title: Capacity Multiplier
+          default: 1
+        setup_cost_inr:
+          type: number
+          maximum: 100000000.0
+          minimum: 0.0
+          title: Setup Cost Inr
+          default: 50000
+      additionalProperties: false
+      type: object
+      title: SimulationRequest
+    SimulationResult:
+      properties:
+        evidence_category:
+          type: string
+          const: SIMULATED RESULT
+          title: Evidence Category
+          default: SIMULATED RESULT
+        agent_mode:
+          type: string
+          title: Agent Mode
+        assumptions_version:
+          type: string
+          title: Assumptions Version
+        config:
+          $ref: '#/components/schemas/SimulationRequest'
+        runs:
+          items:
+            $ref: '#/components/schemas/SimulationRun'
+          type: array
+          title: Runs
+        summary:
+          additionalProperties:
+            $ref: '#/components/schemas/ModelSummary'
+          type: object
+          title: Summary
+        limitations:
+          items:
+            type: string
+          type: array
+          title: Limitations
+      additionalProperties: false
+      type: object
+      required:
+      - agent_mode
+      - assumptions_version
+      - config
+      - runs
+      - summary
+      - limitations
+      title: SimulationResult
+    SimulationRun:
+      properties:
+        seed:
+          type: integer
+          title: Seed
+        dataset_sha256:
+          type: string
+          title: Dataset Sha256
+        metrics:
+          items:
+            $ref: '#/components/schemas/Metrics'
+          type: array
+          title: Metrics
+      additionalProperties: false
+      type: object
+      required:
+      - seed
+      - dataset_sha256
+      - metrics
+      title: SimulationRun
+    TraceEntry:
+      properties:
+        sequence:
+          type: integer
+          title: Sequence
+        timestamp:
+          type: string
+          title: Timestamp
+        tool:
+          type: string
+          title: Tool
+        inputs:
+          additionalProperties: true
+          type: object
+          title: Inputs
+        result:
+          additionalProperties: true
+          type: object
+          title: Result
+      additionalProperties: false
+      type: object
+      required:
+      - sequence
+      - timestamp
+      - tool
+      - inputs
+      - result
+      title: TraceEntry
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
