@@ -108,9 +108,11 @@ export default function ScenarioStudio() {
     );
   };
 
-  const exportCsv = () => sim.result && download(`freshflow-scenario-${Date.now()}.csv`, resultToCsv(sim.result, sim.request), "text/csv");
+  // The stored study was computed with its own config (30 repetitions); exports describe what is shown.
+  const shown = (sim.result?.study && SimulationRequestSchema.safeParse(sim.result.config).data) || sim.request;
+  const exportCsv = () => sim.result && download(`freshflow-scenario-${Date.now()}.csv`, resultToCsv(sim.result, shown), "text/csv");
   const exportJson = () =>
-    sim.result && download(`freshflow-scenario-${Date.now()}.json`, JSON.stringify({ id: sim.runId, request: sim.request, result: sim.result }, null, 2), "application/json");
+    sim.result && download(`freshflow-scenario-${Date.now()}.json`, JSON.stringify({ id: sim.runId ?? sim.result.study?.id, request: shown, result: sim.result }, null, 2), "application/json");
 
   return (
     <>

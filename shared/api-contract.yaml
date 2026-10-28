@@ -577,6 +577,41 @@ paths:
           content:
             application/json:
               schema: {}
+  /api/v1/studies:
+    get:
+      summary: Studies
+      description: The stored 30-seed validation study (same numbers as evidence/FreshFlow_Scenario_Validation.xlsx).
+      operationId: studies_api_v1_studies_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/studies/{study_id}:
+    get:
+      summary: Study
+      operationId: study_api_v1_studies__study_id__get
+      parameters:
+      - name: study_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Study Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationResult'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /api/v1/simulations/{run_id}/batches:
     get:
       summary: Run Batches
@@ -1553,6 +1588,13 @@ components:
           additionalProperties: true
           type: object
           title: Risk
+        study:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Study
+          description: Set only on stored validation-study results (GET /api/v1/studies/{id})
       additionalProperties: false
       type: object
       required:

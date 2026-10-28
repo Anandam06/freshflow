@@ -189,9 +189,20 @@ export const SimulationResultSchema = z
       })
       .passthrough()
       .optional(),
+    /** Present only on the stored 30-seed validation study (GET /api/v1/studies/{id}). */
+    study: z
+      .object({ id: z.string(), name: z.string(), group: z.string(), description: z.string(), source: z.string(), note: z.string() })
+      .passthrough()
+      .nullish(),
   })
   .passthrough();
 export type SimulationResult = z.infer<typeof SimulationResultSchema>;
+
+/** GET /api/v1/studies: one row per fleet scenario of the 30-seed validation study. */
+export const StudyEntrySchema = z
+  .object({ id: z.string(), group: z.string(), name: z.string(), description: z.string(), repetitions: num, mean_d_minus_c_inr: num })
+  .passthrough();
+export type StudyEntry = z.infer<typeof StudyEntrySchema>;
 
 export const CreatedSimulationSchema = z.object({ id: z.string(), result: SimulationResultSchema }).passthrough();
 export type CreatedSimulation = z.infer<typeof CreatedSimulationSchema>;

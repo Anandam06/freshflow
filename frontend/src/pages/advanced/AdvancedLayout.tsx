@@ -20,7 +20,11 @@ export default function AdvancedLayout() {
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-fresh">Advanced analysis</p>
         <h1 className="mt-1 text-3xl font-bold tracking-tight text-forest">The full evidence behind FreshFlow</h1>
         <p className="mt-2 max-w-3xl text-lg text-slate-600">
-          A 2,000-shipment tomato fleet simulation comparing A, B, C and D across repeated runs, plus sensitivity tests, the batch control tower and every assumption.
+          A 2,000-shipment tomato fleet simulation comparing A, B, C and D across 30 seeded runs, plus sensitivity tests, the batch control tower and every assumption.
+        </p>
+        <p className="mt-2 max-w-3xl text-base text-slate-500">
+          Fleet results, Compare all four and What-if use the same stored validation study as the Excel evidence workbook, so the numbers match it
+          exactly. The Playground scores a single shipment on the 18-produce Mumbai network, so its rupee figures are per shipment, not per month.
         </p>
       </header>
       <nav aria-label="Advanced analysis" className="-mx-1 mb-6 flex gap-2 overflow-x-auto px-1 pb-1">

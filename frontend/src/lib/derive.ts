@@ -5,7 +5,7 @@
  * model logic. They live in this one module so they can be deleted once the backend returns the
  * values directly (requested in INTEGRATION.md §Requested fields).
  */
-import type { SimulationRun } from "@/types/api";
+import type { ModelMetrics, SimulationRun } from "@/types/api";
 
 export interface ProfitBridge {
   m0: number;
@@ -51,4 +51,32 @@ export function deltaPP(a: number | null | undefined, b: number | null | undefin
 export function relativeChange(value: number | null | undefined, base: number | null | undefined): number | null {
   if (value == null || base == null || base === 0) return null;
   return (value - base) / Math.abs(base);
+}
+
+const avg = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
+
+/**
+ * The all-repetitions view: per model, the mean of every backend number across the seeded runs (the
+ * figure the Excel workbook reports). Means keep the linear identities (A + bridge steps = D). The two
+ * target flags are re-evaluated on the means with the backend's rules (spoilage < 10%, uplift >= 12%).
+ */
+export function meanRun(runs: SimulationRun[]): SimulationRun {
+  const metrics = runs[0].metrics.map((first, i) => {
+    const rows = runs.map((r) => r.metrics[i] as Record<string, unknown>);
+    const out: Record<string, unknown> = { ...first };
+    for (const [k, v] of Object.entries(first)) {
+      if (typeof v !== "number" && v !== null) continue;
+      const values = rows.map((r) => r[k]);
+      out[k] = values.every((x) => typeof x === "number") ? avg(values as number[]) : null;
+    }
+    out.financial_waterfall = first.financial_waterfall?.map((w, j) => ({
+      ...w,
+      amount_inr: avg(runs.map((r) => r.metrics[i].financial_waterfall?.[j]?.amount_inr ?? 0)),
+    }));
+    const uplift = out.margin_relative_uplift_vs_m0 as number | null;
+    out.meets_spoilage_target = (out.spoilage_rate as number) < 0.1;
+    out.meets_margin_target = uplift != null && uplift >= 0.12;
+    return out as ModelMetrics;
+  });
+  return { seed: runs[0].seed, dataset_sha256: `mean of ${runs.length} runs`, metrics };
 }

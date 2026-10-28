@@ -113,6 +113,7 @@ class SimulationResult(StrictModel):
     limitations: list[str]
     metadata: dict = Field(default_factory=dict)
     risk: dict = Field(default_factory=dict)
+    study: dict | None = Field(None, description='Set only on stored validation-study results (GET /api/v1/studies/{id})')
 
 
 class CreatedSimulation(StrictModel):

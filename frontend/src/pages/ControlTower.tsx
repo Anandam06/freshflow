@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Radar, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -147,7 +147,8 @@ const PAGE = 25;
 /** Audited repetition of the current simulation run: GET /api/v1/simulations/{run_id}/batches. */
 function RunBatches() {
   const client = useClient();
-  const { runId } = useSimulation();
+  const { runId, result, ensureReplayRun } = useSimulation();
+  useEffect(ensureReplayRun, [ensureReplayRun]);
   const [offset, setOffset] = useState(0);
   const [q, setQ] = useState("");
   const [rescueOnly, setRescueOnly] = useState(false);
@@ -164,7 +165,13 @@ function RunBatches() {
   return (
     <>
       <SectionTitle aside={<ProvenanceTag category="SYNTHETIC" />}>Batches in the current simulation run</SectionTitle>
-      {!runId && <EmptyState title="No simulation run loaded yet" icon={Radar} />}
+      {!runId && <EmptyState title={result?.study ? "Preparing the batch-level run (seed 60000) — this can take about a minute" : "No simulation run loaded yet"} icon={Radar} />}
+      {runId && result?.study && (
+        <p className="mb-3 text-sm text-slate-600">
+          Batch-level view of seed {result.runs[0].seed} for scenario {result.study.id}, recomputed on this server. Totals can differ from the study's seed-{result.runs[0].seed} row by
+          under 1% for C and D (time-limited optimizer on a different platform); A and B are identical.
+        </p>
+      )}
       {page.error ? <ErrorPanel error={page.error} onRetry={page.reload} /> : null}
       {runId && page.loading && !page.data ? <LoadingBlock /> : null}
       {page.data && (

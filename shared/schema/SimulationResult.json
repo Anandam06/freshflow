@@ -510,6 +510,20 @@
       "additionalProperties": true,
       "title": "Risk",
       "type": "object"
+    },
+    "study": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Set only on stored validation-study results (GET /api/v1/studies/{id})",
+      "title": "Study"
     }
   },
   "required": [

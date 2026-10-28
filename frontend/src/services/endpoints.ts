@@ -6,6 +6,8 @@ export const endpoints = {
   health: () => `${v1}/health`,
   scenarioDefaults: () => `${v1}/scenarios/defaults`,
   sensitivity: () => `${v1}/scenarios/sensitivity`,
+  studies: () => `${v1}/studies`,
+  study: (id: string) => `${v1}/studies/${e(id)}`,
   simulations: () => `${v1}/simulations`,
   simulation: (runId: string) => `${v1}/simulations/${e(runId)}`,
   runBatches: (runId: string, offset: number, limit: number, rescueOnly = false) =>

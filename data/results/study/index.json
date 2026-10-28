@@ -1,0 +1,902 @@
+[
+ {
+  "id": "S01",
+  "group": "A Baseline & traffic",
+  "name": "Baseline / normal operations",
+  "description": "Application defaults, unchanged.",
+  "overrides": {},
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3724340.71400584,
+   "M1": 3304454.2025050814,
+   "M2": 7699113.74806599,
+   "M3": 7646230.850182409
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09725881348992946,
+   "M3": 0.09528284840092283
+  },
+  "mean_d_minus_c_inr": -52882.89788358106
+ },
+ {
+  "id": "S02",
+  "group": "A Baseline & traffic",
+  "name": "Light traffic",
+  "description": "Traffic multiplier 1.15.",
+  "overrides": {
+   "traffic_multiplier": 1.15
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3724340.71400584,
+   "M1": 3304454.2025050814,
+   "M2": 7699113.74806599,
+   "M3": 7646230.850182409
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09725881348992946,
+   "M3": 0.09528284840092283
+  },
+  "mean_d_minus_c_inr": -52882.89788358106
+ },
+ {
+  "id": "S03",
+  "group": "A Baseline & traffic",
+  "name": "Moderate traffic",
+  "description": "Traffic multiplier 1.40.",
+  "overrides": {
+   "traffic_multiplier": 1.4
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3724340.71400584,
+   "M1": 3304454.2025050814,
+   "M2": 7699113.74806599,
+   "M3": 7646230.850182409
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09725881348992946,
+   "M3": 0.09528284840092283
+  },
+  "mean_d_minus_c_inr": -52882.89788358106
+ },
+ {
+  "id": "S04",
+  "group": "A Baseline & traffic",
+  "name": "Heavy traffic",
+  "description": "Traffic multiplier 1.80.",
+  "overrides": {
+   "traffic_multiplier": 1.8
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3724340.71400584,
+   "M1": 3304454.2025050814,
+   "M2": 7699113.74806599,
+   "M3": 7646230.850182409
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09725881348992946,
+   "M3": 0.09528284840092283
+  },
+  "mean_d_minus_c_inr": -52882.89788358106
+ },
+ {
+  "id": "S05",
+  "group": "A Baseline & traffic",
+  "name": "Severe traffic",
+  "description": "Traffic multiplier 2.50.",
+  "overrides": {
+   "traffic_multiplier": 2.5
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3724340.71400584,
+   "M1": 3304454.2025050814,
+   "M2": 7699113.74806599,
+   "M3": 7646230.850182409
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09725881348992946,
+   "M3": 0.09528284840092283
+  },
+  "mean_d_minus_c_inr": -52882.89788358106
+ },
+ {
+  "id": "S08",
+  "group": "B Temperature & freshness",
+  "name": "Mild temperature increase",
+  "description": "Temperature shift +2 \u00b0C.",
+  "overrides": {
+   "temperature_shift_c": 2
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3648796.2496795543,
+   "M1": 3181825.7379301484,
+   "M2": 7693676.553543153,
+   "M3": 7584039.698036412
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26653300561787124,
+   "M1": 0.278090887564518,
+   "M2": 0.0974310251127463,
+   "M3": 0.09740119363162296
+  },
+  "mean_d_minus_c_inr": -109636.8555067412
+ },
+ {
+  "id": "S09",
+  "group": "B Temperature & freshness",
+  "name": "High temperature",
+  "description": "Temperature shift +5 \u00b0C.",
+  "overrides": {
+   "temperature_shift_c": 5
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3505215.1011821837,
+   "M1": 2986982.4814649504,
+   "M2": 7674978.930299391,
+   "M3": 7460494.260013543
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.27107924575232534,
+   "M1": 0.2841851563285674,
+   "M2": 0.09801767790297151,
+   "M3": 0.10188255184552768
+  },
+  "mean_d_minus_c_inr": -214484.67028584803
+ },
+ {
+  "id": "S10",
+  "group": "B Temperature & freshness",
+  "name": "Extreme temperature",
+  "description": "Temperature shift +8 \u00b0C.",
+  "overrides": {
+   "temperature_shift_c": 8
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3313688.675044442,
+   "M1": 2757443.4166717227,
+   "M2": 7630770.411447924,
+   "M3": 7315242.3112367485
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.2772358522942352,
+   "M1": 0.2914026177612731,
+   "M2": 0.09941719415996914,
+   "M3": 0.10709769722597026
+  },
+  "mean_d_minus_c_inr": -315528.1002111751
+ },
+ {
+  "id": "S12",
+  "group": "B Temperature & freshness",
+  "name": "Low initial freshness",
+  "description": "Initial RSL multiplier 0.70 applied to the default scale 1.4 \u2192 initial_rsl_scale 0.98.",
+  "overrides": {
+   "initial_rsl_scale": 0.98
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1742300.4408043895,
+   "M1": 631577.6330051523,
+   "M2": 7627467.77241815,
+   "M3": 7574944.371704796
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.3271279196042555,
+   "M1": 0.3581544181441762,
+   "M2": 0.09956481164362965,
+   "M3": 0.09799451564734925
+  },
+  "mean_d_minus_c_inr": -52523.400713353105
+ },
+ {
+  "id": "S15",
+  "group": "C Buyers & demand",
+  "name": "Strong buyer availability",
+  "description": "Buyer availability 0.95 (equals the default, so identical to S01).",
+  "overrides": {
+   "buyer_availability": 0.95
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3724340.71400584,
+   "M1": 3304454.2025050814,
+   "M2": 7699113.74806599,
+   "M3": 7646230.850182409
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09725881348992946,
+   "M3": 0.09528284840092283
+  },
+  "mean_d_minus_c_inr": -52882.89788358106
+ },
+ {
+  "id": "S16",
+  "group": "C Buyers & demand",
+  "name": "Moderate buyer shortage",
+  "description": "Buyer availability 0.70.",
+  "overrides": {
+   "buyer_availability": 0.7
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": -708102.9018102883,
+   "M1": -1040855.4207319474,
+   "M2": 2357231.280119106,
+   "M3": 2272428.449321289
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.4528268157335645,
+   "M1": 0.46021543626442196,
+   "M2": 0.31852838534333516,
+   "M3": 0.317904860301549
+  },
+  "mean_d_minus_c_inr": -84802.83079781731
+ },
+ {
+  "id": "S17",
+  "group": "C Buyers & demand",
+  "name": "Severe buyer shortage",
+  "description": "Buyer availability 0.40.",
+  "overrides": {
+   "buyer_availability": 0.4
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": -6096093.650856886,
+   "M1": -6339274.724978422,
+   "M2": -4285185.389145456,
+   "M3": -4389713.61644348
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.6832673496053832,
+   "M1": 0.6878461466115352,
+   "M2": 0.5997149081495937,
+   "M3": 0.5997630878421615
+  },
+  "mean_d_minus_c_inr": -104528.2272980243
+ },
+ {
+  "id": "S18",
+  "group": "C Buyers & demand",
+  "name": "Buyer cancellation",
+  "description": "Cancellation probability 0.20.",
+  "overrides": {
+   "cancellation_probability": 0.2
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 481454.85939897236,
+   "M1": 122925.72661776337,
+   "M2": 3738377.4232199923,
+   "M3": 3675612.7032269514
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.39328300699478025,
+   "M1": 0.40144117444530164,
+   "M2": 0.25445844156782393,
+   "M3": 0.24525765384362733
+  },
+  "mean_d_minus_c_inr": -62764.719993041086
+ },
+ {
+  "id": "S19",
+  "group": "C Buyers & demand",
+  "name": "Market price crash",
+  "description": "Price multiplier 0.80.",
+  "overrides": {
+   "price_multiplier": 0.8
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 37563.24615631439,
+   "M1": -318335.4943776255,
+   "M2": 3161110.5035453807,
+   "M3": 3092573.581961109
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09732567973290786,
+   "M3": 0.09532582860003684
+  },
+  "mean_d_minus_c_inr": -68536.92158427188
+ },
+ {
+  "id": "S20",
+  "group": "C Buyers & demand",
+  "name": "Market price increase",
+  "description": "Price multiplier 1.15.",
+  "overrides": {
+   "price_multiplier": 1.15
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 6489423.814892983,
+   "M1": 6021546.4751671115,
+   "M2": 11098199.466311399,
+   "M3": 11058072.841939326
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09722513276156218,
+   "M3": 0.09527715444168308
+  },
+  "mean_d_minus_c_inr": -40126.62437207245
+ },
+ {
+  "id": "S22",
+  "group": "D Agent & cost",
+  "name": "Immediate approval",
+  "description": "Approval delay 0 h.",
+  "overrides": {
+   "approval_delay_hours": 0
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3724340.71400584,
+   "M1": 3304454.2025050814,
+   "M2": 7699113.74806599,
+   "M3": 7646515.710292659
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09725881348992946,
+   "M3": 0.0952792437328777
+  },
+  "mean_d_minus_c_inr": -52598.03777333138
+ },
+ {
+  "id": "S23",
+  "group": "D Agent & cost",
+  "name": "Slow approval",
+  "description": "Approval delay 3 h.",
+  "overrides": {
+   "approval_delay_hours": 3
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3724340.71400584,
+   "M1": 3304454.2025050814,
+   "M2": 7699113.74806599,
+   "M3": 7645782.633985347
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09725881348992946,
+   "M3": 0.09528284840092283
+  },
+  "mean_d_minus_c_inr": -53331.114080643405
+ },
+ {
+  "id": "S24",
+  "group": "D Agent & cost",
+  "name": "High AI operating cost",
+  "description": "AI cost multiplier 3.0.",
+  "overrides": {
+   "ai_cost_multiplier": 3.0
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3724340.71400584,
+   "M1": 3304454.2025050814,
+   "M2": 7699113.74806599,
+   "M3": 7446079.110182409
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.2742353971259317,
+   "M2": 0.09725881348992946,
+   "M3": 0.09528284840092283
+  },
+  "mean_d_minus_c_inr": -253034.63788358116
+ },
+ {
+  "id": "S25",
+  "group": "D Agent & cost",
+  "name": "Prediction error +6 h",
+  "description": "Prediction error SD default 3 h + 6 h \u2192 9 h.",
+  "overrides": {
+   "prediction_error_hours": 9
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3724340.71400584,
+   "M1": 3302427.1963872258,
+   "M2": 7496846.754046462,
+   "M3": 7457292.059922635
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26413320207267066,
+   "M1": 0.27428657182433996,
+   "M2": 0.10890328732698598,
+   "M3": 0.10654622647782729
+  },
+  "mean_d_minus_c_inr": -39554.69412382729
+ },
+ {
+  "id": "S27",
+  "group": "E Combined",
+  "name": "Heavy traffic + heat",
+  "description": "Traffic 1.80\u00d7; +5 \u00b0C.",
+  "overrides": {
+   "traffic_multiplier": 1.8,
+   "temperature_shift_c": 5
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3505215.1011821837,
+   "M1": 2986982.4814649504,
+   "M2": 7674978.930299391,
+   "M3": 7460494.260013543
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.27107924575232534,
+   "M1": 0.2841851563285674,
+   "M2": 0.09801767790297151,
+   "M3": 0.10188255184552768
+  },
+  "mean_d_minus_c_inr": -214484.67028584803
+ },
+ {
+  "id": "S28",
+  "group": "E Combined",
+  "name": "Traffic + buyer cancellation",
+  "description": "Traffic 1.80\u00d7; cancellation 0.20.",
+  "overrides": {
+   "traffic_multiplier": 1.8,
+   "cancellation_probability": 0.2
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 481454.85939897236,
+   "M1": 122925.72661776337,
+   "M2": 3738377.4232199923,
+   "M3": 3675612.7032269514
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.39328300699478025,
+   "M1": 0.40144117444530164,
+   "M2": 0.25445844156782393,
+   "M3": 0.24525765384362733
+  },
+  "mean_d_minus_c_inr": -62764.719993041086
+ },
+ {
+  "id": "S29",
+  "group": "E Combined",
+  "name": "Heat + low freshness",
+  "description": "+5 \u00b0C; initial RSL \u00d70.70 (scale 0.98).",
+  "overrides": {
+   "temperature_shift_c": 5,
+   "initial_rsl_scale": 0.98
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1261677.400467967,
+   "M1": 43792.516484283035,
+   "M2": 7576092.132356642,
+   "M3": 7068701.80241357
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.3432896927607923,
+   "M1": 0.37711313732896085,
+   "M2": 0.10124077305591325,
+   "M3": 0.11489762157656566
+  },
+  "mean_d_minus_c_inr": -507390.3299430723
+ },
+ {
+  "id": "S30",
+  "group": "E Combined",
+  "name": "Price crash + buyer shortage",
+  "description": "Price 0.80; availability 0.40.",
+  "overrides": {
+   "price_multiplier": 0.8,
+   "buyer_availability": 0.4
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": -7681799.632400534,
+   "M1": -7896340.735031096,
+   "M2": -6278186.334806178,
+   "M3": -6381536.050065916
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.6832673496053832,
+   "M1": 0.6878461466115352,
+   "M2": 0.5996873189396549,
+   "M3": 0.5996739803665754
+  },
+  "mean_d_minus_c_inr": -103349.71525973818
+ },
+ {
+  "id": "S31",
+  "group": "E Combined",
+  "name": "Worst-case operational stress",
+  "description": "Traffic 2.50\u00d7, +5 \u00b0C, availability 0.40, approval 3 h.",
+  "overrides": {
+   "traffic_multiplier": 2.5,
+   "temperature_shift_c": 5,
+   "buyer_availability": 0.4,
+   "approval_delay_hours": 3
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": -6173622.017082179,
+   "M1": -6478082.618992955,
+   "M2": -4289369.315785569,
+   "M3": -4461260.235830415
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.6857593620994147,
+   "M1": 0.692210522849584,
+   "M2": 0.5998411914749883,
+   "M3": 0.6023655050632981
+  },
+  "mean_d_minus_c_inr": -171890.92004484526
+ },
+ {
+  "id": "S32",
+  "group": "E Combined",
+  "name": "Favourable rescue conditions",
+  "description": "Availability 1.00, disruption probability 0.15 with traffic 1.40\u00d7 (moderate disruptions), approval 0 h.",
+  "overrides": {
+   "buyer_availability": 1.0,
+   "disruption_probability": 0.15,
+   "traffic_multiplier": 1.4,
+   "approval_delay_hours": 0
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 3320018.4467605716,
+   "M1": 2888816.6248520394,
+   "M2": 7108980.750806916,
+   "M3": 8166731.259440153
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.26582885327527694,
+   "M1": 0.27624911440455224,
+   "M2": 0.10475305123653447,
+   "M3": 0.06314577675328643
+  },
+  "mean_d_minus_c_inr": 1057750.508633238
+ },
+ {
+  "id": "S33",
+  "group": "E Combined",
+  "name": "Agent is not worth the cost",
+  "description": "AI cost \u00d710, availability 0.70 (low rescue capacity), disruption probability 0 (low disruption frequency).",
+  "overrides": {
+   "ai_cost_multiplier": 10,
+   "buyer_availability": 0.7,
+   "disruption_probability": 0.0
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": -708102.9018102883,
+   "M1": -1040855.4207319474,
+   "M2": 2357231.280119106,
+   "M3": 1371745.6193212892
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.4528268157335645,
+   "M1": 0.46021543626442196,
+   "M2": 0.31852838534333516,
+   "M3": 0.317904860301549
+  },
+  "mean_d_minus_c_inr": -985485.660797817
+ },
+ {
+  "id": "X01",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "Disrupted baseline (p=0.30)",
+  "description": "S01 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1480407.6578318332,
+   "M1": 1019764.6055794344,
+   "M2": 4593955.386745756,
+   "M3": 6450076.770361919
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.33476485981986287,
+   "M1": 0.3457986085372922,
+   "M2": 0.19433724196790975,
+   "M3": 0.12176119427534673
+  },
+  "mean_d_minus_c_inr": 1856121.3836161634
+ },
+ {
+  "id": "X02",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "Light traffic, p=0.30",
+  "description": "S02 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "traffic_multiplier": 1.15
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1239382.034459946,
+   "M1": 864072.5071097398,
+   "M2": 4439427.709359124,
+   "M3": 6417438.549780468
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.34232450047605933,
+   "M1": 0.35070975312700736,
+   "M2": 0.19921203152786862,
+   "M3": 0.12265505293381476
+  },
+  "mean_d_minus_c_inr": 1978010.8404213435
+ },
+ {
+  "id": "X03",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "Moderate traffic, p=0.30",
+  "description": "S03 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "traffic_multiplier": 1.4
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1051046.2497971086,
+   "M1": 811718.4870767697,
+   "M2": 4396420.800279521,
+   "M3": 6413367.689043917
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.3482712089456385,
+   "M1": 0.35235933005804015,
+   "M2": 0.20058010743132265,
+   "M3": 0.12268521098666232
+  },
+  "mean_d_minus_c_inr": 2016946.8887643954
+ },
+ {
+  "id": "X04",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "Heavy traffic, p=0.30",
+  "description": "S04 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "traffic_multiplier": 1.8
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1034214.0397326082,
+   "M1": 811718.4870767697,
+   "M2": 4396420.800279521,
+   "M3": 6413367.689043917
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.3487931005393623,
+   "M1": 0.35235933005804015,
+   "M2": 0.20058010743132265,
+   "M3": 0.12268521098666232
+  },
+  "mean_d_minus_c_inr": 2016946.8887643954
+ },
+ {
+  "id": "X05",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "Severe traffic, p=0.30",
+  "description": "S05 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "traffic_multiplier": 2.5
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1034214.0397326082,
+   "M1": 811718.4870767697,
+   "M2": 4396420.800279521,
+   "M3": 6413367.689043917
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.3487931005393623,
+   "M1": 0.35235933005804015,
+   "M2": 0.20058010743132265,
+   "M3": 0.12268521098666232
+  },
+  "mean_d_minus_c_inr": 2016946.8887643954
+ },
+ {
+  "id": "X09",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "High temperature, p=0.30",
+  "description": "S09 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "temperature_shift_c": 5
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1191853.175278538,
+   "M1": 648025.6805094734,
+   "M2": 4393786.773095185,
+   "M3": 6299921.597042527
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.3448945842862634,
+   "M1": 0.3582353474149272,
+   "M2": 0.20209282202268591,
+   "M3": 0.12655942616292343
+  },
+  "mean_d_minus_c_inr": 1906134.8239473423
+ },
+ {
+  "id": "X22",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "Immediate approval, p=0.30",
+  "description": "S22 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "approval_delay_hours": 0
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1480407.6578318332,
+   "M1": 1019764.6055794344,
+   "M2": 4593955.386745756,
+   "M3": 6453059.867592711
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.33476485981986287,
+   "M1": 0.3457986085372922,
+   "M2": 0.19433724196790975,
+   "M3": 0.12167341071016718
+  },
+  "mean_d_minus_c_inr": 1859104.4808469561
+ },
+ {
+  "id": "X23",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "Slow approval, p=0.30",
+  "description": "S23 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "approval_delay_hours": 3
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1480407.6578318332,
+   "M1": 1019764.6055794344,
+   "M2": 4593955.386745756,
+   "M3": 6441434.252512904
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.33476485981986287,
+   "M1": 0.3457986085372922,
+   "M2": 0.19433724196790975,
+   "M3": 0.12215917424544798
+  },
+  "mean_d_minus_c_inr": 1847478.8657671486
+ },
+ {
+  "id": "X24",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "High AI cost, p=0.30",
+  "description": "S24 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "ai_cost_multiplier": 3.0
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 1480407.6578318332,
+   "M1": 1019764.6055794344,
+   "M2": 4593955.386745756,
+   "M3": 6250635.430361918
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.33476485981986287,
+   "M1": 0.3457986085372922,
+   "M2": 0.19433724196790975,
+   "M3": 0.12176119427534673
+  },
+  "mean_d_minus_c_inr": 1656680.0436161633
+ },
+ {
+  "id": "X27",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "Heavy traffic + heat, p=0.30",
+  "description": "S27 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "traffic_multiplier": 1.8,
+   "temperature_shift_c": 5
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": 795387.6541012834,
+   "M1": 512225.3030397409,
+   "M2": 4262299.172026206,
+   "M3": 6270097.070738188
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.3573585265050206,
+   "M1": 0.36252441503304855,
+   "M2": 0.20623639700504298,
+   "M3": 0.12744795845971285
+  },
+  "mean_d_minus_c_inr": 2007797.8987119822
+ },
+ {
+  "id": "X28",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "Traffic + cancellation, p=0.30",
+  "description": "S28 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "traffic_multiplier": 1.8,
+   "cancellation_probability": 0.2
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": -1715314.8915418258,
+   "M1": -1895578.655238867,
+   "M2": 1028948.0596550104,
+   "M3": 2737971.122102774
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.4628612783434628,
+   "M1": 0.4652143572842659,
+   "M2": 0.3396771727828902,
+   "M3": 0.26612894611177096
+  },
+  "mean_d_minus_c_inr": 1709023.0624477637
+ },
+ {
+  "id": "X31",
+  "group": "X Supplementary (30% disruptions)",
+  "name": "Worst case, p=0.30",
+  "description": "S31 with disruption probability 0.30.",
+  "overrides": {
+   "disruption_probability": 0.3,
+   "traffic_multiplier": 2.5,
+   "temperature_shift_c": 5,
+   "buyer_availability": 0.4,
+   "approval_delay_hours": 3
+  },
+  "repetitions": 30,
+  "mean_profit_inr": {
+   "M0": -7342938.8734490415,
+   "M1": -7526563.3429042585,
+   "M2": -5715329.091424668,
+   "M3": -5445641.30550084
+  },
+  "mean_spoilage_rate": {
+   "M0": 0.7239112594300082,
+   "M1": 0.7262427231174712,
+   "M2": 0.6450319858196013,
+   "M3": 0.6322124964124393
+  },
+  "mean_d_minus_c_inr": 269687.78592382825
+ }
+]

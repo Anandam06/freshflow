@@ -11,6 +11,7 @@ import type {
   SensitivityStudy,
   SimulationRequest,
   SimulationResult,
+  StudyEntry,
   VersionRequest,
 } from "@/types/api";
 
@@ -38,6 +39,9 @@ export interface ApiClient {
   health(): Promise<Health>;
   getScenarioDefaults(): Promise<SimulationRequest>;
   getSensitivity(): Promise<SensitivityStudy | null>;
+  /** The stored 30-seed validation study behind the Excel workbook; null when not published. */
+  getStudies(): Promise<StudyEntry[] | null>;
+  getStudy(id: string): Promise<SimulationResult>;
   runSimulation(req: SimulationRequest): Promise<CreatedSimulation>;
   getSimulation(id: string): Promise<SimulationResult>;
   listRunBatches(runId: string, offset: number, limit: number, rescueOnly?: boolean): Promise<BatchPage>;

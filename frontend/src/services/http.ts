@@ -10,6 +10,7 @@ import {
   SensitivityStudySchema,
   SimulationRequestSchema,
   SimulationResultSchema,
+  StudyEntrySchema,
   type ApprovalRequest,
   type EventRequest,
   type InvestigateRequest,
@@ -70,6 +71,15 @@ export function createHttpClient(baseUrl: string, fetchImpl: Fetch = (input, ini
         throw e;
       }
     },
+    async getStudies() {
+      try {
+        return await request(z.array(StudyEntrySchema), endpoints.studies());
+      } catch (e) {
+        if (e instanceof ApiError && e.status === 404) return null; // study not published on this deployment
+        throw e;
+      }
+    },
+    getStudy: (id) => request(SimulationResultSchema, endpoints.study(id)),
     runSimulation: (req: SimulationRequest) => request(CreatedSimulationSchema, endpoints.simulations(), post(req)),
     getSimulation: (id) => request(SimulationResultSchema, endpoints.simulation(id)),
     listRunBatches: (runId, offset, limit, rescueOnly) => request(BatchPageSchema, endpoints.runBatches(runId, offset, limit, rescueOnly)),

@@ -6,6 +6,7 @@ import { AppRoutes, Providers } from "@/app/App";
 import { createMockClient } from "@/services/mock/mockClient";
 import type { ApiClient } from "@/services/client";
 import { formatINR } from "@/lib/format";
+import { meanRun } from "@/lib/derive";
 
 function renderAt(path: string, client: ApiClient = createMockClient({ latencyMs: 0 })) {
   return render(
@@ -62,7 +63,8 @@ describe("Executive overview", () => {
     const { result } = await client.runSimulation(await client.getScenarioDefaults());
     renderAt("/advanced", client);
     const headline = await screen.findByTestId("headline-profit", {}, { timeout: 8000 });
-    expect(headline).toHaveTextContent(formatINR(result.runs[0].metrics[3].incremental_profit_vs_m0_inr, { compact: true, signed: true }));
+    // Default view: the mean over all repetitions (what the Excel workbook reports).
+    expect(headline).toHaveTextContent(formatINR(meanRun(result.runs).metrics[3].incremental_profit_vs_m0_inr, { compact: true, signed: true }));
     expect(screen.getAllByText("Synthetic simulation").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Case target").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Demo data").length).toBeGreaterThan(0);

@@ -1,7 +1,7 @@
 import { CheckCircle2, CircleSlash, XCircle } from "lucide-react";
 import type { ModelId, ModelMetrics, SimulationResult } from "@/types/api";
 import { MODEL_META, MODEL_ORDER } from "@/lib/models";
-import { relativeChange } from "@/lib/derive";
+import { meanRun, relativeChange } from "@/lib/derive";
 import { formatCount, formatDays, formatFraction, formatINR, formatINRPerKg, formatKg, formatPP, formatRatio } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
 import { Select } from "@/components/ui/input";
@@ -15,14 +15,15 @@ import { DemoDataBadge, ProvenanceTag } from "./common";
 
 export function useCurrentRun() {
   const sim = useSimulation();
-  const run = sim.result?.runs[Math.min(sim.runIndex, (sim.result?.runs.length ?? 1) - 1)];
+  const runs = sim.result?.runs;
+  const run = !runs ? undefined : sim.runIndex < 0 && runs.length > 1 ? meanRun(runs) : runs[Math.min(Math.max(sim.runIndex, 0), runs.length - 1)];
   const byModel = run ? (Object.fromEntries(run.metrics.map((m) => [m.model, m])) as Record<ModelId, ModelMetrics>) : undefined;
   return { ...sim, current: run, byModel };
 }
 
 /** Scenario parameters, provenance and the repetition selector. */
 export function RunContextBar({ result }: { result: SimulationResult }) {
-  const { runIndex, setRunIndex, runId } = useSimulation();
+  const { runIndex, setRunIndex, runId, studies, loadStudy, loading } = useSimulation();
   const c = result.config as Record<string, number>;
   const items: [string, string | undefined][] = [
     ["Batches", formatCount(c.batches)],
@@ -39,7 +40,7 @@ export function RunContextBar({ result }: { result: SimulationResult }) {
     ["Setup cost", formatINR(c.setup_cost_inr)],
   ];
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-border bg-white p-4 xl:flex-row xl:items-center">
+    <div className="flex flex-col gap-3 rounded-lg border border-border bg-white p-4 xl:flex-row xl:flex-wrap xl:items-center">
       <div className="flex flex-wrap items-center gap-2">
         <ProvenanceTag category={result.evidence_category ?? "SIMULATED RESULT"} />
         <DemoDataBadge />
@@ -64,9 +65,22 @@ export function RunContextBar({ result }: { result: SimulationResult }) {
           </div>
         ))}
       </dl>
+      {result.study && studies && (
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <span className="whitespace-nowrap">Scenario</span>
+          <Select value={result.study.id} disabled={loading} onChange={(e) => void loadStudy(e.target.value)} className="h-9 w-auto max-w-[260px]" aria-label="Study scenario">
+            {studies.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.id} · {s.name}
+              </option>
+            ))}
+          </Select>
+        </label>
+      )}
       <label className="flex items-center gap-2 text-sm text-slate-600">
         <span className="whitespace-nowrap">Showing</span>
-        <Select value={runIndex} onChange={(e) => setRunIndex(Number(e.target.value))} className="h-9 w-auto" aria-label="Repetition shown">
+        <Select value={result.runs.length > 1 ? runIndex : 0} onChange={(e) => setRunIndex(Number(e.target.value))} className="h-9 w-auto" aria-label="Repetition shown">
+          {result.runs.length > 1 && <option value={-1}>Mean of all {result.runs.length} repetitions</option>}
           {result.runs.map((r, i) => (
             <option key={r.seed} value={i}>
               Repetition {i + 1} · seed {r.seed}
@@ -75,6 +89,12 @@ export function RunContextBar({ result }: { result: SimulationResult }) {
         </Select>
       </label>
       {runId && <span className="sr-only">Simulation id {runId}</span>}
+      {result.study && (
+        <p className="basis-full text-sm text-slate-600 xl:order-last" data-testid="study-note">
+          <strong className="text-forest">Validation study {result.study.id}</strong> — {result.study.description} Seeds {result.runs[0].seed}–
+          {result.runs[result.runs.length - 1].seed}. These are the same numbers as the Excel evidence workbook (FreshFlow_Scenario_Validation.xlsx).
+        </p>
+      )}
     </div>
   );
 }

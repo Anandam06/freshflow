@@ -130,6 +130,9 @@ export function createMockClient(opts: MockOptions = {}): ApiClient {
     health: () => wait(HealthSchema.parse(healthFixture)),
     getScenarioDefaults: () => wait(defaults),
     getSensitivity: () => studyReady.then(wait),
+    // Demo data predates the 30-seed validation study; Advanced Analysis then runs the captured default.
+    getStudies: () => wait(null),
+    getStudy: (id) => Promise.reject(new ApiError(404, "Resource not found", `/api/v1/studies/${id}`)),
 
     async runSimulation(req) {
       await studyReady;

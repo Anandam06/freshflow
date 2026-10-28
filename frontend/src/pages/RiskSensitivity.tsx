@@ -30,6 +30,9 @@ const PARAM_LABEL: Record<string, string> = {
   seed: "Seed",
 };
 
+/** Stored-study entries are keyed by scenario id (S01, X01…); the older study used descriptive keys. */
+const label = (key: string, r: SimulationResult) => (r.study ? `${r.study.id} · ${r.study.name}` : titleCase(key));
+
 /** Parameters that differ from the study's baseline (display only). */
 function changes(r: SimulationResult, base: SimulationResult | undefined): string {
   if (!base) return "";
@@ -42,14 +45,15 @@ export default function RiskSensitivity() {
   const study = useAsync(() => client.getSensitivity(), [client]);
   const rank = (k: string) => (ORDER.includes(k) ? ORDER.indexOf(k) : ORDER.length);
   const entries = Object.entries(study.data ?? {}).sort(([a], [b]) => rank(a) - rank(b));
-  const base = study.data?.baseline;
+  const base = study.data?.baseline ?? study.data?.S01;
+  const reps = base?.summary.M3.repetitions;
 
   return (
     <>
       <PageHeader
         eyebrow="Risk & sensitivity"
         title="When does agentic intervention actually pay?"
-        description="Backend sensitivity study: each scenario is a full simulation with repeated seeded datasets. All numbers are backend outputs; ranges are the backend's 5th–95th simulation percentiles, not confidence intervals."
+        description={`Backend sensitivity study: each scenario is a full simulation over ${reps ?? "repeated"} seeded datasets${base?.study ? " — the same validation study as the Excel workbook and the Fleet results tab" : ""}. Ranges are 5th–95th simulation percentiles, not confidence intervals.`}
         actions={<DemoDataBadge />}
       />
       {study.error ? <ErrorPanel error={study.error} onRetry={study.reload} /> : null}
@@ -76,7 +80,7 @@ export default function RiskSensitivity() {
               return (
                 <Card key={key} className={positive ? "border-fresh/40" : "border-unsafe-100"} data-testid={`scenario-${key}`}>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-[15px]">{titleCase(key)}</CardTitle>
+                    <CardTitle className="text-[15px]">{label(key, r)}</CardTitle>
                     <CardDescription className="text-xs">{changes(r, base)}</CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -106,7 +110,7 @@ export default function RiskSensitivity() {
                 rows={entries.map(([key, r]) => {
                   const mean = r.risk?.mean_incremental_m3_vs_m2_inr ?? null;
                   return {
-                    label: titleCase(key),
+                    label: label(key, r),
                     color: mean != null && mean > 0 ? STATUS.good : STATUS.critical,
                     values: r.risk?.incremental_m3_vs_m2_distribution_inr ?? [],
                     mean,
@@ -143,7 +147,7 @@ export default function RiskSensitivity() {
                       const s = r.summary[m];
                       return (
                         <TR key={`${key}-${m}`} className={i === 0 ? "border-t-2 border-slate-200" : ""}>
-                          <TD className="font-medium text-slate-800">{i === 0 ? titleCase(key) : ""}</TD>
+                          <TD className="font-medium text-slate-800">{i === 0 ? label(key, r) : ""}</TD>
                           <TD>
                             <span className="inline-flex items-center gap-1.5">
                               <span className="h-2.5 w-2.5 rounded-sm" style={{ background: MODEL_COLOR[m] }} aria-hidden />

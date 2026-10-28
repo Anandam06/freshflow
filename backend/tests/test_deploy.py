@@ -38,6 +38,22 @@ def test_head_requests_mirror_get_without_body(tmp_path, monkeypatch):
     assert c.head('/api/v1/excel/upload').status_code in (404, 405)  # POST-only routes are never served to HEAD/GET
 
 
+def test_stored_study_matches_the_validation_evidence(tmp_path, monkeypatch):
+    import json
+    from pathlib import Path
+    c = make(tmp_path, monkeypatch)
+    index = c.get('/api/v1/studies').json()
+    assert {'S01', 'X01'} <= {r['id'] for r in index}
+    s01 = c.get('/api/v1/studies/S01').json()
+    assert len(s01['runs']) == 30 and s01['study']['id'] == 'S01'
+    raw = Path(__file__).resolve().parents[2] / 'evidence/raw/fleet_results.jsonl'
+    rows = [json.loads(l) for l in raw.read_text(encoding='utf-8').splitlines()]
+    profits = [r['metrics'][3]['operating_profit_inr'] for r in rows if r['scenario_id'] == 'S01']
+    assert abs(s01['summary']['M3']['mean_operating_profit_inr'] - sum(profits) / len(profits)) < 1e-6
+    assert c.get('/api/v1/studies/../S01').status_code == 404
+    assert c.get('/api/v1/studies/S99').status_code == 404
+
+
 def test_public_demo_needs_no_key_but_production_does(tmp_path, monkeypatch):
     c = make(tmp_path, monkeypatch)
     assert c.post('/api/v1/shipments', json={}).status_code == 200

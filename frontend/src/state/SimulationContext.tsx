@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useClient } from "@/services/ClientContext";
-import { DEFAULT_SIMULATION_REQUEST, SimulationRequestSchema, type SimulationRequest, type SimulationResult } from "@/types/api";
+import { DEFAULT_SIMULATION_REQUEST, SimulationRequestSchema, type SimulationRequest, type SimulationResult, type StudyEntry } from "@/types/api";
 
 export interface SavedScenario {
   id: string;
@@ -17,14 +17,19 @@ interface SimulationState {
   /** GET /api/v1/scenarios/defaults (falls back to the contract defaults until loaded). */
   defaults: SimulationRequest;
   result: SimulationResult | undefined;
-  /** Backend id of the current result (GET /api/v1/simulations/{id}). */
+  /** Backend id of the current result (GET /api/v1/simulations/{id}); for the stored study, the seed-60000 replay run once requested. */
   runId: string | null;
   loading: boolean;
   error: unknown;
-  /** Index into result.runs shown on the dashboards. */
+  /** Index into result.runs shown on the dashboards; -1 = mean of all repetitions (the default). */
   runIndex: number;
   setRunIndex: (i: number) => void;
   run: (req: SimulationRequest) => Promise<SimulationResult | undefined>;
+  /** The stored 30-seed validation study (same numbers as the Excel workbook); null when not published. */
+  studies: StudyEntry[] | null;
+  loadStudy: (id: string) => Promise<void>;
+  /** Pages that need batch-level data (control tower, fleet export) call this; it creates the seed-60000 run of the shown scenario. */
+  ensureReplayRun: () => void;
   saved: SavedScenario[];
   save: (name: string) => SavedScenario | null;
   remove: (id: string) => void;
@@ -55,7 +60,8 @@ export function SimulationProvider({ children, initialRequest }: { children: Rea
   const [result, setResult] = useState<SimulationResult>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
-  const [runIndex, setRunIndex] = useState(0);
+  const [runIndex, setRunIndex] = useState(-1);
+  const [studies, setStudies] = useState<StudyEntry[] | null>(null);
   const [runId, setRunId] = useState<string | null>(null);
   const [defaults, setDefaults] = useState<SimulationRequest>(DEFAULT_SIMULATION_REQUEST);
   const [saved, setSaved] = useState<SavedScenario[]>(() => readSaved().filter((s) => s.dataMode === client.mode));
@@ -72,7 +78,7 @@ export function SimulationProvider({ children, initialRequest }: { children: Rea
         setRequest(req);
         setResult(created.result);
         setRunId(created.id);
-        setRunIndex(0);
+        setRunIndex(-1);
         return created.result;
       } catch (e) {
         if (id === latest.current) setError(e);
@@ -84,6 +90,46 @@ export function SimulationProvider({ children, initialRequest }: { children: Rea
     [client],
   );
 
+  const loadStudy = useCallback(
+    async (studyId: string) => {
+      const id = ++latest.current;
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await client.getStudy(studyId);
+        if (id !== latest.current) return;
+        const parsed = SimulationRequestSchema.safeParse(res.config);
+        // The form keeps the scenario's parameters; a re-run from the studio uses the faster default repetition count.
+        if (parsed.success) setRequest({ ...parsed.data, repetitions: DEFAULT_SIMULATION_REQUEST.repetitions });
+        setResult(res);
+        setRunId(null);
+        setRunIndex(-1);
+      } catch (e) {
+        if (id === latest.current) setError(e);
+      } finally {
+        if (id === latest.current) setLoading(false);
+      }
+    },
+    [client],
+  );
+
+  const replayFor = useRef<string | null>(null);
+  const ensureReplayRun = useCallback(() => {
+    if (runId || !result?.study) return;
+    const req = SimulationRequestSchema.parse({ ...result.config, repetitions: 1 });
+    const key = JSON.stringify(req);
+    if (replayFor.current === key) return;
+    replayFor.current = key;
+    client.runSimulation(req).then(
+      (created) => {
+        if (replayFor.current === key) setRunId(created.id);
+      },
+      () => {
+        replayFor.current = null;
+      },
+    );
+  }, [client, result, runId]);
+
   // Public visitors cannot POST (operator key), so a deployment can pin a stored baseline run
   // that loads through the public GET /api/v1/simulations/{id}.
   const baselineId = client.mode === "live" ? (import.meta.env.VITE_BASELINE_SIMULATION_ID as string | undefined)?.trim() : undefined;
@@ -93,10 +139,12 @@ export function SimulationProvider({ children, initialRequest }: { children: Rea
   }, [client]);
 
   useEffect(() => {
-    if (!baselineId) {
-      if (initialRequest) {
-        void run(initialRequest);
-      } else {
+    if (initialRequest) {
+      void run(initialRequest);
+      return;
+    }
+    const fallback = () => {
+      if (!baselineId) {
         client.getScenarioDefaults().then(
           (d) => void run(d),
           (e) => {
@@ -104,27 +152,37 @@ export function SimulationProvider({ children, initialRequest }: { children: Rea
             setLoading(false);
           },
         );
+        return;
       }
-      return;
-    }
-    const id = ++latest.current;
-    setLoading(true);
-    client.getSimulation(baselineId).then(
-      (res) => {
-        if (id !== latest.current) return;
-        const parsed = SimulationRequestSchema.safeParse(res.config);
-        if (parsed.success) setRequest(parsed.data);
-        setResult(res);
-        setRunId(baselineId);
-        setLoading(false);
+      const id = ++latest.current;
+      setLoading(true);
+      client.getSimulation(baselineId).then(
+        (res) => {
+          if (id !== latest.current) return;
+          const parsed = SimulationRequestSchema.safeParse(res.config);
+          if (parsed.success) setRequest(parsed.data);
+          setResult(res);
+          setRunId(baselineId);
+          setLoading(false);
+        },
+        (e) => {
+          if (id !== latest.current) return;
+          setError(e);
+          setLoading(false);
+        },
+      );
+    };
+    // Default view: the stored 30-seed study, so every page and the Excel workbook show the same numbers.
+    // A pinned baseline run or the live default run is used only where the study is not published.
+    client.getStudies().then(
+      (list) => {
+        setStudies(list);
+        if (list?.some((s) => s.id === "S01")) void loadStudy("S01");
+        else fallback();
       },
-      (e) => {
-        if (id !== latest.current) return;
-        setError(e);
-        setLoading(false);
-      },
+      fallback,
     );
-  }, [run, initialRequest, baselineId, client]);
+  }, [run, loadStudy, initialRequest, baselineId, client]);
 
   const save = useCallback(
     (name: string) => {
@@ -134,7 +192,8 @@ export function SimulationProvider({ children, initialRequest }: { children: Rea
         name: name.trim() || `Scenario ${saved.length + 1}`,
         savedAt: new Date().toISOString(),
         dataMode: client.mode,
-        request,
+        // A stored study entry records the parameters it was actually computed with (30 repetitions).
+        request: result.study ? (SimulationRequestSchema.safeParse(result.config).data ?? request) : request,
         result,
       };
       const next = [...saved, item];
@@ -155,8 +214,8 @@ export function SimulationProvider({ children, initialRequest }: { children: Rea
   );
 
   const value = useMemo(
-    () => ({ request, defaults, result, runId, loading, error, runIndex, setRunIndex, run, saved, save, remove }),
-    [request, defaults, result, runId, loading, error, runIndex, run, saved, save, remove],
+    () => ({ request, defaults, result, runId, loading, error, runIndex, setRunIndex, run, studies, loadStudy, ensureReplayRun, saved, save, remove }),
+    [request, defaults, result, runId, loading, error, runIndex, run, studies, loadStudy, ensureReplayRun, saved, save, remove],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

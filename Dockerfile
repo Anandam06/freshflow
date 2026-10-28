@@ -19,6 +19,7 @@ COPY research research
 COPY data/network data/network
 COPY data/scenarios data/scenarios
 COPY data/results/sensitivity.json data/results/sensitivity.json
+COPY data/results/study data/results/study
 COPY --from=web /web/dist frontend/dist
 ENV PYTHONPATH=/app/backend \
     FRESHFLOW_DB=/app/data/freshflow.sqlite \

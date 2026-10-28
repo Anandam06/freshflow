@@ -6,11 +6,12 @@ import { ErrorPanel, KpiCard, LoadingBlock, PageHeader, ProvenanceTag, SectionTi
 import { Limitations, ModelChips, RunContextBar, TargetPanel, useCurrentRun } from "@/components/results";
 import { ModelMetricBar, ProfitBridgeChart } from "@/charts/ModelCharts";
 import { agenticShare, deltaPP, profitBridge } from "@/lib/derive";
-import { formatFraction, formatINR, formatINRPerKg, formatKg, formatPP } from "@/lib/format";
+import { formatCount, formatFraction, formatINR, formatINRPerKg, formatKg, formatPP } from "@/lib/format";
 import { MODEL_ORDER } from "@/lib/models";
 
 export default function Overview() {
-  const { result, current: run, byModel, loading, error, request, run: rerun } = useCurrentRun();
+  const { result, current: run, byModel, loading, error, request, run: rerun, runIndex } = useCurrentRun();
+  const scope = result && result.runs.length > 1 && runIndex < 0 ? `on average over ${result.runs.length} repetitions` : "in this repetition";
 
   return (
     <>
@@ -42,7 +43,7 @@ export default function Overview() {
           <div className="mt-6">
             <RunContextBar result={result} />
           </div>
-          <Headline metrics={byModel} bridge={profitBridge(run)} />
+          <Headline metrics={byModel} bridge={profitBridge(run)} scope={scope} />
 
           <div className="mt-6 grid gap-6 xl:grid-cols-5">
             <Card className="xl:col-span-3">
@@ -123,7 +124,7 @@ export default function Overview() {
   );
 }
 
-function Headline({ metrics, bridge }: { metrics: ReturnType<typeof useCurrentRun>["byModel"] & object; bridge: ReturnType<typeof profitBridge> }) {
+function Headline({ metrics, bridge, scope }: { metrics: ReturnType<typeof useCurrentRun>["byModel"] & object; bridge: ReturnType<typeof profitBridge>; scope: string }) {
   const m0 = metrics.M0;
   const m3 = metrics.M3;
   const share = agenticShare(bridge);
@@ -149,7 +150,7 @@ function Headline({ metrics, bridge }: { metrics: ReturnType<typeof useCurrentRu
         </p>
         <p className="mt-1 text-sm text-slate-700">
           {agentic < 0
-            ? "In this repetition the agentic layer cost more than it rescued; the A→D gain comes from freshness data and optimization. See Risk & sensitivity for when it pays."
+            ? `${scope[0].toUpperCase()}${scope.slice(1)} the agentic layer cost more than it rescued; the A→D gain comes from freshness data and optimization. With disruptions (scenario X01) it pays — see Risk & sensitivity.`
             : share == null
               ? "Share of total gain undefined (total gain not positive)."
               : `${formatFraction(share, 0)} of the total A→D profit gain. The rest comes from freshness data and optimization.`}
@@ -160,7 +161,7 @@ function Headline({ metrics, bridge }: { metrics: ReturnType<typeof useCurrentRu
         <p className="num mt-1 text-3xl font-semibold tracking-tight text-forest">{spoilPP == null ? "—" : formatPP(spoilPP, 1, { signed: false })}</p>
         <p className="mt-1 text-sm text-slate-700">
           {formatFraction(m0.spoilage_rate)} → {formatFraction(m3.spoilage_rate)} of input kg ·{" "}
-          {m3.meets_spoilage_target ? <span className="font-medium text-fresh">below the 10% case target in this run</span> : <span className="font-medium text-unsafe">case target (&lt;10%) not met in this run</span>}
+          {m3.meets_spoilage_target ? <span className="font-medium text-fresh">below the 10% case target {scope}</span> : <span className="font-medium text-unsafe">case target (&lt;10%) not met {scope}</span>}
         </p>
       </div>
     </section>
@@ -192,11 +193,11 @@ function KpiGrid({ m }: { m: NonNullable<ReturnType<typeof useCurrentRun>["byMod
       />
       <KpiCard
         label="Rescued batches (D)"
-        value={m3.rescued_batches != null ? String(m3.rescued_batches) : "—"}
+        value={formatCount(m3.rescued_batches)}
         sub={`Rescue success rate ${formatFraction(m3.successful_rescue_rate)} of attempts`}
         tip="Batches whose plan became infeasible after a disruption and were sold through an alternative channel. Salvage sales are a subset of revenue."
       />
-      <KpiCard label="Food-safety violations" value={String(m3.food_safety_violations)} sub="Held lots are quarantined in every model" tone={m3.food_safety_violations > 0 ? "unsafe" : "fresh"} />
+      <KpiCard label="Food-safety violations" value={formatCount(m3.food_safety_violations)} sub="Held lots are quarantined in every model" tone={m3.food_safety_violations > 0 ? "unsafe" : "fresh"} />
     </div>
   );
 }

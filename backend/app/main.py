@@ -1,5 +1,6 @@
 import json
 import os
+import re
 from pathlib import Path
 from uuid import uuid4
 from datetime import datetime, timezone
@@ -362,6 +363,22 @@ def create_app(db_path=None):
         if not path.exists():
             raise HTTPException(404, 'Run backend/run_risk_study.py to generate the prespecified study')
         return json.loads(path.read_text(encoding='utf-8'))
+
+    study_dir = Path(__file__).resolve().parents[2] / 'data/results/study'
+
+    @app.get('/api/v1/studies')
+    def studies():
+        """The stored 30-seed validation study (same numbers as evidence/FreshFlow_Scenario_Validation.xlsx)."""
+        path = study_dir / 'index.json'
+        if not path.exists():
+            raise HTTPException(404, 'Run python -m validation.export_study to publish the validation study')
+        return json.loads(path.read_text(encoding='utf-8'))
+
+    @app.get('/api/v1/studies/{study_id}', response_model=SimulationResult)
+    def study(study_id: str):
+        if not re.fullmatch(r'[SX]\d{2}', study_id) or not (study_dir / f'{study_id}.json').exists():
+            raise HTTPException(404, f'No stored study scenario {study_id}')
+        return json.loads((study_dir / f'{study_id}.json').read_text(encoding='utf-8'))
 
     @app.get('/api/v1/simulations/{run_id}/batches', response_model=BatchPage)
     def run_batches(run_id: str, offset: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=500),

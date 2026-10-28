@@ -162,6 +162,11 @@ def simulate(config: SimulationRequest):
         metrics = [financials(evaluate(batches, model, config), model, config.setup_cost_inr if model == 'M3' else 0)
                    for model in ['M0', 'M1', 'M2', 'M3']]
         runs.append({'seed': seed, 'dataset_sha256': digest, 'metrics': comparisons(metrics, config.days, config.setup_cost_inr)})
+    return summarize(config, runs)
+
+
+def summarize(config: SimulationRequest, runs):
+    """Result envelope for seeded runs; also used to publish the stored validation study."""
     summary = {}
     for index, model in enumerate(['M0', 'M1', 'M2', 'M3']):
         values = [r['metrics'][index] for r in runs]
@@ -173,7 +178,7 @@ def simulate(config: SimulationRequest):
                           'spoilage_distribution': spoilage,
                           'probability_meeting_both_targets': mean(float(v['meets_spoilage_target'] and v['meets_margin_target']) for v in values),
                           'runs_meeting_both_targets': sum(v['meets_spoilage_target'] and v['meets_margin_target'] for v in values),
-                          'repetitions': config.repetitions}
+                          'repetitions': len(runs)}
     gains = [r['metrics'][3]['operating_profit_inr'] - r['metrics'][2]['operating_profit_inr'] for r in runs]
     return {'evidence_category': 'SIMULATED RESULT', 'agent_mode': 'deterministic_policy_emulation',
             'assumptions_version': ASSUMPTIONS_VERSION, 'config': config.model_dump(), 'runs': runs, 'summary': summary,
