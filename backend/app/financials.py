@@ -8,7 +8,11 @@ def financials(rows, model, setup_cost_inr=0):
     realization = gross - sum(v for k, v in costs.items() if k != 'procurement_inr')
     attempted = sum(r['attempted_delivery'] for r in rows)
     rescue_attempts = sum(r['rescue_attempt'] for r in rows)
+    waterfall = [{'account': 'gross_sales_revenue', 'amount_inr': gross}] + [
+        {'account': key, 'amount_inr': -value} for key, value in costs.items()]
     return {'model': model, 'input_kg': quantity, 'sellable_kg': sold,
+            'sold_kg': sold, 'salvage_value_inr': sum(r.get('salvage_value_inr', 0) for r in rows),
+            'rescued_batches': sum(r['rescued'] for r in rows), 'financial_waterfall': waterfall,
             'spoiled_kg': quantity - sold, 'spoilage_rate': 1 - sold / quantity,
             'gross_sales_revenue_inr': gross, **costs,
             'net_realization_per_input_kg_inr': realization / quantity,

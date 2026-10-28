@@ -5,3 +5,9 @@ __pycache__/
 *.sqlite*
 data/results/*.json
 data/synthetic/*.json
+
+# Stored sensitivity study is served by GET /api/v1/scenarios/sensitivity
+!data/results/sensitivity.json
+# Local tooling
+.vscode/
+*.log

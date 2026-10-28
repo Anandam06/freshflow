@@ -1,0 +1,34 @@
+{
+  "id": "T17",
+  "version": 0,
+  "status": "monitoring",
+  "evidence_category": "SYNTHETIC",
+  "quantity_kg": 500.0,
+  "initial_rsl_hours": 52.0,
+  "rsl_hours": 52.0,
+  "rsl_lower_hours": 46.0,
+  "destination": "Retailer A",
+  "delay_hours": 0.0,
+  "safety_hold": false,
+  "event": null,
+  "proposal": null,
+  "agent_mode": null,
+  "monitoring": true,
+  "trace": [
+    {
+      "sequence": 1,
+      "timestamp": "2026-10-27T18:29:15.886946+00:00",
+      "tool": "seed",
+      "inputs": {},
+      "result": {
+        "scenario": "illustrative T17; dedicated single-batch capacity"
+      }
+    }
+  ],
+  "current_location": "junction",
+  "elapsed_hours": 6.0,
+  "buyer_capacities": {},
+  "unavailable_buyers": [],
+  "price_factors": {},
+  "quality_grade": "A"
+}

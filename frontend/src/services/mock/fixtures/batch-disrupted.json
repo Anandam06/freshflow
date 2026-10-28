@@ -1,0 +1,57 @@
+{
+  "id": "T17",
+  "version": 1,
+  "status": "event_detected",
+  "evidence_category": "SYNTHETIC",
+  "quantity_kg": 500.0,
+  "initial_rsl_hours": 52.0,
+  "rsl_hours": 35.02943725152286,
+  "rsl_lower_hours": 29.029437251522857,
+  "destination": "Retailer A",
+  "delay_hours": 12.0,
+  "safety_hold": false,
+  "event": {
+    "temperature_c": 35,
+    "duration_hours": 6,
+    "delay_hours": 12,
+    "safety_hold": false
+  },
+  "proposal": null,
+  "agent_mode": null,
+  "monitoring": true,
+  "trace": [
+    {
+      "sequence": 1,
+      "timestamp": "2026-10-27T18:29:15.886946+00:00",
+      "tool": "seed",
+      "inputs": {},
+      "result": {
+        "scenario": "illustrative T17; dedicated single-batch capacity"
+      }
+    },
+    {
+      "sequence": 2,
+      "timestamp": "2026-10-27T18:29:16.031589+00:00",
+      "tool": "sense_event",
+      "inputs": {
+        "temperature_c": 35,
+        "duration_hours": 6,
+        "delay_hours": 12,
+        "safety_hold": false
+      },
+      "result": {
+        "rsl_hours": 35.02943725152286,
+        "rsl_lower_hours": 29.029437251522857,
+        "thermal_age_hours": 16.970562748477143,
+        "uncertainty_hours": 6,
+        "method": "synthetic thermal-age proxy; lower bound is not a confidence interval"
+      }
+    }
+  ],
+  "current_location": "junction",
+  "elapsed_hours": 6.0,
+  "buyer_capacities": {},
+  "unavailable_buyers": [],
+  "price_factors": {},
+  "quality_grade": "A"
+}

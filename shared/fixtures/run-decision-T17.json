@@ -1,0 +1,546 @@
+{
+  "run_id": "9ea14ff9-5e96-4b43-b495-65e560e161ac",
+  "batch_id": "T17",
+  "scope": "Interactive replay; immutable experiment metrics are not rewritten",
+  "state": {
+    "id": "T17",
+    "version": 0,
+    "status": "awaiting_approval",
+    "evidence_category": "SYNTHETIC",
+    "quantity_kg": 320.0,
+    "initial_rsl_hours": 96.23816264275159,
+    "rsl_hours": 85.78149151800937,
+    "rsl_lower_hours": 79.78149151800937,
+    "destination": "Processor C",
+    "delay_hours": 0.0,
+    "safety_hold": false,
+    "event": {
+      "temperature_c": 20.68098538901881,
+      "duration_hours": 6,
+      "delay_hours": 0,
+      "safety_hold": false
+    },
+    "proposal": {
+      "id": "Processor C",
+      "price_inr_kg": 14.79916901433428,
+      "travel_hours": 2.0,
+      "minimum_rsl_hours": 2.0,
+      "capacity_kg": 10000.0,
+      "transport_inr_kg": 0.8,
+      "route": {
+        "origin": "junction",
+        "destination": "Processor C",
+        "reachable": true,
+        "travel_hours": 2.0,
+        "path": [
+          "junction",
+          "Processor C"
+        ],
+        "source": "SYNTHETIC graph; not map-derived routing"
+      },
+      "arrival_rsl_lower_hours": 77.78149151800937,
+      "feasible": true,
+      "reasons": [],
+      "available_capacity_kg": 320.4851305584234,
+      "net_proceeds_inr": 4239.734084586969,
+      "rescue_cost_inr_kg": 0.75
+    },
+    "agent_mode": "deterministic",
+    "monitoring": true,
+    "trace": [
+      {
+        "sequence": 1,
+        "timestamp": "2026-10-27T18:29:53.234668+00:00",
+        "tool": "get_batch_state",
+        "inputs": {},
+        "result": {
+          "scope": "run-scoped interactive replay",
+          "morning_destination": "Processor C"
+        }
+      },
+      {
+        "sequence": 2,
+        "timestamp": "2026-10-27T18:29:53.235528+00:00",
+        "tool": "sense_event",
+        "inputs": {
+          "temperature_c": 20.68098538901881,
+          "duration_hours": 6,
+          "delay_hours": 0,
+          "safety_hold": false
+        },
+        "result": {
+          "rsl_hours": 86.28149151800937,
+          "rsl_lower_hours": 80.28149151800937,
+          "thermal_age_hours": 6.29000445807554,
+          "uncertainty_hours": 6,
+          "method": "synthetic thermal-age proxy; lower bound is not a confidence interval"
+        }
+      },
+      {
+        "sequence": 3,
+        "timestamp": "2026-10-27T18:29:53.235533+00:00",
+        "tool": "get_batch_state",
+        "inputs": {},
+        "result": {
+          "id": "T17",
+          "destination": "Processor C",
+          "quantity_kg": 320.0,
+          "event": {
+            "temperature_c": 20.68098538901881,
+            "duration_hours": 6,
+            "delay_hours": 0,
+            "safety_hold": false
+          },
+          "safety_hold": false,
+          "current_location": "junction"
+        }
+      },
+      {
+        "sequence": 4,
+        "timestamp": "2026-10-27T18:29:53.235536+00:00",
+        "tool": "predict_remaining_shelf_life",
+        "inputs": {},
+        "result": {
+          "rsl_hours": 85.78149151800937,
+          "rsl_lower_hours": 79.78149151800937,
+          "interpretation": "Synthetic quality estimate; safety hold is separate"
+        }
+      },
+      {
+        "sequence": 5,
+        "timestamp": "2026-10-27T18:29:53.235539+00:00",
+        "tool": "get_buyer_options",
+        "inputs": {},
+        "result": {
+          "buyers": [
+            {
+              "id": "Retailer A",
+              "price_inr_kg": 32.0,
+              "travel_hours": 12.0,
+              "minimum_rsl_hours": 24.0,
+              "capacity_kg": 14000.0,
+              "transport_inr_kg": 2.0
+            },
+            {
+              "id": "Wholesale B",
+              "price_inr_kg": 24.0,
+              "travel_hours": 5.0,
+              "minimum_rsl_hours": 8.0,
+              "capacity_kg": 14000.0,
+              "transport_inr_kg": 1.2
+            },
+            {
+              "id": "Processor C",
+              "price_inr_kg": 16.0,
+              "travel_hours": 2.0,
+              "minimum_rsl_hours": 2.0,
+              "capacity_kg": 10000.0,
+              "transport_inr_kg": 0.8
+            }
+          ],
+          "retailer_delay_hours": 0,
+          "price_factors": {
+            "Retailer A": 0.9232918908615658,
+            "Wholesale B": 1.1473563706862284,
+            "Processor C": 0.9249480633958925
+          },
+          "unavailable_buyers": [],
+          "source": "SYNTHETIC scenario quotes and capacity observations; not live market data"
+        }
+      },
+      {
+        "sequence": 6,
+        "timestamp": "2026-10-27T18:29:53.235542+00:00",
+        "tool": "check_buyer_capacity",
+        "inputs": {},
+        "result": {
+          "available_capacity_kg": {
+            "Retailer A": 0.21118381727137603,
+            "Wholesale B": 0,
+            "Processor C": 320.4851305584234
+          }
+        }
+      },
+      {
+        "sequence": 7,
+        "timestamp": "2026-10-27T18:29:53.235548+00:00",
+        "tool": "calculate_route_eta",
+        "inputs": {},
+        "result": {
+          "routes": [
+            {
+              "origin": "junction",
+              "destination": "Retailer A",
+              "reachable": true,
+              "travel_hours": 12.0,
+              "path": [
+                "junction",
+                "Retailer A"
+              ],
+              "source": "SYNTHETIC graph; not map-derived routing"
+            },
+            {
+              "origin": "junction",
+              "destination": "Wholesale B",
+              "reachable": true,
+              "travel_hours": 5.0,
+              "path": [
+                "junction",
+                "Wholesale B"
+              ],
+              "source": "SYNTHETIC graph; not map-derived routing"
+            },
+            {
+              "origin": "junction",
+              "destination": "Processor C",
+              "reachable": true,
+              "travel_hours": 2.0,
+              "path": [
+                "junction",
+                "Processor C"
+              ],
+              "source": "SYNTHETIC graph; not map-derived routing"
+            }
+          ]
+        }
+      },
+      {
+        "sequence": 8,
+        "timestamp": "2026-10-27T18:29:53.235561+00:00",
+        "tool": "optimize_destination",
+        "inputs": {},
+        "result": {
+          "options": [
+            {
+              "id": "Processor C",
+              "price_inr_kg": 14.79916901433428,
+              "travel_hours": 2.0,
+              "minimum_rsl_hours": 2.0,
+              "capacity_kg": 10000.0,
+              "transport_inr_kg": 0.8,
+              "route": {
+                "origin": "junction",
+                "destination": "Processor C",
+                "reachable": true,
+                "travel_hours": 2.0,
+                "path": [
+                  "junction",
+                  "Processor C"
+                ],
+                "source": "SYNTHETIC graph; not map-derived routing"
+              },
+              "arrival_rsl_lower_hours": 77.78149151800937,
+              "feasible": true,
+              "reasons": [],
+              "available_capacity_kg": 320.4851305584234,
+              "net_proceeds_inr": 4239.734084586969,
+              "rescue_cost_inr_kg": 0.75
+            },
+            {
+              "id": "Retailer A",
+              "price_inr_kg": 29.545340507570106,
+              "travel_hours": 12.0,
+              "minimum_rsl_hours": 24.0,
+              "capacity_kg": 14000.0,
+              "transport_inr_kg": 2.0,
+              "route": {
+                "origin": "junction",
+                "destination": "Retailer A",
+                "reachable": true,
+                "travel_hours": 12.0,
+                "path": [
+                  "junction",
+                  "Retailer A"
+                ],
+                "source": "SYNTHETIC graph; not map-derived routing"
+              },
+              "arrival_rsl_lower_hours": 67.78149151800937,
+              "feasible": false,
+              "reasons": [
+                "Buyer capacity exceeded"
+              ],
+              "available_capacity_kg": 0.21118381727137603,
+              "net_proceeds_inr": 8574.508962422435,
+              "rescue_cost_inr_kg": 0.75
+            },
+            {
+              "id": "Wholesale B",
+              "price_inr_kg": 27.53655289646948,
+              "travel_hours": 5.0,
+              "minimum_rsl_hours": 8.0,
+              "capacity_kg": 14000.0,
+              "transport_inr_kg": 1.2,
+              "route": {
+                "origin": "junction",
+                "destination": "Wholesale B",
+                "reachable": true,
+                "travel_hours": 5.0,
+                "path": [
+                  "junction",
+                  "Wholesale B"
+                ],
+                "source": "SYNTHETIC graph; not map-derived routing"
+              },
+              "arrival_rsl_lower_hours": 74.78149151800937,
+              "feasible": false,
+              "reasons": [
+                "Buyer capacity exceeded"
+              ],
+              "available_capacity_kg": 0,
+              "net_proceeds_inr": 8187.696926870234,
+              "rescue_cost_inr_kg": 0.75
+            }
+          ]
+        }
+      },
+      {
+        "sequence": 9,
+        "timestamp": "2026-10-27T18:29:53.235567+00:00",
+        "tool": "validate_constraints",
+        "inputs": {
+          "destination": "Processor C"
+        },
+        "result": {
+          "allowed": true,
+          "requires_human_approval": true,
+          "reasons": [],
+          "destination": "Processor C"
+        }
+      },
+      {
+        "sequence": 10,
+        "timestamp": "2026-10-27T18:29:53.235570+00:00",
+        "tool": "request_human_approval",
+        "inputs": {
+          "destination": "Processor C"
+        },
+        "result": {
+          "status": "awaiting_approval",
+          "destination": "Processor C"
+        }
+      }
+    ],
+    "current_location": "junction",
+    "elapsed_hours": 10.166666666666666,
+    "buyer_capacities": {
+      "Retailer A": 0.21118381727137603,
+      "Wholesale B": 0.0,
+      "Processor C": 320.4851305584234
+    },
+    "unavailable_buyers": [],
+    "price_factors": {
+      "Retailer A": 0.9232918908615658,
+      "Wholesale B": 1.1473563706862284,
+      "Processor C": 0.9249480633958925
+    },
+    "quality_grade": "B"
+  },
+  "simulated_outcome": {
+    "batch_id": "T17",
+    "day": 0,
+    "quantity_kg": 320.0,
+    "destination": "Processor C",
+    "morning_destination": "Processor C",
+    "current_location": "junction",
+    "route": {
+      "origin": "junction",
+      "destination": "Processor C",
+      "reachable": true,
+      "travel_hours": 2.0,
+      "path": [
+        "junction",
+        "Processor C"
+      ],
+      "source": "SYNTHETIC graph; not map-derived routing"
+    },
+    "sold_kg": 320.0,
+    "spoiled_kg": 0,
+    "revenue_inr": 4735.734084586969,
+    "realized_unit_price_inr": 14.79916901433428,
+    "salvage_value_inr": 4735.734084586969,
+    "procurement_inr": 3762.4860318016845,
+    "transport_inr": 256.0,
+    "handling_inr": 160.0,
+    "rescue_inr": 0,
+    "agent_sensor_inr": 80.0,
+    "attempted_delivery": true,
+    "rejected": false,
+    "on_time": true,
+    "rescue_attempt": false,
+    "rescued": false,
+    "safety_violation": false,
+    "estimated_freshness": {
+      "rsl_hours": 86.28149151800937,
+      "rsl_lower_hours": 80.28149151800937,
+      "thermal_age_hours": 6.29000445807554,
+      "uncertainty_hours": 6,
+      "method": "synthetic thermal-age proxy; lower bound is not a confidence interval"
+    },
+    "realized_arrival_rsl_hours": 88.60575932922065,
+    "buyer_acceptance": true,
+    "candidate_decisions": [
+      {
+        "id": "Processor C",
+        "price_inr_kg": 14.79916901433428,
+        "travel_hours": 2.0,
+        "minimum_rsl_hours": 2.0,
+        "capacity_kg": 10000.0,
+        "transport_inr_kg": 0.8,
+        "route": {
+          "origin": "junction",
+          "destination": "Processor C",
+          "reachable": true,
+          "travel_hours": 2.0,
+          "path": [
+            "junction",
+            "Processor C"
+          ],
+          "source": "SYNTHETIC graph; not map-derived routing"
+        },
+        "arrival_rsl_lower_hours": 78.28149151800937,
+        "feasible": true,
+        "reasons": [],
+        "available_capacity_kg": 320.4851305584234,
+        "net_proceeds_inr": 4479.734084586969,
+        "rescue_cost_inr_kg": 0.0
+      },
+      {
+        "id": "Retailer A",
+        "price_inr_kg": 29.545340507570106,
+        "travel_hours": 12.0,
+        "minimum_rsl_hours": 24.0,
+        "capacity_kg": 14000.0,
+        "transport_inr_kg": 2.0,
+        "route": {
+          "origin": "junction",
+          "destination": "Retailer A",
+          "reachable": true,
+          "travel_hours": 12.0,
+          "path": [
+            "junction",
+            "Retailer A"
+          ],
+          "source": "SYNTHETIC graph; not map-derived routing"
+        },
+        "arrival_rsl_lower_hours": 68.28149151800937,
+        "feasible": false,
+        "reasons": [
+          "Buyer capacity exceeded"
+        ],
+        "available_capacity_kg": 0.21118381727137603,
+        "net_proceeds_inr": 8814.508962422435,
+        "rescue_cost_inr_kg": 0.0
+      },
+      {
+        "id": "Wholesale B",
+        "price_inr_kg": 27.53655289646948,
+        "travel_hours": 5.0,
+        "minimum_rsl_hours": 8.0,
+        "capacity_kg": 14000.0,
+        "transport_inr_kg": 1.2,
+        "route": {
+          "origin": "junction",
+          "destination": "Wholesale B",
+          "reachable": true,
+          "travel_hours": 5.0,
+          "path": [
+            "junction",
+            "Wholesale B"
+          ],
+          "source": "SYNTHETIC graph; not map-derived routing"
+        },
+        "arrival_rsl_lower_hours": 75.28149151800937,
+        "feasible": false,
+        "reasons": [
+          "Buyer capacity exceeded"
+        ],
+        "available_capacity_kg": 0,
+        "net_proceeds_inr": 8427.696926870234,
+        "rescue_cost_inr_kg": 0.0
+      }
+    ],
+    "solver_status": "OPTIMAL",
+    "constraint_violations": [],
+    "trace": [
+      {
+        "sequence": 1,
+        "timestamp": "day=0;elapsed_hours=9.666667",
+        "tool": "get_batch_state",
+        "inputs": {},
+        "result": {
+          "batch_id": "T17",
+          "destination": "Processor C",
+          "current_location": "junction",
+          "event": {
+            "temperature_c": 20.68098538901881,
+            "physical_temperature_c": 20,
+            "humidity_percent": 93.26525264118324,
+            "duration_hours": 6,
+            "temperature_history": [
+              {
+                "start_hour": 0,
+                "end_hour": 6,
+                "physical_c": 20,
+                "observed_c": 20.68098538901881
+              }
+            ],
+            "humidity_history": [
+              {
+                "start_hour": 0,
+                "end_hour": 6,
+                "relative_humidity_percent": 93.26525264118324
+              }
+            ],
+            "delay_hours": 0,
+            "safety_hold": false,
+            "cancelled_buyers": [],
+            "price_factors": {
+              "Retailer A": 0.9232918908615658,
+              "Wholesale B": 1.1473563706862284,
+              "Processor C": 0.9249480633958925
+            },
+            "observed_at_hour": 6,
+            "current_location": "junction"
+          }
+        }
+      },
+      {
+        "sequence": 2,
+        "timestamp": "day=0;elapsed_hours=9.666667",
+        "tool": "verify_execution",
+        "inputs": {},
+        "result": {
+          "accepted": true,
+          "sold_kg": 320.0,
+          "realized_rsl_hours": 88.60575932922065
+        }
+      }
+    ],
+    "ledger": [
+      {
+        "account": "sales",
+        "amount_inr": 4735.734084586969
+      },
+      {
+        "account": "procurement_inr",
+        "amount_inr": -3762.4860318016845
+      },
+      {
+        "account": "transport_inr",
+        "amount_inr": -256.0
+      },
+      {
+        "account": "handling_inr",
+        "amount_inr": -160.0
+      },
+      {
+        "account": "rescue_inr",
+        "amount_inr": 0
+      },
+      {
+        "account": "agent_sensor_inr",
+        "amount_inr": -80.0
+      }
+    ]
+  }
+}

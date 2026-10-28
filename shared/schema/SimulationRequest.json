@@ -1,0 +1,119 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "seed": {
+      "default": 60000,
+      "maximum": 2147483647,
+      "minimum": 0,
+      "title": "Seed",
+      "type": "integer"
+    },
+    "batches": {
+      "default": 2000,
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "Batches",
+      "type": "integer"
+    },
+    "days": {
+      "default": 30,
+      "maximum": 365,
+      "minimum": 1,
+      "title": "Days",
+      "type": "integer"
+    },
+    "repetitions": {
+      "default": 3,
+      "maximum": 30,
+      "minimum": 1,
+      "title": "Repetitions",
+      "type": "integer"
+    },
+    "disruption_probability": {
+      "default": 0.0,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Disruption Probability",
+      "type": "number"
+    },
+    "price_multiplier": {
+      "default": 1,
+      "maximum": 3,
+      "minimum": 0.1,
+      "title": "Price Multiplier",
+      "type": "number"
+    },
+    "capacity_multiplier": {
+      "default": 1,
+      "maximum": 3,
+      "minimum": 0.1,
+      "title": "Capacity Multiplier",
+      "type": "number"
+    },
+    "setup_cost_inr": {
+      "default": 50000,
+      "maximum": 100000000.0,
+      "minimum": 0,
+      "title": "Setup Cost Inr",
+      "type": "number"
+    },
+    "buyer_availability": {
+      "default": 0.95,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Buyer Availability",
+      "type": "number"
+    },
+    "temperature_shift_c": {
+      "default": 0,
+      "maximum": 10,
+      "minimum": -5,
+      "title": "Temperature Shift C",
+      "type": "number"
+    },
+    "traffic_multiplier": {
+      "default": 1,
+      "maximum": 3,
+      "minimum": 0,
+      "title": "Traffic Multiplier",
+      "type": "number"
+    },
+    "prediction_error_hours": {
+      "default": 3,
+      "maximum": 24,
+      "minimum": 0,
+      "title": "Prediction Error Hours",
+      "type": "number"
+    },
+    "approval_delay_hours": {
+      "default": 0.5,
+      "maximum": 24,
+      "minimum": 0,
+      "title": "Approval Delay Hours",
+      "type": "number"
+    },
+    "ai_cost_multiplier": {
+      "default": 1,
+      "maximum": 20,
+      "minimum": 0,
+      "title": "Ai Cost Multiplier",
+      "type": "number"
+    },
+    "initial_rsl_scale": {
+      "default": 1.4,
+      "maximum": 2,
+      "minimum": 0.3,
+      "title": "Initial Rsl Scale",
+      "type": "number"
+    },
+    "cancellation_probability": {
+      "default": 0.03,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Cancellation Probability",
+      "type": "number"
+    }
+  },
+  "title": "SimulationRequest",
+  "type": "object"
+}

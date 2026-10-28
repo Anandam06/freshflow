@@ -35,6 +35,10 @@ with tempfile.TemporaryDirectory() as temporary:
             result = client.post('/api/v1/simulations', json={'batches': 50, 'repetitions': 1})
             result.raise_for_status()
             assert len(result.json()['result']['runs'][0]['metrics']) == 4
+            run_id = result.json()['id']
+            assert client.get(f'/api/v1/simulations/{run_id}/batches?limit=3').json()['total'] == 50
+            assert client.get(f'/api/v1/simulations/{run_id}/decisions/T17').status_code == 200
+            assert client.get('/api/v1/health').status_code == 200
             path = '/api/v1/batches/T17'
             client.post(path + '/events', json={}).raise_for_status()
             pending = client.post(path + '/investigate', json={})

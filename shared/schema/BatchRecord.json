@@ -1,0 +1,96 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "day": {
+      "title": "Day",
+      "type": "integer"
+    },
+    "quantity_kg": {
+      "title": "Quantity Kg",
+      "type": "number"
+    },
+    "morning_buyer": {
+      "title": "Morning Buyer",
+      "type": "string"
+    },
+    "maturity": {
+      "title": "Maturity",
+      "type": "string"
+    },
+    "quality_grade": {
+      "title": "Quality Grade",
+      "type": "string"
+    },
+    "harvest_timestamp": {
+      "title": "Harvest Timestamp",
+      "type": "string"
+    },
+    "dispatch_timestamp": {
+      "title": "Dispatch Timestamp",
+      "type": "string"
+    },
+    "collection_location": {
+      "title": "Collection Location",
+      "type": "string"
+    },
+    "dispatch_location": {
+      "title": "Dispatch Location",
+      "type": "string"
+    },
+    "initial_rsl_hours": {
+      "title": "Initial Rsl Hours",
+      "type": "number"
+    },
+    "procurement_inr_kg": {
+      "title": "Procurement Inr Kg",
+      "type": "number"
+    },
+    "physical_condition": {
+      "additionalProperties": true,
+      "title": "Physical Condition",
+      "type": "object"
+    },
+    "sensor_observation": {
+      "additionalProperties": true,
+      "title": "Sensor Observation",
+      "type": "object"
+    },
+    "buyer_snapshot": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Buyer Snapshot",
+      "type": "array"
+    },
+    "future_event": {
+      "additionalProperties": true,
+      "title": "Future Event",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "day",
+    "quantity_kg",
+    "morning_buyer",
+    "maturity",
+    "quality_grade",
+    "harvest_timestamp",
+    "dispatch_timestamp",
+    "collection_location",
+    "dispatch_location",
+    "initial_rsl_hours",
+    "procurement_inr_kg",
+    "physical_condition",
+    "sensor_observation",
+    "buyer_snapshot",
+    "future_event"
+  ],
+  "title": "BatchRecord",
+  "type": "object"
+}

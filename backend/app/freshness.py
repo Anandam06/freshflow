@@ -1,6 +1,6 @@
 """Illustrative thermal-age quality proxy, NOT a food-safety model."""
 
-ASSUMPTIONS_VERSION = 'synthetic-v1'
+ASSUMPTIONS_VERSION = 'synthetic-v2'
 
 
 def predict_rsl(initial_hours: float, temperature_c: float, duration_hours: float,

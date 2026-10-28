@@ -3,8 +3,19 @@ info:
   title: FreshFlow API
   description: Synthetic demonstration. All currency INR, mass kg, durations hours.
     Ratios are fractions, not percentages.
-  version: 1.0.0
+  version: 1.4.0
 paths:
+  /api/v1/health:
+    get:
+      summary: Health
+      operationId: health_api_v1_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
   /health:
     get:
       summary: Health
@@ -14,7 +25,8 @@ paths:
           description: Successful Response
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/Health'
   /api/v1/batches:
     get:
       summary: Batches
@@ -167,6 +179,304 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/batches/{batch_id}/reset:
+    post:
+      summary: Reset
+      operationId: reset_api_v1_batches__batch_id__reset_post
+      parameters:
+      - name: batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Batch Id
+      - name: x-operator-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Operator-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchState'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/llm-usage:
+    get:
+      summary: Llm Usage
+      operationId: llm_usage_api_v1_llm_usage_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/network:
+    get:
+      summary: Network
+      operationId: network_api_v1_network_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/shipments:
+    post:
+      summary: Create Shipment
+      operationId: create_shipment_api_v1_shipments_post
+      parameters:
+      - name: x-operator-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Operator-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/shipments/{shipment_id}:
+    get:
+      summary: Get Shipment
+      operationId: get_shipment_api_v1_shipments__shipment_id__get
+      parameters:
+      - name: shipment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Shipment Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/shipments/{shipment_id}/approval:
+    post:
+      summary: Shipment Approval
+      operationId: shipment_approval_api_v1_shipments__shipment_id__approval_post
+      parameters:
+      - name: shipment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Shipment Id
+      - name: x-operator-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Operator-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentApproval'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/shipments/{shipment_id}/export.xlsx:
+    get:
+      summary: Shipment Xlsx
+      operationId: shipment_xlsx_api_v1_shipments__shipment_id__export_xlsx_get
+      parameters:
+      - name: shipment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Shipment Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/exports/comparison:
+    post:
+      summary: Comparison Xlsx
+      operationId: comparison_xlsx_api_v1_exports_comparison_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComparisonExport'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/excel/template:
+    get:
+      summary: Excel Template
+      operationId: excel_template_api_v1_excel_template_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/excel/upload:
+    post:
+      summary: Excel Upload
+      operationId: excel_upload_api_v1_excel_upload_post
+      parameters:
+      - name: x-operator-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Operator-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkbookUpload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workbook-runs/{run_id}:
+    get:
+      summary: Workbook Run
+      operationId: workbook_run_api_v1_workbook_runs__run_id__get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workbook-runs/{run_id}/export.xlsx:
+    get:
+      summary: Workbook Xlsx
+      operationId: workbook_xlsx_api_v1_workbook_runs__run_id__export_xlsx_get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/simulations/{run_id}/export.xlsx:
+    get:
+      summary: Simulation Xlsx
+      operationId: simulation_xlsx_api_v1_simulations__run_id__export_xlsx_get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /api/v1/simulations:
     post:
       summary: Simulation
@@ -199,6 +509,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/simulations/{run_id}/results:
+    get:
+      summary: Run
+      operationId: run_api_v1_simulations__run_id__results_get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationResult'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /api/v1/simulations/{run_id}:
     get:
       summary: Run
@@ -223,6 +557,194 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/scenarios/defaults:
+    get:
+      summary: Defaults
+      operationId: defaults_api_v1_scenarios_defaults_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/scenarios/sensitivity:
+    get:
+      summary: Sensitivity
+      operationId: sensitivity_api_v1_scenarios_sensitivity_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/simulations/{run_id}/batches:
+    get:
+      summary: Run Batches
+      operationId: run_batches_api_v1_simulations__run_id__batches_get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: rescue_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Only batches where the simulated M3 policy attempted a rescue
+          default: false
+          title: Rescue Only
+        description: Only batches where the simulated M3 policy attempted a rescue
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchPage'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/simulations/{run_id}/decisions/{batch_id}:
+    get:
+      summary: Run Decision
+      operationId: run_decision_api_v1_simulations__run_id__decisions__batch_id__get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      - name: batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Batch Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunDecision'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/simulations/{run_id}/decisions/{batch_id}/approve:
+    post:
+      summary: Approve Decision
+      operationId: approve_decision_api_v1_simulations__run_id__decisions__batch_id__approve_post
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      - name: batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Batch Id
+      - name: x-operator-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Operator-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VersionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunDecision'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/simulations/{run_id}/decisions/{batch_id}/reject:
+    post:
+      summary: Reject Decision
+      operationId: reject_decision_api_v1_simulations__run_id__decisions__batch_id__reject_post
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      - name: batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Batch Id
+      - name: x-operator-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Operator-Key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VersionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunDecision'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /api/v1/evidence:
     get:
       summary: Evidence
@@ -232,7 +754,40 @@ paths:
           description: Successful Response
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/EvidenceRegister'
+  /api/v1/assumptions:
+    get:
+      summary: Assumptions
+      operationId: assumptions_api_v1_assumptions_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  additionalProperties:
+                    type: string
+                  type: object
+                type: array
+                title: Response Assumptions Api V1 Assumptions Get
+  /api/v1/sources:
+    get:
+      summary: Sources
+      operationId: sources_api_v1_sources_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  additionalProperties:
+                    type: string
+                  type: object
+                type: array
+                title: Response Sources Api V1 Sources Get
 components:
   schemas:
     ApprovalRequest:
@@ -250,6 +805,39 @@ components:
       - approve
       - expected_version
       title: ApprovalRequest
+    BatchPage:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        repetition:
+          type: integer
+          title: Repetition
+        offset:
+          type: integer
+          title: Offset
+        limit:
+          type: integer
+          title: Limit
+        total:
+          type: integer
+          title: Total
+        batches:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Batches
+      additionalProperties: false
+      type: object
+      required:
+      - run_id
+      - repetition
+      - offset
+      - limit
+      - total
+      - batches
+      title: BatchPage
     BatchState:
       properties:
         id:
@@ -312,6 +900,33 @@ components:
             $ref: '#/components/schemas/TraceEntry'
           type: array
           title: Trace
+        current_location:
+          type: string
+          title: Current Location
+          default: junction
+        elapsed_hours:
+          type: number
+          title: Elapsed Hours
+          default: 6
+        buyer_capacities:
+          additionalProperties:
+            type: number
+          type: object
+          title: Buyer Capacities
+        unavailable_buyers:
+          items:
+            type: string
+          type: array
+          title: Unavailable Buyers
+        price_factors:
+          additionalProperties:
+            type: number
+          type: object
+          title: Price Factors
+        quality_grade:
+          type: string
+          title: Quality Grade
+          default: A
       additionalProperties: false
       type: object
       required:
@@ -331,6 +946,20 @@ components:
       - monitoring
       - trace
       title: BatchState
+    ComparisonExport:
+      properties:
+        shipment_ids:
+          items:
+            type: string
+          type: array
+          maxItems: 50
+          minItems: 1
+          title: Shipment Ids
+      additionalProperties: false
+      type: object
+      required:
+      - shipment_ids
+      title: ComparisonExport
     CreatedSimulation:
       properties:
         id:
@@ -344,6 +973,33 @@ components:
       - id
       - result
       title: CreatedSimulation
+    Disruption:
+      properties:
+        type:
+          type: string
+          enum:
+          - heavy_traffic
+          - road_closure
+          - temperature_rise
+          - refrigeration_failure
+          - humidity_problem
+          - buyer_cancellation
+          - price_drop
+          - product_damage
+          title: Type
+        severity:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          title: Severity
+          default: medium
+      additionalProperties: false
+      type: object
+      required:
+      - type
+      title: Disruption
     EventRequest:
       properties:
         temperature_c:
@@ -371,6 +1027,28 @@ components:
       additionalProperties: false
       type: object
       title: EventRequest
+    EvidenceRegister:
+      properties:
+        assumptions:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          type: array
+          title: Assumptions
+        sources:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          type: array
+          title: Sources
+      additionalProperties: false
+      type: object
+      required:
+      - assumptions
+      - sources
+      title: EvidenceRegister
     HTTPValidationError:
       properties:
         detail:
@@ -380,6 +1058,42 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    Health:
+      properties:
+        status:
+          type: string
+          const: ok
+          title: Status
+          default: ok
+        version:
+          type: string
+          title: Version
+        database:
+          type: string
+          enum:
+          - sqlite
+          - postgresql
+          title: Database
+        live_agent_configured:
+          type: boolean
+          title: Live Agent Configured
+        llm_provider:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Llm Provider
+        llm_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Llm Model
+      additionalProperties: false
+      type: object
+      required:
+      - version
+      - database
+      - live_agent_configured
+      title: Health
     InvestigateRequest:
       properties:
         mode:
@@ -501,6 +1215,24 @@ components:
           - type: number
           - type: 'null'
           title: Incremental Agentic Policy Profit Vs M2 Inr
+        sold_kg:
+          type: number
+          title: Sold Kg
+          default: 0
+        salvage_value_inr:
+          type: number
+          title: Salvage Value Inr
+          default: 0
+        rescued_batches:
+          type: integer
+          title: Rescued Batches
+          default: 0
+        financial_waterfall:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Financial Waterfall
       additionalProperties: false
       type: object
       required:
@@ -549,6 +1281,36 @@ components:
         repetitions:
           type: integer
           title: Repetitions
+        median_operating_profit_inr:
+          type: number
+          title: Median Operating Profit Inr
+          default: 0
+        profit_p05_inr:
+          type: number
+          title: Profit P05 Inr
+          default: 0
+        profit_p95_inr:
+          type: number
+          title: Profit P95 Inr
+          default: 0
+        spoilage_p05:
+          type: number
+          title: Spoilage P05
+          default: 0
+        spoilage_p95:
+          type: number
+          title: Spoilage P95
+          default: 0
+        profit_distribution_inr:
+          items:
+            type: number
+          type: array
+          title: Profit Distribution Inr
+        spoilage_distribution:
+          items:
+            type: number
+          type: array
+          title: Spoilage Distribution
       additionalProperties: false
       type: object
       required:
@@ -558,6 +1320,100 @@ components:
       - runs_meeting_both_targets
       - repetitions
       title: ModelSummary
+    RunDecision:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        batch_id:
+          type: string
+          title: Batch Id
+        scope:
+          type: string
+          title: Scope
+          default: Interactive replay; immutable experiment metrics are not rewritten
+        state:
+          $ref: '#/components/schemas/BatchState'
+        simulated_outcome:
+          additionalProperties: true
+          type: object
+          title: Simulated Outcome
+      additionalProperties: false
+      type: object
+      required:
+      - run_id
+      - batch_id
+      - state
+      - simulated_outcome
+      title: RunDecision
+    ShipmentApproval:
+      properties:
+        approve:
+          type: boolean
+          title: Approve
+        expected_version:
+          type: integer
+          minimum: 0.0
+          title: Expected Version
+      additionalProperties: false
+      type: object
+      required:
+      - approve
+      - expected_version
+      title: ShipmentApproval
+    ShipmentRequest:
+      properties:
+        commodity_id:
+          type: string
+          title: Commodity Id
+          default: tomato
+        origin_id:
+          type: string
+          title: Origin Id
+          default: H1
+        buyer_id:
+          type: string
+          title: Buyer Id
+          default: B02
+        quantity_kg:
+          type: number
+          maximum: 10000.0
+          exclusiveMinimum: 0.0
+          title: Quantity Kg
+          default: 800
+        quality_grade:
+          type: string
+          enum:
+          - A
+          - B
+          - C
+          title: Quality Grade
+          default: A
+        disruptions:
+          items:
+            $ref: '#/components/schemas/Disruption'
+          type: array
+          maxItems: 8
+          title: Disruptions
+        settings:
+          additionalProperties:
+            type: number
+          type: object
+          title: Settings
+        mode:
+          type: string
+          enum:
+          - deterministic
+          - live
+          title: Mode
+          default: deterministic
+        dataset_id:
+          type: string
+          title: Dataset Id
+          default: default
+      additionalProperties: false
+      type: object
+      title: ShipmentRequest
     SimulationRequest:
       properties:
         seed:
@@ -565,7 +1421,7 @@ components:
           maximum: 2147483647.0
           minimum: 0.0
           title: Seed
-          default: 2026
+          default: 60000
         batches:
           type: integer
           maximum: 10000.0
@@ -589,7 +1445,7 @@ components:
           maximum: 1.0
           minimum: 0.0
           title: Disruption Probability
-          default: 0.3
+          default: 0.0
         price_multiplier:
           type: number
           maximum: 3.0
@@ -608,6 +1464,54 @@ components:
           minimum: 0.0
           title: Setup Cost Inr
           default: 50000
+        buyer_availability:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Buyer Availability
+          default: 0.95
+        temperature_shift_c:
+          type: number
+          maximum: 10.0
+          minimum: -5.0
+          title: Temperature Shift C
+          default: 0
+        traffic_multiplier:
+          type: number
+          maximum: 3.0
+          minimum: 0.0
+          title: Traffic Multiplier
+          default: 1
+        prediction_error_hours:
+          type: number
+          maximum: 24.0
+          minimum: 0.0
+          title: Prediction Error Hours
+          default: 3
+        approval_delay_hours:
+          type: number
+          maximum: 24.0
+          minimum: 0.0
+          title: Approval Delay Hours
+          default: 0.5
+        ai_cost_multiplier:
+          type: number
+          maximum: 20.0
+          minimum: 0.0
+          title: Ai Cost Multiplier
+          default: 1
+        initial_rsl_scale:
+          type: number
+          maximum: 2.0
+          minimum: 0.3
+          title: Initial Rsl Scale
+          default: 1.4
+        cancellation_probability:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Cancellation Probability
+          default: 0.03
       additionalProperties: false
       type: object
       title: SimulationRequest
@@ -641,6 +1545,14 @@ components:
             type: string
           type: array
           title: Limitations
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        risk:
+          additionalProperties: true
+          type: object
+          title: Risk
       additionalProperties: false
       type: object
       required:
@@ -725,3 +1637,34 @@ components:
       - msg
       - type
       title: ValidationError
+    VersionRequest:
+      properties:
+        expected_version:
+          type: integer
+          minimum: 0.0
+          title: Expected Version
+      additionalProperties: false
+      type: object
+      required:
+      - expected_version
+      title: VersionRequest
+    WorkbookUpload:
+      properties:
+        filename:
+          type: string
+          maxLength: 200
+          title: Filename
+        content_base64:
+          type: string
+          maxLength: 15000000
+          title: Content Base64
+        mode:
+          type: string
+          title: Mode
+          default: deterministic
+      additionalProperties: false
+      type: object
+      required:
+      - filename
+      - content_base64
+      title: WorkbookUpload

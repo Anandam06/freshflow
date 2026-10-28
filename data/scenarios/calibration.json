@@ -1,0 +1,265 @@
+{
+  "calibration_id": "case-baseline-v2",
+  "source_category": "CASE",
+  "target_range": [
+    0.25,
+    0.3
+  ],
+  "objective": "Nearest mean M0 spoilage to 0.275; initial RSL grid followed by recorded probability-grid expansion when initial grid misses range",
+  "calibration_seeds": [
+    101,
+    102,
+    103
+  ],
+  "evaluation_seeds_reserved": [
+    60000,
+    60001,
+    60002,
+    60003,
+    60004,
+    60005,
+    60006,
+    60007,
+    60008,
+    60009
+  ],
+  "frozen_initial_rsl_scale": 1.4,
+  "calibration_mean_spoilage": 0.27321461792685564,
+  "frozen_disruption_probability": 0.0,
+  "initial_grid_trials": [
+    {
+      "scale": 0.8,
+      "spoilage_rates": [
+        0.45311444568420733,
+        0.44426825088993704,
+        0.46020577870608936
+      ],
+      "mean": 0.4525294917600779,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 0.9,
+      "spoilage_rates": [
+        0.4212059501948874,
+        0.4137043368706308,
+        0.4216837479787978
+      ],
+      "mean": 0.4188646783481053,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.0,
+      "spoilage_rates": [
+        0.40205745050260433,
+        0.3943941395888758,
+        0.39748552914596114
+      ],
+      "mean": 0.3979790397458138,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.1,
+      "spoilage_rates": [
+        0.38894920919248066,
+        0.37831782587938856,
+        0.3748219685982216
+      ],
+      "mean": 0.38069633455669694,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.2,
+      "spoilage_rates": [
+        0.37462410999754825,
+        0.3651703310744021,
+        0.3569631230346286
+      ],
+      "mean": 0.365585854702193,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.3,
+      "spoilage_rates": [
+        0.36139278191124746,
+        0.3526389084231524,
+        0.3467324023675291
+      ],
+      "mean": 0.353588030900643,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.4,
+      "spoilage_rates": [
+        0.35350722259192735,
+        0.3454827648367409,
+        0.33781251474185325
+      ],
+      "mean": 0.3456008340568405,
+      "disruption_probability": 0.3
+    }
+  ],
+  "within_case_range": true,
+  "trials": [
+    {
+      "scale": 0.8,
+      "spoilage_rates": [
+        0.45311444568420733,
+        0.44426825088993704,
+        0.46020577870608936
+      ],
+      "mean": 0.4525294917600779,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 0.9,
+      "spoilage_rates": [
+        0.4212059501948874,
+        0.4137043368706308,
+        0.4216837479787978
+      ],
+      "mean": 0.4188646783481053,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.0,
+      "spoilage_rates": [
+        0.40205745050260433,
+        0.3943941395888758,
+        0.39748552914596114
+      ],
+      "mean": 0.3979790397458138,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.1,
+      "spoilage_rates": [
+        0.38894920919248066,
+        0.37831782587938856,
+        0.3748219685982216
+      ],
+      "mean": 0.38069633455669694,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.2,
+      "spoilage_rates": [
+        0.37462410999754825,
+        0.3651703310744021,
+        0.3569631230346286
+      ],
+      "mean": 0.365585854702193,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.3,
+      "spoilage_rates": [
+        0.36139278191124746,
+        0.3526389084231524,
+        0.3467324023675291
+      ],
+      "mean": 0.353588030900643,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.4,
+      "spoilage_rates": [
+        0.35350722259192735,
+        0.3454827648367409,
+        0.33781251474185325
+      ],
+      "mean": 0.3456008340568405,
+      "disruption_probability": 0.3
+    },
+    {
+      "scale": 1.0,
+      "disruption_probability": 0.0,
+      "spoilage_rates": [
+        0.338200126116889,
+        0.3201544738707288,
+        0.3229100557882585
+      ],
+      "mean": 0.32708821859195875
+    },
+    {
+      "scale": 1.2,
+      "disruption_probability": 0.0,
+      "spoilage_rates": [
+        0.3055196625423846,
+        0.28605478558974906,
+        0.29117481731309725
+      ],
+      "mean": 0.2942497551484103
+    },
+    {
+      "scale": 1.4,
+      "disruption_probability": 0.0,
+      "spoilage_rates": [
+        0.28496121056223944,
+        0.26508976251735783,
+        0.26959288070096965
+      ],
+      "mean": 0.27321461792685564
+    },
+    {
+      "scale": 1.0,
+      "disruption_probability": 0.1,
+      "spoilage_rates": [
+        0.3609888222101353,
+        0.3545321437160017,
+        0.33947433306366404
+      ],
+      "mean": 0.35166509966326703
+    },
+    {
+      "scale": 1.2,
+      "disruption_probability": 0.1,
+      "spoilage_rates": [
+        0.32978136247031264,
+        0.32376484865457766,
+        0.3146347235658925
+      ],
+      "mean": 0.3227269782302609
+    },
+    {
+      "scale": 1.4,
+      "disruption_probability": 0.1,
+      "spoilage_rates": [
+        0.30800876273014943,
+        0.30048390353587473,
+        0.29397680316156694
+      ],
+      "mean": 0.3008231564758637
+    },
+    {
+      "scale": 1.0,
+      "disruption_probability": 0.2,
+      "spoilage_rates": [
+        0.38342823934960124,
+        0.3822015341140079,
+        0.3561710644787113
+      ],
+      "mean": 0.37393361264744013
+    },
+    {
+      "scale": 1.2,
+      "disruption_probability": 0.2,
+      "spoilage_rates": [
+        0.3434338325568296,
+        0.345043451985134,
+        0.3198343621482629
+      ],
+      "mean": 0.3361038822300755
+    },
+    {
+      "scale": 1.4,
+      "disruption_probability": 0.2,
+      "spoilage_rates": [
+        0.3223452595585333,
+        0.3277749780578161,
+        0.30240771083946427
+      ],
+      "mean": 0.3175093161519379
+    }
+  ],
+  "limitation": "Case-aligned synthetic calibration, not research or field validation; no M1\u2013M3 outcomes used."
+}

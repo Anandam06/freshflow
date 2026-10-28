@@ -1,0 +1,270 @@
+{
+  "run_id": "9ea14ff9-5e96-4b43-b495-65e560e161ac",
+  "repetition": 0,
+  "offset": 0,
+  "limit": 3,
+  "total": 2000,
+  "batches": [
+    {
+      "id": "T1",
+      "day": 0,
+      "quantity_kg": 570.0,
+      "morning_buyer": "Retailer A",
+      "maturity": "red",
+      "quality_grade": "B",
+      "harvest_timestamp": "2025-12-31T22:53:03.412236+00:00",
+      "dispatch_timestamp": "2026-01-01T06:00:00+00:00",
+      "collection_location": "collection_center",
+      "dispatch_location": "depot",
+      "initial_rsl_hours": 81.51941901955006,
+      "procurement_inr_kg": 11.544926003745053,
+      "physical_condition": {
+        "initial_rsl_hours": 85.17054488683839,
+        "safety_hold": false
+      },
+      "sensor_observation": {
+        "initial_rsl_hours": 81.51941901955006,
+        "temperature_c": 20,
+        "humidity_percent": 90,
+        "prediction_error_sd_hours": 3
+      },
+      "buyer_snapshot": [
+        {
+          "id": "Retailer A",
+          "price_inr_kg": 32.0,
+          "travel_hours": 12.0,
+          "minimum_rsl_hours": 24.0,
+          "capacity_kg": 14000.0,
+          "transport_inr_kg": 2.0,
+          "available": true,
+          "demand_kg": 11392.211183817271
+        },
+        {
+          "id": "Wholesale B",
+          "price_inr_kg": 24.0,
+          "travel_hours": 5.0,
+          "minimum_rsl_hours": 8.0,
+          "capacity_kg": 14000.0,
+          "transport_inr_kg": 1.2,
+          "available": false,
+          "demand_kg": 11391.215380834177
+        },
+        {
+          "id": "Processor C",
+          "price_inr_kg": 16.0,
+          "travel_hours": 2.0,
+          "minimum_rsl_hours": 2.0,
+          "capacity_kg": 10000.0,
+          "transport_inr_kg": 0.8,
+          "available": true,
+          "demand_kg": 9802.485130558423
+        }
+      ],
+      "future_event": {
+        "temperature_c": 19.41986310556156,
+        "physical_temperature_c": 20,
+        "humidity_percent": 93.91780735286727,
+        "duration_hours": 6,
+        "temperature_history": [
+          {
+            "start_hour": 0,
+            "end_hour": 6,
+            "physical_c": 20,
+            "observed_c": 19.41986310556156
+          }
+        ],
+        "humidity_history": [
+          {
+            "start_hour": 0,
+            "end_hour": 6,
+            "relative_humidity_percent": 93.91780735286727
+          }
+        ],
+        "delay_hours": 0,
+        "safety_hold": false,
+        "cancelled_buyers": [],
+        "price_factors": {
+          "Retailer A": 0.9232918908615658,
+          "Wholesale B": 1.1473563706862284,
+          "Processor C": 0.9249480633958925
+        },
+        "observed_at_hour": 6,
+        "current_location": "junction"
+      }
+    },
+    {
+      "id": "T2",
+      "day": 0,
+      "quantity_kg": 334.0,
+      "morning_buyer": "Retailer A",
+      "maturity": "mature_green",
+      "quality_grade": "A",
+      "harvest_timestamp": "2025-12-31T07:45:19.531409+00:00",
+      "dispatch_timestamp": "2026-01-01T06:00:00+00:00",
+      "collection_location": "collection_center",
+      "dispatch_location": "depot",
+      "initial_rsl_hours": 54.749428771258984,
+      "procurement_inr_kg": 14.199604731179885,
+      "physical_condition": {
+        "initial_rsl_hours": 52.7821520969679,
+        "safety_hold": false
+      },
+      "sensor_observation": {
+        "initial_rsl_hours": 54.749428771258984,
+        "temperature_c": 20,
+        "humidity_percent": 90,
+        "prediction_error_sd_hours": 3
+      },
+      "buyer_snapshot": [
+        {
+          "id": "Retailer A",
+          "price_inr_kg": 32.0,
+          "travel_hours": 12.0,
+          "minimum_rsl_hours": 24.0,
+          "capacity_kg": 14000.0,
+          "transport_inr_kg": 2.0,
+          "available": true,
+          "demand_kg": 11392.211183817271
+        },
+        {
+          "id": "Wholesale B",
+          "price_inr_kg": 24.0,
+          "travel_hours": 5.0,
+          "minimum_rsl_hours": 8.0,
+          "capacity_kg": 14000.0,
+          "transport_inr_kg": 1.2,
+          "available": false,
+          "demand_kg": 11391.215380834177
+        },
+        {
+          "id": "Processor C",
+          "price_inr_kg": 16.0,
+          "travel_hours": 2.0,
+          "minimum_rsl_hours": 2.0,
+          "capacity_kg": 10000.0,
+          "transport_inr_kg": 0.8,
+          "available": true,
+          "demand_kg": 9802.485130558423
+        }
+      ],
+      "future_event": {
+        "temperature_c": 20.044760907587246,
+        "physical_temperature_c": 20,
+        "humidity_percent": 75.74249680998189,
+        "duration_hours": 6,
+        "temperature_history": [
+          {
+            "start_hour": 0,
+            "end_hour": 6,
+            "physical_c": 20,
+            "observed_c": 20.044760907587246
+          }
+        ],
+        "humidity_history": [
+          {
+            "start_hour": 0,
+            "end_hour": 6,
+            "relative_humidity_percent": 75.74249680998189
+          }
+        ],
+        "delay_hours": 0,
+        "safety_hold": false,
+        "cancelled_buyers": [],
+        "price_factors": {
+          "Retailer A": 0.9232918908615658,
+          "Wholesale B": 1.1473563706862284,
+          "Processor C": 0.9249480633958925
+        },
+        "observed_at_hour": 6,
+        "current_location": "junction"
+      }
+    },
+    {
+      "id": "T3",
+      "day": 0,
+      "quantity_kg": 645.0,
+      "morning_buyer": "Retailer A",
+      "maturity": "pink",
+      "quality_grade": "B",
+      "harvest_timestamp": "2025-12-31T15:33:14.694619+00:00",
+      "dispatch_timestamp": "2026-01-01T06:00:00+00:00",
+      "collection_location": "collection_center",
+      "dispatch_location": "depot",
+      "initial_rsl_hours": 126.53644763212614,
+      "procurement_inr_kg": 12.591331758525424,
+      "physical_condition": {
+        "initial_rsl_hours": 123.40006287635943,
+        "safety_hold": false
+      },
+      "sensor_observation": {
+        "initial_rsl_hours": 126.53644763212614,
+        "temperature_c": 20,
+        "humidity_percent": 90,
+        "prediction_error_sd_hours": 3
+      },
+      "buyer_snapshot": [
+        {
+          "id": "Retailer A",
+          "price_inr_kg": 32.0,
+          "travel_hours": 12.0,
+          "minimum_rsl_hours": 24.0,
+          "capacity_kg": 14000.0,
+          "transport_inr_kg": 2.0,
+          "available": true,
+          "demand_kg": 11392.211183817271
+        },
+        {
+          "id": "Wholesale B",
+          "price_inr_kg": 24.0,
+          "travel_hours": 5.0,
+          "minimum_rsl_hours": 8.0,
+          "capacity_kg": 14000.0,
+          "transport_inr_kg": 1.2,
+          "available": false,
+          "demand_kg": 11391.215380834177
+        },
+        {
+          "id": "Processor C",
+          "price_inr_kg": 16.0,
+          "travel_hours": 2.0,
+          "minimum_rsl_hours": 2.0,
+          "capacity_kg": 10000.0,
+          "transport_inr_kg": 0.8,
+          "available": true,
+          "demand_kg": 9802.485130558423
+        }
+      ],
+      "future_event": {
+        "temperature_c": 20.246104414307112,
+        "physical_temperature_c": 20,
+        "humidity_percent": 81.32959292132574,
+        "duration_hours": 6,
+        "temperature_history": [
+          {
+            "start_hour": 0,
+            "end_hour": 6,
+            "physical_c": 20,
+            "observed_c": 20.246104414307112
+          }
+        ],
+        "humidity_history": [
+          {
+            "start_hour": 0,
+            "end_hour": 6,
+            "relative_humidity_percent": 81.32959292132574
+          }
+        ],
+        "delay_hours": 0,
+        "safety_hold": false,
+        "cancelled_buyers": [],
+        "price_factors": {
+          "Retailer A": 0.9232918908615658,
+          "Wholesale B": 1.1473563706862284,
+          "Processor C": 0.9249480633958925
+        },
+        "observed_at_hour": 6,
+        "current_location": "junction"
+      }
+    }
+  ]
+}

@@ -1,42 +1,50 @@
 {
-  "id": "79f5089e-80e2-40fb-b954-a4fede786164",
+  "id": "9ea14ff9-5e96-4b43-b495-65e560e161ac",
   "result": {
     "evidence_category": "SIMULATED RESULT",
     "agent_mode": "deterministic_policy_emulation",
-    "assumptions_version": "synthetic-v1",
+    "assumptions_version": "synthetic-v2",
     "config": {
-      "seed": 2026,
+      "seed": 60000,
       "batches": 2000,
       "days": 30,
       "repetitions": 3,
-      "disruption_probability": 0.3,
+      "disruption_probability": 0.0,
       "price_multiplier": 1.0,
       "capacity_multiplier": 1.0,
-      "setup_cost_inr": 50000.0
+      "setup_cost_inr": 50000.0,
+      "buyer_availability": 0.95,
+      "temperature_shift_c": 0.0,
+      "traffic_multiplier": 1.0,
+      "prediction_error_hours": 3.0,
+      "approval_delay_hours": 0.5,
+      "ai_cost_multiplier": 1.0,
+      "initial_rsl_scale": 1.4,
+      "cancellation_probability": 0.03
     },
     "runs": [
       {
-        "seed": 2026,
-        "dataset_sha256": "a2d20715947c3f406514f41dfea1f3055dd38b411c2840354354a6dd8c6eea8c",
+        "seed": 60000,
+        "dataset_sha256": "d5483d0de4a50917a818a416ed7aee2782c7015dcd628099a826c8b78736b7d9",
         "metrics": [
           {
             "model": "M0",
-            "input_kg": 989632.0,
-            "sellable_kg": 769425.0,
-            "spoiled_kg": 220207.0,
-            "spoilage_rate": 0.22251402541550802,
-            "gross_sales_revenue_inr": 19083496.0,
-            "procurement_inr": 12891001.623419134,
-            "transport_inr": 1349336.4,
-            "handling_inr": 494816.0,
+            "input_kg": 1013581.0,
+            "sellable_kg": 756581.0,
+            "spoiled_kg": 257000.0,
+            "spoilage_rate": 0.25355644985452563,
+            "gross_sales_revenue_inr": 19305087.44271013,
+            "procurement_inr": 13158749.204660522,
+            "transport_inr": 1209223.2,
+            "handling_inr": 506790.5,
             "rescue_inr": 0.0,
             "agent_sensor_inr": 0.0,
-            "net_realization_per_input_kg_inr": 17.419953679751668,
-            "net_batch_realization_margin": 0.2278587726578435,
-            "operating_profit_inr": 4348341.976580866,
-            "operating_profit_margin": 0.2278587726578435,
-            "buyer_rejection_rate": 0.15430427720628045,
-            "on_time_fulfilment_rate": 0.7385,
+            "net_realization_per_input_kg_inr": 17.35339725459547,
+            "net_batch_realization_margin": 0.22949000107857903,
+            "operating_profit_inr": 4430324.53804961,
+            "operating_profit_margin": 0.22949000107857903,
+            "buyer_rejection_rate": 0.08333333333333333,
+            "on_time_fulfilment_rate": 0.7535,
             "successful_rescue_rate": null,
             "food_safety_violations": 0,
             "setup_cost_inr": 0.0,
@@ -47,122 +55,238 @@
             "payback_days": null,
             "meets_spoilage_target": false,
             "meets_margin_target": false,
-            "incremental_agentic_policy_profit_vs_m2_inr": null
+            "incremental_agentic_policy_profit_vs_m2_inr": null,
+            "sold_kg": 756581.0,
+            "salvage_value_inr": 3077855.074854046,
+            "rescued_batches": 0,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 19305087.44271013
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -13158749.204660522
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1209223.2
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -506790.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": 0
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -0.0
+              }
+            ]
           },
           {
             "model": "M1",
-            "input_kg": 989632.0,
-            "sellable_kg": 754650.0,
-            "spoiled_kg": 234982.0,
-            "spoilage_rate": 0.23744381749983834,
-            "gross_sales_revenue_inr": 18588664.0,
-            "procurement_inr": 12891001.623419134,
-            "transport_inr": 1350092.4,
-            "handling_inr": 494816.0,
+            "input_kg": 1013581.0,
+            "sellable_kg": 748312.0,
+            "spoiled_kg": 265269.0,
+            "spoilage_rate": 0.2617146532936193,
+            "gross_sales_revenue_inr": 19038323.93989407,
+            "procurement_inr": 13158749.204660522,
+            "transport_inr": 1207597.2,
+            "handling_inr": 506790.5,
             "rescue_inr": 0.0,
-            "agent_sensor_inr": 98963.20000000001,
-            "net_realization_per_input_kg_inr": 16.81917359179978,
-            "net_batch_realization_margin": 0.2019397831162512,
-            "operating_profit_inr": 3753790.7765808664,
-            "operating_profit_margin": 0.2019397831162512,
-            "buyer_rejection_rate": 0.16892992938620316,
-            "on_time_fulfilment_rate": 0.725,
+            "agent_sensor_inr": 101358.1,
+            "net_realization_per_input_kg_inr": 16.991812336551366,
+            "net_batch_realization_margin": 0.2134551837684593,
+            "operating_profit_inr": 4063828.9352335464,
+            "operating_profit_margin": 0.2134551837684593,
+            "buyer_rejection_rate": 0.09151921903599756,
+            "on_time_fulfilment_rate": 0.7445,
             "successful_rescue_rate": null,
             "food_safety_violations": 0,
             "setup_cost_inr": 0.0,
-            "incremental_profit_vs_m0_inr": -594551.1999999993,
-            "margin_relative_uplift_vs_m0": -0.11375023765493852,
-            "margin_percentage_point_change_vs_m0": -2.5918989541592303,
+            "incremental_profit_vs_m0_inr": -366495.6028160639,
+            "margin_relative_uplift_vs_m0": -0.06987152919411643,
+            "margin_percentage_point_change_vs_m0": -1.6034817310119742,
             "roi_over_simulated_period": null,
             "payback_days": null,
             "meets_spoilage_target": false,
             "meets_margin_target": false,
-            "incremental_agentic_policy_profit_vs_m2_inr": null
+            "incremental_agentic_policy_profit_vs_m2_inr": null,
+            "sold_kg": 748312.0,
+            "salvage_value_inr": 3077855.074854046,
+            "rescued_batches": 0,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 19038323.93989407
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -13158749.204660522
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1207597.2
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -506790.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": 0
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -101358.1
+              }
+            ]
           },
           {
             "model": "M2",
-            "input_kg": 989632.0,
-            "sellable_kg": 901981.0,
-            "spoiled_kg": 87651.0,
-            "spoilage_rate": 0.0885692863609907,
-            "gross_sales_revenue_inr": 23132256.0,
-            "procurement_inr": 12891001.623419134,
-            "transport_inr": 1458772.4,
-            "handling_inr": 494816.0,
+            "input_kg": 1013581.0,
+            "sellable_kg": 936398.0,
+            "spoiled_kg": 77183.0,
+            "spoilage_rate": 0.07614882283705005,
+            "gross_sales_revenue_inr": 23966818.44506025,
+            "procurement_inr": 13158749.204660522,
+            "transport_inr": 1332974.4,
+            "handling_inr": 506790.5,
             "rescue_inr": 0.0,
-            "agent_sensor_inr": 148444.8,
-            "net_realization_per_input_kg_inr": 21.250548486710212,
-            "net_batch_realization_margin": 0.3518559182719086,
-            "operating_profit_inr": 8139221.176580867,
-            "operating_profit_margin": 0.3518559182719086,
-            "buyer_rejection_rate": 0.08006042296072508,
-            "on_time_fulfilment_rate": 0.874,
+            "agent_sensor_inr": 152037.15,
+            "net_realization_per_input_kg_inr": 21.680572539402622,
+            "net_batch_realization_margin": 0.36785304693693416,
+            "operating_profit_inr": 8816267.190399727,
+            "operating_profit_margin": 0.36785304693693416,
+            "buyer_rejection_rate": 0.0,
+            "on_time_fulfilment_rate": 0.9205,
             "successful_rescue_rate": null,
             "food_safety_violations": 0,
             "setup_cost_inr": 0.0,
-            "incremental_profit_vs_m0_inr": 3790879.200000001,
-            "margin_relative_uplift_vs_m0": 0.5441842074707446,
-            "margin_percentage_point_change_vs_m0": 12.39971456140651,
+            "incremental_profit_vs_m0_inr": 4385942.6523501165,
+            "margin_relative_uplift_vs_m0": 0.6029153566955565,
+            "margin_percentage_point_change_vs_m0": 13.836304585835514,
             "roi_over_simulated_period": null,
             "payback_days": null,
             "meets_spoilage_target": true,
             "meets_margin_target": true,
-            "incremental_agentic_policy_profit_vs_m2_inr": null
+            "incremental_agentic_policy_profit_vs_m2_inr": null,
+            "sold_kg": 936398.0,
+            "salvage_value_inr": 3687240.9912903016,
+            "rescued_batches": 0,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 23966818.44506025
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -13158749.204660522
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1332974.4
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -506790.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": 0
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -152037.15
+              }
+            ]
           },
           {
             "model": "M3",
-            "input_kg": 989632.0,
-            "sellable_kg": 973092.0,
-            "spoiled_kg": 16540.0,
-            "spoilage_rate": 0.016713283321477035,
-            "gross_sales_revenue_inr": 23958640.0,
-            "procurement_inr": 12891001.623419134,
-            "transport_inr": 1564028.8,
-            "handling_inr": 494816.0,
-            "rescue_inr": 99925.5,
-            "agent_sensor_inr": 247408.0,
-            "net_realization_per_input_kg_inr": 21.77825868605704,
-            "net_batch_realization_margin": 0.3615171844721097,
-            "operating_profit_inr": 8661460.076580865,
-            "operating_profit_margin": 0.3615171844721097,
+            "input_kg": 1013581.0,
+            "sellable_kg": 936398.0,
+            "spoiled_kg": 77183.0,
+            "spoilage_rate": 0.07614882283705005,
+            "gross_sales_revenue_inr": 24006731.292586345,
+            "procurement_inr": 13158749.204660522,
+            "transport_inr": 1339001.2,
+            "handling_inr": 506790.5,
+            "rescue_inr": 7965.0,
+            "agent_sensor_inr": 253395.25,
+            "net_realization_per_input_kg_inr": 21.606146270092225,
+            "net_batch_realization_margin": 0.36409913667110233,
+            "operating_profit_inr": 8740830.137925824,
+            "operating_profit_margin": 0.36409913667110233,
             "buyer_rejection_rate": 0.0,
-            "on_time_fulfilment_rate": 0.967,
-            "successful_rescue_rate": 0.8838951310861424,
+            "on_time_fulfilment_rate": 0.9205,
+            "successful_rescue_rate": 0.5,
             "food_safety_violations": 0,
             "setup_cost_inr": 50000.0,
-            "incremental_profit_vs_m0_inr": 4313118.1,
-            "margin_relative_uplift_vs_m0": 0.586584445510772,
-            "margin_percentage_point_change_vs_m0": 13.36584118142662,
-            "roi_over_simulated_period": 85.262362,
-            "payback_days": 0.3477762410447328,
+            "incremental_profit_vs_m0_inr": 4310505.599876214,
+            "margin_relative_uplift_vs_m0": 0.5865577365457075,
+            "margin_percentage_point_change_vs_m0": 13.46091355925233,
+            "roi_over_simulated_period": 85.21011199752428,
+            "payback_days": 0.3479870203725233,
             "meets_spoilage_target": true,
             "meets_margin_target": true,
-            "incremental_agentic_policy_profit_vs_m2_inr": 522238.8999999985
+            "incremental_agentic_policy_profit_vs_m2_inr": -75437.0524739027,
+            "sold_kg": 936398.0,
+            "salvage_value_inr": 3632170.2579614446,
+            "rescued_batches": 12,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 24006731.292586345
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -13158749.204660522
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1339001.2
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -506790.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": -7965.0
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -253395.25
+              }
+            ]
           }
         ]
       },
       {
-        "seed": 2027,
-        "dataset_sha256": "d5fa5ca66196d95755dc527e243d5cf9eb355ee5f2496f72257bbedaed6e2691",
+        "seed": 60001,
+        "dataset_sha256": "dffce53e8da09f94ef43e086b81490680640fdd3012fc5b157056d8e6350309d",
         "metrics": [
           {
             "model": "M0",
-            "input_kg": 1004534.0,
-            "sellable_kg": 774079.0,
-            "spoiled_kg": 230455.0,
-            "spoilage_rate": 0.22941483314651367,
-            "gross_sales_revenue_inr": 19257208.0,
-            "procurement_inr": 13089016.646947062,
-            "transport_inr": 1350380.0,
-            "handling_inr": 502267.0,
+            "input_kg": 998705.0,
+            "sellable_kg": 735815.0,
+            "spoiled_kg": 262890.0,
+            "spoilage_rate": 0.26323088399477323,
+            "gross_sales_revenue_inr": 18173259.692336734,
+            "procurement_inr": 12958206.360583581,
+            "transport_inr": 1168608.4,
+            "handling_inr": 499352.5,
             "rescue_inr": 0.0,
             "agent_sensor_inr": 0.0,
-            "net_realization_per_input_kg_inr": 17.326004893811458,
-            "net_batch_realization_margin": 0.22410020980470993,
-            "operating_profit_inr": 4315544.353052938,
-            "operating_profit_margin": 0.22410020980470993,
-            "buyer_rejection_rate": 0.14553472987872107,
-            "on_time_fulfilment_rate": 0.729,
+            "net_realization_per_input_kg_inr": 16.526700869963335,
+            "net_batch_realization_margin": 0.19518195919738515,
+            "operating_profit_inr": 3547092.431753153,
+            "operating_profit_margin": 0.19518195919738515,
+            "buyer_rejection_rate": 0.08984615384615384,
+            "on_time_fulfilment_rate": 0.7395,
             "successful_rescue_rate": null,
             "food_safety_violations": 0,
             "setup_cost_inr": 0.0,
@@ -173,122 +297,238 @@
             "payback_days": null,
             "meets_spoilage_target": false,
             "meets_margin_target": false,
-            "incremental_agentic_policy_profit_vs_m2_inr": null
+            "incremental_agentic_policy_profit_vs_m2_inr": null,
+            "sold_kg": 735815.0,
+            "salvage_value_inr": 2848831.099128364,
+            "rescued_batches": 0,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 18173259.692336734
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -12958206.360583581
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1168608.4
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -499352.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": 0
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -0.0
+              }
+            ]
           },
           {
             "model": "M1",
-            "input_kg": 1004534.0,
-            "sellable_kg": 756641.0,
-            "spoiled_kg": 247893.0,
-            "spoilage_rate": 0.24677412611220728,
-            "gross_sales_revenue_inr": 18672272.0,
-            "procurement_inr": 13089016.646947062,
-            "transport_inr": 1349290.0,
-            "handling_inr": 502267.0,
+            "input_kg": 998705.0,
+            "sellable_kg": 724045.0,
+            "spoiled_kg": 274660.0,
+            "spoilage_rate": 0.27501614590895207,
+            "gross_sales_revenue_inr": 17807509.197252665,
+            "procurement_inr": 12958206.360583581,
+            "transport_inr": 1167506.4,
+            "handling_inr": 499352.5,
             "rescue_inr": 0.0,
-            "agent_sensor_inr": 100453.40000000001,
-            "net_realization_per_input_kg_inr": 16.644794103534572,
-            "net_batch_realization_margin": 0.19447258228955416,
-            "operating_profit_inr": 3631244.953052938,
-            "operating_profit_margin": 0.19447258228955416,
-            "buyer_rejection_rate": 0.16445916114790288,
-            "on_time_fulfilment_rate": 0.716,
+            "agent_sensor_inr": 99870.5,
+            "net_realization_per_input_kg_inr": 16.06157954276054,
+            "net_batch_realization_margin": 0.1731052559076966,
+            "operating_profit_inr": 3082573.4366690833,
+            "operating_profit_margin": 0.1731052559076966,
+            "buyer_rejection_rate": 0.10374462860650706,
+            "on_time_fulfilment_rate": 0.73,
             "successful_rescue_rate": null,
             "food_safety_violations": 0,
             "setup_cost_inr": 0.0,
-            "incremental_profit_vs_m0_inr": -684299.4000000004,
-            "margin_relative_uplift_vs_m0": -0.13220704943103134,
-            "margin_percentage_point_change_vs_m0": -2.962762751515577,
+            "incremental_profit_vs_m0_inr": -464518.99508406967,
+            "margin_relative_uplift_vs_m0": -0.11310831892696938,
+            "margin_percentage_point_change_vs_m0": -2.2076703289688555,
             "roi_over_simulated_period": null,
             "payback_days": null,
             "meets_spoilage_target": false,
             "meets_margin_target": false,
-            "incremental_agentic_policy_profit_vs_m2_inr": null
+            "incremental_agentic_policy_profit_vs_m2_inr": null,
+            "sold_kg": 724045.0,
+            "salvage_value_inr": 2848831.099128364,
+            "rescued_batches": 0,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 17807509.197252665
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -12958206.360583581
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1167506.4
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -499352.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": 0
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -99870.5
+              }
+            ]
           },
           {
             "model": "M2",
-            "input_kg": 1004534.0,
-            "sellable_kg": 925067.0,
-            "spoiled_kg": 79467.0,
-            "spoilage_rate": 0.07910832286413405,
-            "gross_sales_revenue_inr": 23636712.0,
-            "procurement_inr": 13089016.646947062,
-            "transport_inr": 1470820.0,
-            "handling_inr": 502267.0,
+            "input_kg": 998705.0,
+            "sellable_kg": 908567.0,
+            "spoiled_kg": 90138.0,
+            "spoilage_rate": 0.09025488006969029,
+            "gross_sales_revenue_inr": 22427332.968228534,
+            "procurement_inr": 12958206.360583581,
+            "transport_inr": 1301193.6,
+            "handling_inr": 499352.5,
             "rescue_inr": 0.0,
-            "agent_sensor_inr": 150680.1,
-            "net_realization_per_input_kg_inr": 21.415845456699323,
-            "net_batch_realization_margin": 0.35639171188670143,
-            "operating_profit_inr": 8423928.253052939,
-            "operating_profit_margin": 0.35639171188670143,
-            "buyer_rejection_rate": 0.07269056032306916,
-            "on_time_fulfilment_rate": 0.868,
+            "agent_sensor_inr": 149805.75,
+            "net_realization_per_input_kg_inr": 20.503533193714393,
+            "net_batch_realization_margin": 0.33525050741861967,
+            "operating_profit_inr": 7518774.757644953,
+            "operating_profit_margin": 0.33525050741861967,
+            "buyer_rejection_rate": 0.02145922746781116,
+            "on_time_fulfilment_rate": 0.912,
             "successful_rescue_rate": null,
             "food_safety_violations": 0,
             "setup_cost_inr": 0.0,
-            "incremental_profit_vs_m0_inr": 4108383.9000000004,
-            "margin_relative_uplift_vs_m0": 0.5903229729114297,
-            "margin_percentage_point_change_vs_m0": 13.229150208199151,
+            "incremental_profit_vs_m0_inr": 3971682.3258918,
+            "margin_relative_uplift_vs_m0": 0.7176306088801214,
+            "margin_percentage_point_change_vs_m0": 14.006854822123453,
             "roi_over_simulated_period": null,
             "payback_days": null,
             "meets_spoilage_target": true,
             "meets_margin_target": true,
-            "incremental_agentic_policy_profit_vs_m2_inr": null
+            "incremental_agentic_policy_profit_vs_m2_inr": null,
+            "sold_kg": 908567.0,
+            "salvage_value_inr": 3444749.2329450077,
+            "rescued_batches": 0,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 22427332.968228534
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -12958206.360583581
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1301193.6
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -499352.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": 0
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -149805.75
+              }
+            ]
           },
           {
             "model": "M3",
-            "input_kg": 1004534.0,
-            "sellable_kg": 983464.0,
-            "spoiled_kg": 21070.0,
-            "spoilage_rate": 0.02097489980428735,
-            "gross_sales_revenue_inr": 24183832.0,
-            "procurement_inr": 13089016.646947062,
-            "transport_inr": 1569073.2,
-            "handling_inr": 502267.0,
-            "rescue_inr": 96927.75,
-            "agent_sensor_inr": 251133.5,
-            "net_realization_per_input_kg_inr": 21.666196017257754,
-            "net_batch_realization_margin": 0.35872784358793675,
-            "operating_profit_inr": 8675413.90305294,
-            "operating_profit_margin": 0.35872784358793675,
+            "input_kg": 998705.0,
+            "sellable_kg": 909444.0,
+            "spoiled_kg": 89261.0,
+            "spoilage_rate": 0.08937674288203223,
+            "gross_sales_revenue_inr": 22518728.18939109,
+            "procurement_inr": 12958206.360583581,
+            "transport_inr": 1315536.4,
+            "handling_inr": 499352.5,
+            "rescue_inr": 29215.5,
+            "agent_sensor_inr": 249676.25,
+            "net_realization_per_input_kg_inr": 20.451432144017595,
+            "net_batch_realization_margin": 0.33157916894814704,
+            "operating_profit_inr": 7466741.17880751,
+            "operating_profit_margin": 0.33157916894814704,
             "buyer_rejection_rate": 0.0,
-            "on_time_fulfilment_rate": 0.955,
-            "successful_rescue_rate": 0.844106463878327,
+            "on_time_fulfilment_rate": 0.9135,
+            "successful_rescue_rate": 0.32926829268292684,
             "food_safety_violations": 0,
             "setup_cost_inr": 50000.0,
-            "incremental_profit_vs_m0_inr": 4359869.550000001,
-            "margin_relative_uplift_vs_m0": 0.6007474687352896,
-            "margin_percentage_point_change_vs_m0": 13.46276337832268,
-            "roi_over_simulated_period": 86.19739100000001,
-            "payback_days": 0.34404699103898645,
+            "incremental_profit_vs_m0_inr": 3919648.747054357,
+            "margin_relative_uplift_vs_m0": 0.6988207840091667,
+            "margin_percentage_point_change_vs_m0": 13.63972097507619,
+            "roi_over_simulated_period": 77.39297494108715,
+            "payback_days": 0.38268735205603827,
             "meets_spoilage_target": true,
             "meets_margin_target": true,
-            "incremental_agentic_policy_profit_vs_m2_inr": 251485.65000000037
+            "incremental_agentic_policy_profit_vs_m2_inr": -52033.57883744314,
+            "sold_kg": 909444.0,
+            "salvage_value_inr": 3365603.1622547717,
+            "rescued_batches": 27,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 22518728.18939109
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -12958206.360583581
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1315536.4
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -499352.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": -29215.5
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -249676.25
+              }
+            ]
           }
         ]
       },
       {
-        "seed": 2028,
-        "dataset_sha256": "bcd3c3ddfc1977634df3988b009ba3d0d67e6d6892972edde9b0a95e933f4472",
+        "seed": 60002,
+        "dataset_sha256": "2b0263c8785736a3c2fa91dec85a73e25979701dc1ace8e5860ca8af37897d9d",
         "metrics": [
           {
             "model": "M0",
-            "input_kg": 1008653.0,
-            "sellable_kg": 772961.0,
-            "spoiled_kg": 235692.0,
-            "spoilage_rate": 0.23367005303112165,
-            "gross_sales_revenue_inr": 19099992.0,
-            "procurement_inr": 13092644.051014766,
-            "transport_inr": 1361845.2,
-            "handling_inr": 504326.5,
+            "input_kg": 998701.0,
+            "sellable_kg": 732287.0,
+            "spoiled_kg": 266414.0,
+            "spoilage_rate": 0.2667605219179714,
+            "gross_sales_revenue_inr": 18265455.576955765,
+            "procurement_inr": 12953404.721825957,
+            "transport_inr": 1216029.6,
+            "handling_inr": 499350.5,
             "rescue_inr": 0.0,
             "agent_sensor_inr": 0.0,
-            "net_realization_per_input_kg_inr": 17.085975355251012,
-            "net_batch_realization_margin": 0.21681560123089239,
-            "operating_profit_inr": 4141176.2489852346,
-            "operating_profit_margin": 0.21681560123089239,
-            "buyer_rejection_rate": 0.162472647702407,
-            "on_time_fulfilment_rate": 0.729,
+            "net_realization_per_input_kg_inr": 16.5716019879381,
+            "net_batch_realization_margin": 0.19691108934985854,
+            "operating_profit_inr": 3596670.7551298086,
+            "operating_profit_margin": 0.19691108934985854,
+            "buyer_rejection_rate": 0.13566350710900474,
+            "on_time_fulfilment_rate": 0.7295,
             "successful_rescue_rate": null,
             "food_safety_violations": 0,
             "setup_cost_inr": 0.0,
@@ -299,139 +539,333 @@
             "payback_days": null,
             "meets_spoilage_target": false,
             "meets_margin_target": false,
-            "incremental_agentic_policy_profit_vs_m2_inr": null
+            "incremental_agentic_policy_profit_vs_m2_inr": null,
+            "sold_kg": 732287.0,
+            "salvage_value_inr": 3122208.394109784,
+            "rescued_batches": 0,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 18265455.576955765
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -12953404.721825957
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1216029.6
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -499350.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": 0
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -0.0
+              }
+            ]
           },
           {
             "model": "M1",
-            "input_kg": 1008653.0,
-            "sellable_kg": 760776.0,
-            "spoiled_kg": 247877.0,
-            "spoilage_rate": 0.24575052074400217,
-            "gross_sales_revenue_inr": 18678064.0,
-            "procurement_inr": 13092644.051014766,
-            "transport_inr": 1363571.2,
-            "handling_inr": 504326.5,
+            "input_kg": 998701.0,
+            "sellable_kg": 721515.0,
+            "spoiled_kg": 277186.0,
+            "spoilage_rate": 0.2775465329462973,
+            "gross_sales_revenue_inr": 17919620.931691065,
+            "procurement_inr": 12953404.721825957,
+            "transport_inr": 1212093.6,
+            "handling_inr": 499350.5,
             "rescue_inr": 0.0,
-            "agent_sensor_inr": 100865.3,
-            "net_realization_per_input_kg_inr": 16.565955784595893,
-            "net_batch_realization_margin": 0.19363125369873632,
-            "operating_profit_inr": 3616656.948985234,
-            "operating_profit_margin": 0.19363125369873632,
-            "buyer_rejection_rate": 0.17557251908396945,
-            "on_time_fulfilment_rate": 0.718,
+            "agent_sensor_inr": 99870.1,
+            "net_realization_per_input_kg_inr": 16.129258638662687,
+            "net_batch_realization_margin": 0.17605852388794824,
+            "operating_profit_inr": 3154902.009865109,
+            "operating_profit_margin": 0.17605852388794824,
+            "buyer_rejection_rate": 0.142603550295858,
+            "on_time_fulfilment_rate": 0.7245,
             "successful_rescue_rate": null,
             "food_safety_violations": 0,
             "setup_cost_inr": 0.0,
-            "incremental_profit_vs_m0_inr": -524519.3000000007,
-            "margin_relative_uplift_vs_m0": -0.10693117746386926,
-            "margin_percentage_point_change_vs_m0": -2.318434753215606,
+            "incremental_profit_vs_m0_inr": -441768.7452646997,
+            "margin_relative_uplift_vs_m0": -0.10589838048613331,
+            "margin_percentage_point_change_vs_m0": -2.0852565461910304,
             "roi_over_simulated_period": null,
             "payback_days": null,
             "meets_spoilage_target": false,
             "meets_margin_target": false,
-            "incremental_agentic_policy_profit_vs_m2_inr": null
+            "incremental_agentic_policy_profit_vs_m2_inr": null,
+            "sold_kg": 721515.0,
+            "salvage_value_inr": 3122208.394109784,
+            "rescued_batches": 0,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 17919620.931691065
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -12953404.721825957
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1212093.6
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -499350.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": 0
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -99870.1
+              }
+            ]
           },
           {
             "model": "M2",
-            "input_kg": 1008653.0,
-            "sellable_kg": 923191.0,
-            "spoiled_kg": 85462.0,
-            "spoilage_rate": 0.08472884133592029,
-            "gross_sales_revenue_inr": 23518360.0,
-            "procurement_inr": 13092644.051014766,
-            "transport_inr": 1474191.2,
-            "handling_inr": 504326.5,
+            "input_kg": 998701.0,
+            "sellable_kg": 889568.0,
+            "spoiled_kg": 109133.0,
+            "spoilage_rate": 0.10927494815765681,
+            "gross_sales_revenue_inr": 22327782.962452464,
+            "procurement_inr": 12953404.721825957,
+            "transport_inr": 1331406.8,
+            "handling_inr": 499350.5,
             "rescue_inr": 0.0,
-            "agent_sensor_inr": 151297.94999999998,
-            "net_realization_per_input_kg_inr": 21.205056991849528,
-            "net_batch_realization_margin": 0.3527414453637598,
-            "operating_profit_inr": 8295900.2989852335,
-            "operating_profit_margin": 0.3527414453637598,
-            "buyer_rejection_rate": 0.07858942065491184,
-            "on_time_fulfilment_rate": 0.8725,
+            "agent_sensor_inr": 149805.15,
+            "net_realization_per_input_kg_inr": 20.373685930476153,
+            "net_batch_realization_margin": 0.33114867710154317,
+            "operating_profit_inr": 7393815.790626507,
+            "operating_profit_margin": 0.33114867710154317,
+            "buyer_rejection_rate": 0.06110520722635494,
+            "on_time_fulfilment_rate": 0.8835,
             "successful_rescue_rate": null,
             "food_safety_violations": 0,
             "setup_cost_inr": 0.0,
-            "incremental_profit_vs_m0_inr": 4154724.049999999,
-            "margin_relative_uplift_vs_m0": 0.626919111729956,
-            "margin_percentage_point_change_vs_m0": 13.59258441328674,
+            "incremental_profit_vs_m0_inr": 3797145.0354966987,
+            "margin_relative_uplift_vs_m0": 0.6817167493963745,
+            "margin_percentage_point_change_vs_m0": 13.423758775168462,
             "roi_over_simulated_period": null,
             "payback_days": null,
-            "meets_spoilage_target": true,
+            "meets_spoilage_target": false,
             "meets_margin_target": true,
-            "incremental_agentic_policy_profit_vs_m2_inr": null
+            "incremental_agentic_policy_profit_vs_m2_inr": null,
+            "sold_kg": 889568.0,
+            "salvage_value_inr": 3576793.103770548,
+            "rescued_batches": 0,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 22327782.962452464
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -12953404.721825957
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1331406.8
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -499350.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": 0
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -149805.15
+              }
+            ]
           },
           {
             "model": "M3",
-            "input_kg": 1008653.0,
-            "sellable_kg": 986115.0,
-            "spoiled_kg": 22538.0,
-            "spoilage_rate": 0.022344651728592457,
-            "gross_sales_revenue_inr": 24235456.0,
-            "procurement_inr": 13092644.051014766,
-            "transport_inr": 1579655.2,
-            "handling_inr": 504326.5,
-            "rescue_inr": 102447.75,
-            "agent_sensor_inr": 252163.25,
-            "net_realization_per_input_kg_inr": 21.609873068339656,
-            "net_batch_realization_margin": 0.3591522787516453,
-            "operating_profit_inr": 8704219.248985235,
-            "operating_profit_margin": 0.3591522787516453,
+            "input_kg": 998701.0,
+            "sellable_kg": 897996.0,
+            "spoiled_kg": 100705.0,
+            "spoilage_rate": 0.1008359859457435,
+            "gross_sales_revenue_inr": 22495667.790196896,
+            "procurement_inr": 12953404.721825957,
+            "transport_inr": 1344070.8,
+            "handling_inr": 499350.5,
+            "rescue_inr": 48179.25,
+            "agent_sensor_inr": 249675.25,
+            "net_realization_per_input_kg_inr": 20.38086673608707,
+            "net_batch_realization_margin": 0.3289961132692456,
+            "operating_profit_inr": 7400987.268370938,
+            "operating_profit_margin": 0.3289961132692456,
             "buyer_rejection_rate": 0.0,
-            "on_time_fulfilment_rate": 0.9535,
-            "successful_rescue_rate": 0.8481481481481481,
+            "on_time_fulfilment_rate": 0.893,
+            "successful_rescue_rate": 0.20714285714285716,
             "food_safety_violations": 0,
             "setup_cost_inr": 50000.0,
-            "incremental_profit_vs_m0_inr": 4563043.0,
-            "margin_relative_uplift_vs_m0": 0.656487248669781,
-            "margin_percentage_point_change_vs_m0": 14.233667752075291,
-            "roi_over_simulated_period": 90.26086,
-            "payback_days": 0.32872800015252984,
-            "meets_spoilage_target": true,
+            "incremental_profit_vs_m0_inr": 3804316.513241129,
+            "margin_relative_uplift_vs_m0": 0.6707850957276822,
+            "margin_percentage_point_change_vs_m0": 13.208502391938707,
+            "roi_over_simulated_period": 75.08633026482258,
+            "payback_days": 0.3942889596013289,
+            "meets_spoilage_target": false,
             "meets_margin_target": true,
-            "incremental_agentic_policy_profit_vs_m2_inr": 408318.9500000011
+            "incremental_agentic_policy_profit_vs_m2_inr": 7171.477744430304,
+            "sold_kg": 897996.0,
+            "salvage_value_inr": 3667295.2868672633,
+            "rescued_batches": 29,
+            "financial_waterfall": [
+              {
+                "account": "gross_sales_revenue",
+                "amount_inr": 22495667.790196896
+              },
+              {
+                "account": "procurement_inr",
+                "amount_inr": -12953404.721825957
+              },
+              {
+                "account": "transport_inr",
+                "amount_inr": -1344070.8
+              },
+              {
+                "account": "handling_inr",
+                "amount_inr": -499350.5
+              },
+              {
+                "account": "rescue_inr",
+                "amount_inr": -48179.25
+              },
+              {
+                "account": "agent_sensor_inr",
+                "amount_inr": -249675.25
+              }
+            ]
           }
         ]
       }
     ],
     "summary": {
       "M0": {
-        "mean_operating_profit_inr": 4268354.192873013,
-        "mean_spoilage_rate": 0.2285329705310478,
+        "mean_operating_profit_inr": 3858029.2416441906,
+        "mean_spoilage_rate": 0.2611826185890901,
         "probability_meeting_both_targets": 0.0,
         "runs_meeting_both_targets": 0,
-        "repetitions": 3
+        "repetitions": 3,
+        "median_operating_profit_inr": 3596670.7551298086,
+        "profit_p05_inr": 3552050.2640908184,
+        "profit_p95_inr": 4346959.15975763,
+        "spoilage_p05": 0.2545238932685504,
+        "spoilage_p95": 0.2664075581256516,
+        "profit_distribution_inr": [
+          4430324.53804961,
+          3547092.431753153,
+          3596670.7551298086
+        ],
+        "spoilage_distribution": [
+          0.25355644985452563,
+          0.26323088399477323,
+          0.2667605219179714
+        ]
       },
       "M1": {
-        "mean_operating_profit_inr": 3667230.892873013,
-        "mean_spoilage_rate": 0.24332282145201592,
+        "mean_operating_profit_inr": 3433768.127255913,
+        "mean_spoilage_rate": 0.2714257773829562,
         "probability_meeting_both_targets": 0.0,
         "runs_meeting_both_targets": 0,
-        "repetitions": 3
+        "repetitions": 3,
+        "median_operating_profit_inr": 3154902.009865109,
+        "profit_p05_inr": 3089806.293988686,
+        "profit_p95_inr": 3972936.2426967025,
+        "spoilage_p05": 0.2630448025551526,
+        "spoilage_p95": 0.2772934942425628,
+        "profit_distribution_inr": [
+          4063828.9352335464,
+          3082573.4366690833,
+          3154902.009865109
+        ],
+        "spoilage_distribution": [
+          0.2617146532936193,
+          0.27501614590895207,
+          0.2775465329462973
+        ]
       },
       "M2": {
-        "mean_operating_profit_inr": 8286349.90953968,
-        "mean_spoilage_rate": 0.08413548352034834,
-        "probability_meeting_both_targets": 1.0,
-        "runs_meeting_both_targets": 3,
-        "repetitions": 3
+        "mean_operating_profit_inr": 7909619.246223729,
+        "mean_spoilage_rate": 0.09189288368813238,
+        "probability_meeting_both_targets": 0.6666666666666666,
+        "runs_meeting_both_targets": 2,
+        "repetitions": 3,
+        "median_operating_profit_inr": 7518774.757644953,
+        "profit_p05_inr": 7406311.687328352,
+        "profit_p95_inr": 8686517.94712425,
+        "spoilage_p05": 0.07755942856031407,
+        "spoilage_p95": 0.10737294134886016,
+        "profit_distribution_inr": [
+          8816267.190399727,
+          7518774.757644953,
+          7393815.790626507
+        ],
+        "spoilage_distribution": [
+          0.07614882283705005,
+          0.09025488006969029,
+          0.10927494815765681
+        ]
       },
       "M3": {
-        "mean_operating_profit_inr": 8680364.409539679,
-        "mean_spoilage_rate": 0.02001094495145228,
-        "probability_meeting_both_targets": 1.0,
-        "runs_meeting_both_targets": 3,
-        "repetitions": 3
+        "mean_operating_profit_inr": 7869519.52836809,
+        "mean_spoilage_rate": 0.08878718388827526,
+        "probability_meeting_both_targets": 0.6666666666666666,
+        "runs_meeting_both_targets": 2,
+        "repetitions": 3,
+        "median_operating_profit_inr": 7466741.17880751,
+        "profit_p05_inr": 7407562.659414595,
+        "profit_p95_inr": 8613421.242013993,
+        "spoilage_p05": 0.07747161484154827,
+        "spoilage_p95": 0.09969006163937237,
+        "profit_distribution_inr": [
+          8740830.137925824,
+          7466741.17880751,
+          7400987.268370938
+        ],
+        "spoilage_distribution": [
+          0.07614882283705005,
+          0.08937674288203223,
+          0.1008359859457435
+        ]
       }
     },
     "limitations": [
-      "M3 estimates the benefit of event-driven intervention; it does not measure LLM effectiveness.",
-      "Uncalibrated synthetic thermal-age model; no food-safety certification.",
-      "Whole-batch daily allocation; unused/rejected inventory is conservatively written off at day end.",
-      "Spoilage includes unsold commercial write-offs; not all is biological decay.",
-      "Sequential channel enumeration is not a global fleet optimizer.",
-      "Empirical probabilities describe these seeded synthetic scenarios only.",
-      "No target fitting or parameter calibration has been performed."
-    ]
+      "Synthetic assumptions with case-only baseline calibration; no field validation.",
+      "M3 simulates bounded event-driven intervention and delayed approvals, not live LLM performance.",
+      "Quality RSL does not certify food safety. Humidity is recorded but not assigned an unsupported coefficient.",
+      "Whole-lot single-day inventory; unsold inventory is conservatively written off, including commercial waste.",
+      "CP-SAT jointly optimizes daily allocation with fixed FEFO loading slots; fallback status is exposed.",
+      "A synthetic junction graph defines routes; not GPS or map-derived travel.",
+      "Simulation percentiles and probabilities apply only to the specified input distribution."
+    ],
+    "metadata": {
+      "run_id": "9ea14ff9-5e96-4b43-b495-65e560e161ac",
+      "status": "completed",
+      "currency": "INR",
+      "created_at": "2026-10-27T18:29:44.223144+00:00",
+      "batch_audit_repetition": 0,
+      "decision_scope": "interactive replay of first repetition"
+    },
+    "risk": {
+      "incremental_m3_vs_m2_distribution_inr": [
+        -75437.0524739027,
+        -52033.57883744314,
+        7171.477744430304
+      ],
+      "mean_incremental_m3_vs_m2_inr": -40099.71785563851,
+      "probability_m3_worse_than_m2": 0.6666666666666666,
+      "range_definition": "Linearly interpolated 5th\u201395th simulation percentiles; not confidence intervals"
+    }
   }
 }

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 45% 97%;
+    --foreground: 155 40% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 155 30% 12%;
+    --primary: 155 40% 19%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 210 16% 95%;
+    --muted-foreground: 215 14% 38%;
+    --border: 214 20% 89%;
+    --input: 214 20% 84%;
+    --ring: 173 80% 30%;
+  }
+  html { font-size: 16px; }
+  body { @apply bg-background text-foreground; font-feature-settings: "tnum" 1, "cv11" 1; }
+  :focus-visible { @apply outline-none ring-2 ring-ring ring-offset-2; }
+}
+
+@layer utilities {
+  .num { font-variant-numeric: tabular-nums; }
+}

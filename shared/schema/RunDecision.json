@@ -1,0 +1,224 @@
+{
+  "$defs": {
+    "BatchState": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "evidence_category": {
+          "const": "SYNTHETIC",
+          "default": "SYNTHETIC",
+          "title": "Evidence Category",
+          "type": "string"
+        },
+        "quantity_kg": {
+          "title": "Quantity Kg",
+          "type": "number"
+        },
+        "initial_rsl_hours": {
+          "title": "Initial Rsl Hours",
+          "type": "number"
+        },
+        "rsl_hours": {
+          "title": "Rsl Hours",
+          "type": "number"
+        },
+        "rsl_lower_hours": {
+          "title": "Rsl Lower Hours",
+          "type": "number"
+        },
+        "destination": {
+          "title": "Destination",
+          "type": "string"
+        },
+        "delay_hours": {
+          "title": "Delay Hours",
+          "type": "number"
+        },
+        "safety_hold": {
+          "title": "Safety Hold",
+          "type": "boolean"
+        },
+        "event": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Event"
+        },
+        "proposal": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Proposal"
+        },
+        "agent_mode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Agent Mode"
+        },
+        "monitoring": {
+          "title": "Monitoring",
+          "type": "boolean"
+        },
+        "trace": {
+          "items": {
+            "$ref": "#/$defs/TraceEntry"
+          },
+          "title": "Trace",
+          "type": "array"
+        },
+        "current_location": {
+          "default": "junction",
+          "title": "Current Location",
+          "type": "string"
+        },
+        "elapsed_hours": {
+          "default": 6,
+          "title": "Elapsed Hours",
+          "type": "number"
+        },
+        "buyer_capacities": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Buyer Capacities",
+          "type": "object"
+        },
+        "unavailable_buyers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unavailable Buyers",
+          "type": "array"
+        },
+        "price_factors": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Price Factors",
+          "type": "object"
+        },
+        "quality_grade": {
+          "default": "A",
+          "title": "Quality Grade",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "status",
+        "quantity_kg",
+        "initial_rsl_hours",
+        "rsl_hours",
+        "rsl_lower_hours",
+        "destination",
+        "delay_hours",
+        "safety_hold",
+        "event",
+        "proposal",
+        "agent_mode",
+        "monitoring",
+        "trace"
+      ],
+      "title": "BatchState",
+      "type": "object"
+    },
+    "TraceEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "sequence": {
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "timestamp": {
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "tool": {
+          "title": "Tool",
+          "type": "string"
+        },
+        "inputs": {
+          "additionalProperties": true,
+          "title": "Inputs",
+          "type": "object"
+        },
+        "result": {
+          "additionalProperties": true,
+          "title": "Result",
+          "type": "object"
+        }
+      },
+      "required": [
+        "sequence",
+        "timestamp",
+        "tool",
+        "inputs",
+        "result"
+      ],
+      "title": "TraceEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "batch_id": {
+      "title": "Batch Id",
+      "type": "string"
+    },
+    "scope": {
+      "default": "Interactive replay; immutable experiment metrics are not rewritten",
+      "title": "Scope",
+      "type": "string"
+    },
+    "state": {
+      "$ref": "#/$defs/BatchState"
+    },
+    "simulated_outcome": {
+      "additionalProperties": true,
+      "title": "Simulated Outcome",
+      "type": "object"
+    }
+  },
+  "required": [
+    "run_id",
+    "batch_id",
+    "state",
+    "simulated_outcome"
+  ],
+  "title": "RunDecision",
+  "type": "object"
+}

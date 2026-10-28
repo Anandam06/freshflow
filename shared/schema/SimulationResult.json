@@ -1,0 +1,525 @@
+{
+  "$defs": {
+    "Metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "enum": [
+            "M0",
+            "M1",
+            "M2",
+            "M3"
+          ],
+          "title": "Model",
+          "type": "string"
+        },
+        "input_kg": {
+          "title": "Input Kg",
+          "type": "number"
+        },
+        "sellable_kg": {
+          "title": "Sellable Kg",
+          "type": "number"
+        },
+        "spoiled_kg": {
+          "title": "Spoiled Kg",
+          "type": "number"
+        },
+        "spoilage_rate": {
+          "title": "Spoilage Rate",
+          "type": "number"
+        },
+        "gross_sales_revenue_inr": {
+          "title": "Gross Sales Revenue Inr",
+          "type": "number"
+        },
+        "procurement_inr": {
+          "title": "Procurement Inr",
+          "type": "number"
+        },
+        "transport_inr": {
+          "title": "Transport Inr",
+          "type": "number"
+        },
+        "handling_inr": {
+          "title": "Handling Inr",
+          "type": "number"
+        },
+        "rescue_inr": {
+          "title": "Rescue Inr",
+          "type": "number"
+        },
+        "agent_sensor_inr": {
+          "title": "Agent Sensor Inr",
+          "type": "number"
+        },
+        "net_realization_per_input_kg_inr": {
+          "title": "Net Realization Per Input Kg Inr",
+          "type": "number"
+        },
+        "net_batch_realization_margin": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Net Batch Realization Margin"
+        },
+        "operating_profit_inr": {
+          "title": "Operating Profit Inr",
+          "type": "number"
+        },
+        "operating_profit_margin": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Operating Profit Margin"
+        },
+        "buyer_rejection_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Buyer Rejection Rate"
+        },
+        "on_time_fulfilment_rate": {
+          "title": "On Time Fulfilment Rate",
+          "type": "number"
+        },
+        "successful_rescue_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Successful Rescue Rate"
+        },
+        "food_safety_violations": {
+          "title": "Food Safety Violations",
+          "type": "integer"
+        },
+        "setup_cost_inr": {
+          "title": "Setup Cost Inr",
+          "type": "number"
+        },
+        "incremental_profit_vs_m0_inr": {
+          "title": "Incremental Profit Vs M0 Inr",
+          "type": "number"
+        },
+        "margin_relative_uplift_vs_m0": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Margin Relative Uplift Vs M0"
+        },
+        "margin_percentage_point_change_vs_m0": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Margin Percentage Point Change Vs M0"
+        },
+        "roi_over_simulated_period": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Roi Over Simulated Period"
+        },
+        "payback_days": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Payback Days"
+        },
+        "meets_spoilage_target": {
+          "title": "Meets Spoilage Target",
+          "type": "boolean"
+        },
+        "meets_margin_target": {
+          "title": "Meets Margin Target",
+          "type": "boolean"
+        },
+        "incremental_agentic_policy_profit_vs_m2_inr": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Incremental Agentic Policy Profit Vs M2 Inr"
+        },
+        "sold_kg": {
+          "default": 0,
+          "title": "Sold Kg",
+          "type": "number"
+        },
+        "salvage_value_inr": {
+          "default": 0,
+          "title": "Salvage Value Inr",
+          "type": "number"
+        },
+        "rescued_batches": {
+          "default": 0,
+          "title": "Rescued Batches",
+          "type": "integer"
+        },
+        "financial_waterfall": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Financial Waterfall",
+          "type": "array"
+        }
+      },
+      "required": [
+        "model",
+        "input_kg",
+        "sellable_kg",
+        "spoiled_kg",
+        "spoilage_rate",
+        "gross_sales_revenue_inr",
+        "procurement_inr",
+        "transport_inr",
+        "handling_inr",
+        "rescue_inr",
+        "agent_sensor_inr",
+        "net_realization_per_input_kg_inr",
+        "net_batch_realization_margin",
+        "operating_profit_inr",
+        "operating_profit_margin",
+        "buyer_rejection_rate",
+        "on_time_fulfilment_rate",
+        "successful_rescue_rate",
+        "food_safety_violations",
+        "setup_cost_inr",
+        "incremental_profit_vs_m0_inr",
+        "margin_relative_uplift_vs_m0",
+        "margin_percentage_point_change_vs_m0",
+        "roi_over_simulated_period",
+        "payback_days",
+        "meets_spoilage_target",
+        "meets_margin_target"
+      ],
+      "title": "Metrics",
+      "type": "object"
+    },
+    "ModelSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "mean_operating_profit_inr": {
+          "title": "Mean Operating Profit Inr",
+          "type": "number"
+        },
+        "mean_spoilage_rate": {
+          "title": "Mean Spoilage Rate",
+          "type": "number"
+        },
+        "probability_meeting_both_targets": {
+          "title": "Probability Meeting Both Targets",
+          "type": "number"
+        },
+        "runs_meeting_both_targets": {
+          "title": "Runs Meeting Both Targets",
+          "type": "integer"
+        },
+        "repetitions": {
+          "title": "Repetitions",
+          "type": "integer"
+        },
+        "median_operating_profit_inr": {
+          "default": 0,
+          "title": "Median Operating Profit Inr",
+          "type": "number"
+        },
+        "profit_p05_inr": {
+          "default": 0,
+          "title": "Profit P05 Inr",
+          "type": "number"
+        },
+        "profit_p95_inr": {
+          "default": 0,
+          "title": "Profit P95 Inr",
+          "type": "number"
+        },
+        "spoilage_p05": {
+          "default": 0,
+          "title": "Spoilage P05",
+          "type": "number"
+        },
+        "spoilage_p95": {
+          "default": 0,
+          "title": "Spoilage P95",
+          "type": "number"
+        },
+        "profit_distribution_inr": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Profit Distribution Inr",
+          "type": "array"
+        },
+        "spoilage_distribution": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Spoilage Distribution",
+          "type": "array"
+        }
+      },
+      "required": [
+        "mean_operating_profit_inr",
+        "mean_spoilage_rate",
+        "probability_meeting_both_targets",
+        "runs_meeting_both_targets",
+        "repetitions"
+      ],
+      "title": "ModelSummary",
+      "type": "object"
+    },
+    "SimulationRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "seed": {
+          "default": 60000,
+          "maximum": 2147483647,
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "batches": {
+          "default": 2000,
+          "maximum": 10000,
+          "minimum": 1,
+          "title": "Batches",
+          "type": "integer"
+        },
+        "days": {
+          "default": 30,
+          "maximum": 365,
+          "minimum": 1,
+          "title": "Days",
+          "type": "integer"
+        },
+        "repetitions": {
+          "default": 3,
+          "maximum": 30,
+          "minimum": 1,
+          "title": "Repetitions",
+          "type": "integer"
+        },
+        "disruption_probability": {
+          "default": 0.0,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Disruption Probability",
+          "type": "number"
+        },
+        "price_multiplier": {
+          "default": 1,
+          "maximum": 3,
+          "minimum": 0.1,
+          "title": "Price Multiplier",
+          "type": "number"
+        },
+        "capacity_multiplier": {
+          "default": 1,
+          "maximum": 3,
+          "minimum": 0.1,
+          "title": "Capacity Multiplier",
+          "type": "number"
+        },
+        "setup_cost_inr": {
+          "default": 50000,
+          "maximum": 100000000.0,
+          "minimum": 0,
+          "title": "Setup Cost Inr",
+          "type": "number"
+        },
+        "buyer_availability": {
+          "default": 0.95,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Buyer Availability",
+          "type": "number"
+        },
+        "temperature_shift_c": {
+          "default": 0,
+          "maximum": 10,
+          "minimum": -5,
+          "title": "Temperature Shift C",
+          "type": "number"
+        },
+        "traffic_multiplier": {
+          "default": 1,
+          "maximum": 3,
+          "minimum": 0,
+          "title": "Traffic Multiplier",
+          "type": "number"
+        },
+        "prediction_error_hours": {
+          "default": 3,
+          "maximum": 24,
+          "minimum": 0,
+          "title": "Prediction Error Hours",
+          "type": "number"
+        },
+        "approval_delay_hours": {
+          "default": 0.5,
+          "maximum": 24,
+          "minimum": 0,
+          "title": "Approval Delay Hours",
+          "type": "number"
+        },
+        "ai_cost_multiplier": {
+          "default": 1,
+          "maximum": 20,
+          "minimum": 0,
+          "title": "Ai Cost Multiplier",
+          "type": "number"
+        },
+        "initial_rsl_scale": {
+          "default": 1.4,
+          "maximum": 2,
+          "minimum": 0.3,
+          "title": "Initial Rsl Scale",
+          "type": "number"
+        },
+        "cancellation_probability": {
+          "default": 0.03,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Cancellation Probability",
+          "type": "number"
+        }
+      },
+      "title": "SimulationRequest",
+      "type": "object"
+    },
+    "SimulationRun": {
+      "additionalProperties": false,
+      "properties": {
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        },
+        "dataset_sha256": {
+          "title": "Dataset Sha256",
+          "type": "string"
+        },
+        "metrics": {
+          "items": {
+            "$ref": "#/$defs/Metrics"
+          },
+          "title": "Metrics",
+          "type": "array"
+        }
+      },
+      "required": [
+        "seed",
+        "dataset_sha256",
+        "metrics"
+      ],
+      "title": "SimulationRun",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "evidence_category": {
+      "const": "SIMULATED RESULT",
+      "default": "SIMULATED RESULT",
+      "title": "Evidence Category",
+      "type": "string"
+    },
+    "agent_mode": {
+      "title": "Agent Mode",
+      "type": "string"
+    },
+    "assumptions_version": {
+      "title": "Assumptions Version",
+      "type": "string"
+    },
+    "config": {
+      "$ref": "#/$defs/SimulationRequest"
+    },
+    "runs": {
+      "items": {
+        "$ref": "#/$defs/SimulationRun"
+      },
+      "title": "Runs",
+      "type": "array"
+    },
+    "summary": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ModelSummary"
+      },
+      "title": "Summary",
+      "type": "object"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    },
+    "risk": {
+      "additionalProperties": true,
+      "title": "Risk",
+      "type": "object"
+    }
+  },
+  "required": [
+    "agent_mode",
+    "assumptions_version",
+    "config",
+    "runs",
+    "summary",
+    "limitations"
+  ],
+  "title": "SimulationResult",
+  "type": "object"
+}

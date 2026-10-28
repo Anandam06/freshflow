@@ -12,6 +12,7 @@ from app.models import SimulationRequest
 from app.optimization import BUYERS
 from app.simulation import generate, plan_day, evaluate, simulate
 from app.storage import Store
+from app.generator import planning_view
 
 
 @pytest.fixture
@@ -60,11 +61,13 @@ def test_physical_and_accounting_invariants(model, capacity):
 def test_no_future_information():
     config = SimulationRequest(batches=40, days=1)
     batches = generate(config, 8)
-    observed = [{k: v for k, v in b.items() if k != 'future_event'} for b in batches]
+    observed = [planning_view(b) for b in batches]
     original = plan_day(observed, 'M2', config)
     for b in batches:
         b['future_event']['delay_hours'] = 900
-    assert original == plan_day([{k: v for k, v in b.items() if k != 'future_event'} for b in batches], 'M2', config)
+    assert original == plan_day([planning_view(b) for b in batches], 'M2', config)
+    with pytest.raises(ValueError):
+        plan_day(batches, 'M2', config)
 
 
 def test_financial_reconciliation():
@@ -234,3 +237,17 @@ def test_daily_static_allocation_does_not_alias_day_buckets():
     dataset = generate(config, 2026)
     for day in range(config.days):
         assert len({b['morning_buyer'] for b in dataset if b['day'] == day}) == 3
+
+
+def test_demo_reset_restores_seed_and_keeps_versions_monotonic(client):
+    client.post('/api/v1/batches/T17/events', json={})
+    pending = client.post('/api/v1/batches/T17/investigate', json={'mode': 'deterministic'}).json()
+    reset = client.post('/api/v1/batches/T17/reset')
+    assert reset.status_code == 200
+    state = reset.json()
+    assert state['destination'] == 'Retailer A' and state['status'] == 'monitoring' and state['event'] is None
+    assert state['version'] > pending['version']
+    assert [t['tool'] for t in state['trace']] == ['seed', 'demo_reset']
+    stale = client.post('/api/v1/batches/T17/approval', json={'approve': True, 'expected_version': pending['version']})
+    assert stale.status_code == 409
+    assert client.post('/api/v1/batches/T99/reset').status_code == 404

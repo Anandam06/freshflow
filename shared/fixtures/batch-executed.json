@@ -22,7 +22,7 @@
   "trace": [
     {
       "sequence": 1,
-      "timestamp": "2026-10-27T18:11:31.717364+00:00",
+      "timestamp": "2026-10-27T18:29:15.886946+00:00",
       "tool": "seed",
       "inputs": {},
       "result": {
@@ -31,7 +31,7 @@
     },
     {
       "sequence": 2,
-      "timestamp": "2026-10-27T18:11:31.836730+00:00",
+      "timestamp": "2026-10-27T18:29:16.031589+00:00",
       "tool": "sense_event",
       "inputs": {
         "temperature_c": 35,
@@ -49,8 +49,8 @@
     },
     {
       "sequence": 3,
-      "timestamp": "2026-10-27T18:11:31.849111+00:00",
-      "tool": "inspect_batch",
+      "timestamp": "2026-10-27T18:29:16.043377+00:00",
+      "tool": "get_batch_state",
       "inputs": {},
       "result": {
         "id": "T17",
@@ -62,13 +62,14 @@
           "delay_hours": 12,
           "safety_hold": false
         },
-        "safety_hold": false
+        "safety_hold": false,
+        "current_location": "junction"
       }
     },
     {
       "sequence": 4,
-      "timestamp": "2026-10-27T18:11:31.849124+00:00",
-      "tool": "predict_freshness",
+      "timestamp": "2026-10-27T18:29:16.043394+00:00",
+      "tool": "predict_remaining_shelf_life",
       "inputs": {},
       "result": {
         "rsl_hours": 35.02943725152286,
@@ -78,8 +79,8 @@
     },
     {
       "sequence": 5,
-      "timestamp": "2026-10-27T18:11:31.849127+00:00",
-      "tool": "check_buyers_routes",
+      "timestamp": "2026-10-27T18:29:16.043399+00:00",
+      "tool": "get_buyer_options",
       "inputs": {},
       "result": {
         "buyers": [
@@ -109,13 +110,71 @@
           }
         ],
         "retailer_delay_hours": 12,
-        "source": "SYNTHETIC dedicated T17 buyer capacities; not live market quotes"
+        "price_factors": {},
+        "unavailable_buyers": [],
+        "source": "SYNTHETIC scenario quotes and capacity observations; not live market data"
       }
     },
     {
       "sequence": 6,
-      "timestamp": "2026-10-27T18:11:31.849148+00:00",
-      "tool": "rank_options",
+      "timestamp": "2026-10-27T18:29:16.043404+00:00",
+      "tool": "check_buyer_capacity",
+      "inputs": {},
+      "result": {
+        "available_capacity_kg": {
+          "Retailer A": 14000.0,
+          "Wholesale B": 14000.0,
+          "Processor C": 10000.0
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "timestamp": "2026-10-27T18:29:16.043416+00:00",
+      "tool": "calculate_route_eta",
+      "inputs": {},
+      "result": {
+        "routes": [
+          {
+            "origin": "junction",
+            "destination": "Retailer A",
+            "reachable": true,
+            "travel_hours": 24.0,
+            "path": [
+              "junction",
+              "Retailer A"
+            ],
+            "source": "SYNTHETIC graph; not map-derived routing"
+          },
+          {
+            "origin": "junction",
+            "destination": "Wholesale B",
+            "reachable": true,
+            "travel_hours": 5.0,
+            "path": [
+              "junction",
+              "Wholesale B"
+            ],
+            "source": "SYNTHETIC graph; not map-derived routing"
+          },
+          {
+            "origin": "junction",
+            "destination": "Processor C",
+            "reachable": true,
+            "travel_hours": 2.0,
+            "path": [
+              "junction",
+              "Processor C"
+            ],
+            "source": "SYNTHETIC graph; not map-derived routing"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 8,
+      "timestamp": "2026-10-27T18:29:16.043448+00:00",
+      "tool": "optimize_destination",
       "inputs": {},
       "result": {
         "options": [
@@ -126,6 +185,17 @@
             "minimum_rsl_hours": 8.0,
             "capacity_kg": 14000.0,
             "transport_inr_kg": 1.2,
+            "route": {
+              "origin": "junction",
+              "destination": "Wholesale B",
+              "reachable": true,
+              "travel_hours": 5.0,
+              "path": [
+                "junction",
+                "Wholesale B"
+              ],
+              "source": "SYNTHETIC graph; not map-derived routing"
+            },
             "arrival_rsl_lower_hours": 24.029437251522857,
             "feasible": true,
             "reasons": [],
@@ -140,6 +210,17 @@
             "minimum_rsl_hours": 2.0,
             "capacity_kg": 10000.0,
             "transport_inr_kg": 0.8,
+            "route": {
+              "origin": "junction",
+              "destination": "Processor C",
+              "reachable": true,
+              "travel_hours": 2.0,
+              "path": [
+                "junction",
+                "Processor C"
+              ],
+              "source": "SYNTHETIC graph; not map-derived routing"
+            },
             "arrival_rsl_lower_hours": 27.029437251522857,
             "feasible": true,
             "reasons": [],
@@ -154,6 +235,17 @@
             "minimum_rsl_hours": 24.0,
             "capacity_kg": 14000.0,
             "transport_inr_kg": 2.0,
+            "route": {
+              "origin": "junction",
+              "destination": "Retailer A",
+              "reachable": true,
+              "travel_hours": 24.0,
+              "path": [
+                "junction",
+                "Retailer A"
+              ],
+              "source": "SYNTHETIC graph; not map-derived routing"
+            },
             "arrival_rsl_lower_hours": 5.029437251522857,
             "feasible": false,
             "reasons": [
@@ -167,9 +259,9 @@
       }
     },
     {
-      "sequence": 7,
-      "timestamp": "2026-10-27T18:11:31.849154+00:00",
-      "tool": "check_policy",
+      "sequence": 9,
+      "timestamp": "2026-10-27T18:29:16.043470+00:00",
+      "tool": "validate_constraints",
       "inputs": {
         "destination": "Wholesale B"
       },
@@ -181,9 +273,9 @@
       }
     },
     {
-      "sequence": 8,
-      "timestamp": "2026-10-27T18:11:31.849157+00:00",
-      "tool": "propose_action",
+      "sequence": 10,
+      "timestamp": "2026-10-27T18:29:16.043474+00:00",
+      "tool": "request_human_approval",
       "inputs": {
         "destination": "Wholesale B"
       },
@@ -193,8 +285,8 @@
       }
     },
     {
-      "sequence": 9,
-      "timestamp": "2026-10-27T18:11:31.861841+00:00",
+      "sequence": 11,
+      "timestamp": "2026-10-27T18:29:16.054385+00:00",
       "tool": "human_approved",
       "inputs": {},
       "result": {
@@ -202,8 +294,8 @@
       }
     },
     {
-      "sequence": 10,
-      "timestamp": "2026-10-27T18:11:31.861852+00:00",
+      "sequence": 12,
+      "timestamp": "2026-10-27T18:29:16.054400+00:00",
       "tool": "execute_destination_change",
       "inputs": {
         "previous_destination": "Retailer A"
@@ -216,8 +308,8 @@
       }
     },
     {
-      "sequence": 11,
-      "timestamp": "2026-10-27T18:11:31.861855+00:00",
+      "sequence": 13,
+      "timestamp": "2026-10-27T18:29:16.054404+00:00",
       "tool": "verify",
       "inputs": {},
       "result": {
@@ -225,6 +317,34 @@
         "monitoring_resumed": true,
         "physical_delivery_verified": false
       }
+    },
+    {
+      "sequence": 14,
+      "timestamp": "2026-10-27T18:29:16.054407+00:00",
+      "tool": "execute_reroute",
+      "inputs": {
+        "origin": "junction"
+      },
+      "result": {
+        "destination": "Wholesale B",
+        "approval_enforced": true
+      }
+    },
+    {
+      "sequence": 15,
+      "timestamp": "2026-10-27T18:29:16.054410+00:00",
+      "tool": "verify_execution",
+      "inputs": {},
+      "result": {
+        "persistent_state_verified_on_commit": true,
+        "buyer_acceptance_verified": false
+      }
     }
-  ]
+  ],
+  "current_location": "junction",
+  "elapsed_hours": 6.0,
+  "buyer_capacities": {},
+  "unavailable_buyers": [],
+  "price_factors": {},
+  "quality_grade": "A"
 }

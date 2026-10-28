@@ -22,7 +22,7 @@
   "trace": [
     {
       "sequence": 1,
-      "timestamp": "2026-10-27T18:11:31.717364+00:00",
+      "timestamp": "2026-10-27T18:29:15.886946+00:00",
       "tool": "seed",
       "inputs": {},
       "result": {
@@ -31,7 +31,7 @@
     },
     {
       "sequence": 2,
-      "timestamp": "2026-10-27T18:11:31.836730+00:00",
+      "timestamp": "2026-10-27T18:29:16.031589+00:00",
       "tool": "sense_event",
       "inputs": {
         "temperature_c": 35,
@@ -47,5 +47,11 @@
         "method": "synthetic thermal-age proxy; lower bound is not a confidence interval"
       }
     }
-  ]
+  ],
+  "current_location": "junction",
+  "elapsed_hours": 6.0,
+  "buyer_capacities": {},
+  "unavailable_buyers": [],
+  "price_factors": {},
+  "quality_grade": "A"
 }
