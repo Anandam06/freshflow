@@ -53,7 +53,7 @@ export default function RiskSensitivity() {
       <PageHeader
         eyebrow="Risk & sensitivity"
         title="When does agentic intervention actually pay?"
-        description={`Backend sensitivity study: each scenario is a full simulation over ${reps ?? "repeated"} seeded datasets${base?.study ? " — the same validation study as the Excel workbook and the Fleet results tab" : ""}. Ranges are 5th–95th simulation percentiles, not confidence intervals.`}
+        description={`Backend sensitivity study: each scenario is a full simulation over ${reps ?? "repeated"} seeded datasets${base?.study ? " — the same validation study as the Excel workbook and the Fleet results tab" : ""}. Amounts are per simulated ${base?.config.days ?? 30}-day period of ${Number(base?.config.batches ?? 2000).toLocaleString("en-IN")} batches, averaged across runs (not totals); spoilage is the average of per-run rates. Ranges are 5th–95th simulation percentiles, not confidence intervals.`}
         actions={<DemoDataBadge />}
       />
       {study.error ? <ErrorPanel error={study.error} onRetry={study.reload} /> : null}
@@ -85,7 +85,7 @@ export default function RiskSensitivity() {
                   </CardHeader>
                   <CardContent>
                     <p className={`num text-2xl font-semibold ${positive ? "text-fresh" : "text-unsafe"}`}>{formatINR(inc, { compact: true, signed: true })}</p>
-                    <p className="text-sm text-slate-600">mean D − C operating profit</p>
+                    <p className="text-sm text-slate-600">mean D − C operating profit per {String(r.config.days)}-day period</p>
                     <div className="mt-3 flex flex-wrap gap-1.5">
                       <Badge variant={pWorse != null && pWorse >= 0.5 ? "unsafe" : "fresh"}>P(D worse than C) {formatFraction(pWorse, 0)}</Badge>
                       <Badge variant="outline">
@@ -134,9 +134,9 @@ export default function RiskSensitivity() {
                   <TR>
                     <TH>Scenario</TH>
                     <TH>Model</TH>
-                    <TH className="text-right">Mean operating profit</TH>
+                    <TH className="text-right">Mean operating profit per period</TH>
                     <TH className="text-right">Profit p5 – p95</TH>
-                    <TH className="text-right">Mean spoilage</TH>
+                    <TH className="text-right">Mean of per-run spoilage rates</TH>
                     <TH className="text-right">Spoilage p5 – p95</TH>
                     <TH className="text-right">Runs meeting both targets</TH>
                   </TR>

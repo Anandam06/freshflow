@@ -3,7 +3,7 @@ import { ArrowRight, Bot, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ErrorPanel, KpiCard, LoadingBlock, PageHeader, ProvenanceTag, SectionTitle } from "@/components/common";
-import { Limitations, ModelChips, RunContextBar, TargetPanel, useCurrentRun } from "@/components/results";
+import { Limitations, ModelChips, ReportingBasis, RunContextBar, TargetPanel, reportingBasis, useCurrentRun } from "@/components/results";
 import { ModelMetricBar, ProfitBridgeChart } from "@/charts/ModelCharts";
 import { agenticShare, deltaPP, profitBridge } from "@/lib/derive";
 import { formatCount, formatFraction, formatINR, formatINRPerKg, formatKg, formatPP } from "@/lib/format";
@@ -12,6 +12,7 @@ import { MODEL_ORDER } from "@/lib/models";
 export default function Overview() {
   const { result, current: run, byModel, loading, error, request, run: rerun, runIndex } = useCurrentRun();
   const scope = result && result.runs.length > 1 && runIndex < 0 ? `on average over ${result.runs.length} repetitions` : "in this repetition";
+  const basis = result ? reportingBasis(result, runIndex) : null;
 
   return (
     <>
@@ -43,7 +44,7 @@ export default function Overview() {
           <div className="mt-6">
             <RunContextBar result={result} />
           </div>
-          <Headline metrics={byModel} bridge={profitBridge(run)} scope={scope} />
+          <Headline metrics={byModel} bridge={profitBridge(run)} scope={scope} perPeriod={basis!.perPeriod} />
 
           <div className="mt-6 grid gap-6 xl:grid-cols-5">
             <Card className="xl:col-span-3">
@@ -52,7 +53,10 @@ export default function Overview() {
                   <CardTitle>Where the profit comes from</CardTitle>
                   <ProvenanceTag category="SIMULATED RESULT" />
                 </div>
-                <CardDescription>Operating profit bridge, A → D. Only the last step (D − C) is the incremental effect of agentic intervention — teal if positive, red if negative.</CardDescription>
+                <CardDescription>
+                  Operating profit bridge, A → D, {basis!.perPeriod}. Only the last step (D − C) is the incremental effect of agentic intervention — teal if
+                  positive, red if negative.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <ProfitBridgeChart bridge={profitBridge(run)} />
@@ -67,7 +71,9 @@ export default function Overview() {
                   <CardTitle>Spoilage rate by model</CardTitle>
                   <ProvenanceTag category="SIMULATED RESULT" />
                 </div>
-                <CardDescription>Share of input kilograms not sold, including commercial write-offs. Dashed line: case target.</CardDescription>
+                <CardDescription>
+                  Share of input kilograms not sold, including commercial write-offs. {basis!.spoilage} Dashed line: case target.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <ModelMetricBar
@@ -82,6 +88,7 @@ export default function Overview() {
           </div>
 
           <SectionTitle aside={<ProvenanceTag category="SIMULATED RESULT" />}>Key results · D versus A</SectionTitle>
+          <ReportingBasis result={result} className="-mt-2 mb-3" />
           <KpiGrid m={byModel} />
 
           <SectionTitle>How confident should you be?</SectionTitle>
@@ -124,7 +131,7 @@ export default function Overview() {
   );
 }
 
-function Headline({ metrics, bridge, scope }: { metrics: ReturnType<typeof useCurrentRun>["byModel"] & object; bridge: ReturnType<typeof profitBridge>; scope: string }) {
+function Headline({ metrics, bridge, scope, perPeriod }: { metrics: ReturnType<typeof useCurrentRun>["byModel"] & object; bridge: ReturnType<typeof profitBridge>; scope: string; perPeriod: string }) {
   const m0 = metrics.M0;
   const m3 = metrics.M3;
   const share = agenticShare(bridge);
@@ -138,7 +145,7 @@ function Headline({ metrics, bridge, scope }: { metrics: ReturnType<typeof useCu
           {formatINR(m3.incremental_profit_vs_m0_inr, { compact: true, signed: true })}
         </p>
         <p className="mt-1 text-sm text-emerald-50/80">
-          {formatINR(m0.operating_profit_inr, { compact: true })} → {formatINR(m3.operating_profit_inr, { compact: true })} over the simulated period
+          {formatINR(m0.operating_profit_inr, { compact: true })} → {formatINR(m3.operating_profit_inr, { compact: true })} {perPeriod}
         </p>
       </div>
       <div className={agentic < 0 ? "rounded-lg border border-unsafe-100 bg-unsafe-50 p-5" : "rounded-lg border border-fresh/30 bg-fresh-50 p-5"} data-testid="headline-agentic-tile">

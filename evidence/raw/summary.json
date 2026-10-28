@@ -6657,7 +6657,7 @@
   [
    "Slide 5",
    "Baseline spoilage A vs D (S01)",
-   "A 26.4% \u2192 D 9.5% (C 9.7%)",
+   "A 26.4% \u2192 D 9.5% (C 9.7%); average of per-run rates",
    "Spoilage_Comparison!row 3",
    "S01 \u00b7 LOCAL-S01-60000\u202660029",
    "SIMULATED"
@@ -6665,7 +6665,7 @@
   [
    "Slide 5",
    "Baseline profit A vs D (S01)",
-   "A \u20b937.2 lakh \u2192 D \u20b976.5 lakh per 30-day run (D \u2212 A \u20b939.2 lakh; D > A in 100% of seeds)",
+   "A \u20b937.2 lakh \u2192 D \u20b976.5 lakh per simulated 30-day period, mean of runs (D \u2212 A \u20b939.2 lakh; D > A in 100% of seeds)",
    "Profit_Comparison!row 3",
    "S01",
    "SIMULATED"
@@ -6673,7 +6673,7 @@
   [
    "Slide 5",
    "Incremental D vs C (S01, no disruptions)",
-   "\u20b9-52,883 (P05 \u20b9-89,241, P95 \u20b92,132); D > C in 7% of seeds",
+   "\u20b9-52,883 per 30-day period (P05 \u20b9-89,241, P95 \u20b92,132); D > C in 7% of seeds",
    "Profit_Comparison!row 3",
    "S01",
    "SIMULATED"
@@ -6681,7 +6681,7 @@
   [
    "Slide 5",
    "Incremental D vs C (X01, 30% disrupted)",
-   "\u20b918.6 lakh (P05 \u20b915.6 lakh, P95 \u20b921.5 lakh); D > C in 100% of seeds; spoilage C 19.4% \u2192 D 12.2%",
+   "\u20b918.6 lakh per 30-day period (P05 \u20b915.6 lakh, P95 \u20b921.5 lakh); D > C in 100% of seeds; spoilage C 19.4% \u2192 D 12.2%",
    "Profit_Comparison!row 29",
    "X01 (supplementary)",
    "SIMULATED"

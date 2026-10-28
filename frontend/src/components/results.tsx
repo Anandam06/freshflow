@@ -21,6 +21,38 @@ export function useCurrentRun() {
   return { ...sim, current: run, byModel };
 }
 
+/**
+ * Reporting basis for fleet results: every amount is per simulated period (one repetition), and the default
+ * view is the mean across repetitions, never a total over them. Spoilage is the mean of per-run rates.
+ */
+export function reportingBasis(result: SimulationResult, runIndex: number) {
+  const c = result.config as Record<string, number>;
+  const n = result.runs.length;
+  const averaged = n > 1 && runIndex < 0;
+  const inputKg = result.runs.reduce((a, r) => a + r.metrics[0].input_kg, 0) / n;
+  const tonnes = (Math.round(inputKg / 10_000) * 10).toLocaleString("en-IN");
+  const period = `${c.days}-day period of ${c.batches.toLocaleString("en-IN")} batches (~${tonnes} tonnes)`;
+  const shown = result.runs[Math.min(Math.max(runIndex, 0), n - 1)];
+  return {
+    averaged,
+    label: averaged
+      ? `Per simulated ${period}, averaged across ${n} independent runs.`
+      : `Per simulated ${period}; one run only (seed ${shown.seed}), not an average.`,
+    /** Short form for chart captions. */
+    perPeriod: averaged ? `per simulated ${c.days}-day period (mean of ${n} runs)` : `per simulated ${c.days}-day period (seed ${shown.seed})`,
+    spoilage: averaged ? `Average of the ${n} per-run spoilage rates.` : `Spoilage rate of this run (seed ${shown.seed}).`,
+  };
+}
+
+export function ReportingBasis({ result, className }: { result: SimulationResult; className?: string }) {
+  const { runIndex } = useSimulation();
+  return (
+    <p className={cn("text-sm font-medium text-forest", className)} data-testid="reporting-basis">
+      {reportingBasis(result, runIndex).label}
+    </p>
+  );
+}
+
 /** Scenario parameters, provenance and the repetition selector. */
 export function RunContextBar({ result }: { result: SimulationResult }) {
   const { runIndex, setRunIndex, runId, studies, loadStudy, loading } = useSimulation();
@@ -89,6 +121,7 @@ export function RunContextBar({ result }: { result: SimulationResult }) {
         </Select>
       </label>
       {runId && <span className="sr-only">Simulation id {runId}</span>}
+      <ReportingBasis result={result} className="basis-full rounded-md bg-fresh-50 px-3 py-2 xl:order-last" />
       {result.study && (
         <p className="basis-full text-sm text-slate-600 xl:order-last" data-testid="study-note">
           <strong className="text-forest">Validation study {result.study.id}</strong> — {result.study.description} Seeds {result.runs[0].seed}–

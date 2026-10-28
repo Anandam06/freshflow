@@ -7,6 +7,7 @@ import { createMockClient } from "@/services/mock/mockClient";
 import type { ApiClient } from "@/services/client";
 import { formatINR } from "@/lib/format";
 import { meanRun } from "@/lib/derive";
+import { reportingBasis } from "@/components/results";
 
 function renderAt(path: string, client: ApiClient = createMockClient({ latencyMs: 0 })) {
   return render(
@@ -65,6 +66,9 @@ describe("Executive overview", () => {
     const headline = await screen.findByTestId("headline-profit", {}, { timeout: 8000 });
     // Default view: the mean over all repetitions (what the Excel workbook reports).
     expect(headline).toHaveTextContent(formatINR(meanRun(result.runs).metrics[3].incremental_profit_vs_m0_inr, { compact: true, signed: true }));
+    expect(screen.getAllByTestId("reporting-basis")[0]).toHaveTextContent(
+      /^Per simulated 30-day period of 2,000 batches \(~[\d,]+ tonnes\), averaged across 3 independent runs\.$/,
+    );
     expect(screen.getAllByText("Synthetic simulation").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Case target").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Demo data").length).toBeGreaterThan(0);
@@ -113,5 +117,21 @@ describe("Stored-run decision replay", () => {
     await user.click(within(await screen.findByRole("dialog", {}, { timeout: 8000 })).getByRole("button", { name: /^approve$/i }));
     await waitFor(() => expect(screen.getByTestId("batch-status")).toHaveTextContent("Monitoring"));
     expect(screen.getByText(/Simulated outcome in the run/)).toBeInTheDocument();
+  });
+});
+
+describe("Reporting basis", () => {
+  it("labels fleet amounts as per-period averages, never totals", async () => {
+    const client = createMockClient({ latencyMs: 0 });
+    const { result } = await client.runSimulation(await client.getScenarioDefaults());
+    const thirty = { ...result, runs: Array.from({ length: 30 }, (_, i) => ({ ...result.runs[0], seed: 60000 + i })) };
+    const avg = reportingBasis(thirty, -1);
+    expect(avg.label).toBe(
+      `Per simulated 30-day period of 2,000 batches (~${(Math.round(result.runs[0].metrics[0].input_kg / 10_000) * 10).toLocaleString("en-IN")} tonnes), averaged across 30 independent runs.`,
+    );
+    expect(avg.spoilage).toBe("Average of the 30 per-run spoilage rates.");
+    const one = reportingBasis(thirty, 4);
+    expect(one.averaged).toBe(false);
+    expect(one.label).toContain("one run only (seed 60004), not an average");
   });
 });

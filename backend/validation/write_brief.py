@@ -41,6 +41,8 @@ def main():
       f'{s["n_fleet_runs"]} paired fleet runs ({s["reps"]} seeds × scenario) + live shipment/agent tests.')
     w('')
     w('**All results are SIMULATED on SYNTHETIC data. None is an actual Mumbai operating outcome; no physical truck was rerouted.**')
+    w('**Reporting convention:** every fleet amount is per simulated 30-day period of 2,000 batches (~1,000 tonnes), averaged across 30 independent runs — '
+      'never a total across runs. Spoilage rates are the average of the per-run rates. The dashboard uses the same convention and the same stored runs.')
     w('Reference format: Scenario → Run ID(s) → Excel sheet/row → source or assumption.')
     w('')
     w('## Slide 3 — Data & Validation')
@@ -66,10 +68,10 @@ def main():
     w('### What the numbers say (read before choosing headlines)')
     w('')
     w(f'1. **The big gain is optimization, not the agent alone.** In the baseline (S01), A → D cuts spoilage from '
-      f'{S["M0"]["spoil"]["mean"]:.1%} to {S["M3"]["spoil"]["mean"]:.1%} and raises 30-day profit from {lakh(S["M0"]["profit"]["mean"])} to '
+      f'{S["M0"]["spoil"]["mean"]:.1%} to {S["M3"]["spoil"]["mean"]:.1%} and raises profit per 30-day period from {lakh(S["M0"]["profit"]["mean"])} to '
       f'{lakh(S["M3"]["profit"]["mean"])} — but C (optimization without the agent) already reaches {S["M2"]["spoil"]["mean"]:.1%} and '
       f'{lakh(S["M2"]["profit"]["mean"])}. ({pr("S01")}, {sp("S01")}; S01 → LOCAL-S01-60000…60029)')
-    w(f'2. **Without disruptions the agent costs slightly more than it saves.** S01 D − C = {inr(S["DC"]["mean"])} per 30-day run '
+    w(f'2. **Without disruptions the agent costs slightly more than it saves.** S01 D − C = {inr(S["DC"]["mean"])} per 30-day period '
       f'(P05 {inr(S["DC"]["p05"])}, P95 {inr(S["DC"]["p95"])}); D beats C in {S["P_DC"]:.0%} of seeds. ({pr("S01")})')
     w(f'3. **With disruptions the agent pays.** X01 (30% of lots disrupted, declared supplementary): D − C = {lakh(X["DC"]["mean"])} '
       f'(P05 {lakh(X["DC"]["p05"])}, P95 {lakh(X["DC"]["p95"])}), D beats C in {X["P_DC"]:.0%} of seeds; spoilage C '
@@ -80,7 +82,7 @@ def main():
       f'S32, has D > C. With disruptions, D beats C in {len(s["x_beats_c"])} of {len(xs)} X-scenarios.')
     w(f'4b. **Solver caveat on magnitudes.** ~82% of daily C/D allocations stop at the CP-SAT time limit (feasible, not proven optimal). On the live '
       f'Linux deployment, X01 seeds {s["seeds_x01_live"][0]}–{s["seeds_x01_live"][-1]} give mean D − C {lakh(s["live_dc_x01"])} vs {lakh(s["local_dc_x01"])} '
-      f'locally on the same seeds. Quote D − C as "about ₹15–20 lakh per 30-day run under 30% disruption", not as a precise figure.')
+      f'locally on the same seeds. Quote D − C as "about ₹15–20 lakh per simulated 30-day period under 30% disruption", not as a precise figure.')
     w(f'5. Largest agentic contribution: {best} {names[best]} (D − C {lakh(agg[best]["DC"]["mean"])}); weakest: {worst} {names[worst]} '
       f'(D − C {lakh(agg[worst]["DC"]["mean"])}). See Sensitivity_Analysis.')
     if distinct_traffic:

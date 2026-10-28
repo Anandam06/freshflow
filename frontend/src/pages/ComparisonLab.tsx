@@ -2,7 +2,7 @@ import { useState, type ReactNode } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ErrorPanel, LoadingBlock, PageHeader, ProvenanceTag, SectionTitle } from "@/components/common";
-import { KpiTable, ModelChips, RunContextBar, useCurrentRun, type CompareMode } from "@/components/results";
+import { KpiTable, ModelChips, RunContextBar, reportingBasis, useCurrentRun, type CompareMode } from "@/components/results";
 import { CostBreakdownChart, ModelMetricBar, ProfitBridgeChart, RevenueProfitChart, RepetitionStrip } from "@/charts/ModelCharts";
 import { profitBridge, relativeChange } from "@/lib/derive";
 import { formatFraction, formatINR, formatINRAxis, formatINRPerKg, formatPP } from "@/lib/format";
@@ -29,7 +29,8 @@ const pctChange = (m: Record<ModelId, ModelMetrics>, key: keyof ModelMetrics) =>
   MODEL_ORDER.map((id) => ({ model: id, value: relativeChange(m[id][key] as number, m.M0[key] as number) }));
 
 export default function ComparisonLab() {
-  const { result, current: run, byModel, loading, error, request, run: rerun } = useCurrentRun();
+  const { result, current: run, byModel, loading, error, request, run: rerun, runIndex } = useCurrentRun();
+  const basis = result ? reportingBasis(result, runIndex) : null;
   const [mode, setMode] = useState<CompareMode>("absolute");
   const rel = mode === "relative";
 
@@ -65,7 +66,7 @@ export default function ComparisonLab() {
           )}
 
           <div className="mt-6 grid gap-6 lg:grid-cols-2">
-            <ChartCard title="Spoilage" description={rel ? "Change in spoilage rate versus A, percentage points." : "Share of input kilograms not sold (incl. commercial write-offs)."}>
+            <ChartCard title="Spoilage" description={rel ? "Change in spoilage rate versus A, percentage points." : `Share of input kilograms not sold (incl. commercial write-offs). ${basis?.spoilage ?? ""}`}>
               {rel ? (
                 <ModelMetricBar
                   ariaLabel="Spoilage change versus A in percentage points"
@@ -83,7 +84,7 @@ export default function ComparisonLab() {
               )}
             </ChartCard>
 
-            <ChartCard title={rel ? "Operating profit change" : "Revenue and operating profit"} description={rel ? "Operating profit, % change versus A." : "Gross sales revenue and operating profit for the simulated period."}>
+            <ChartCard title={rel ? "Operating profit change" : "Revenue and operating profit"} description={rel ? "Operating profit, % change versus A." : `Gross sales revenue and operating profit ${basis?.perPeriod ?? "per simulated period"}.`}>
               {rel ? (
                 <ModelMetricBar
                   ariaLabel="Operating profit change versus A"
@@ -96,7 +97,7 @@ export default function ComparisonLab() {
               )}
             </ChartCard>
 
-            <ChartCard title="Incremental value waterfall" description="Operating profit bridge. Each step isolates one capability; only D − C is the agentic contribution.">
+            <ChartCard title="Incremental value waterfall" description={`Operating profit bridge ${basis?.perPeriod ?? ""}. Each step isolates one capability; only D − C is the agentic contribution.`}>
               <ProfitBridgeChart bridge={profitBridge(run)} />
             </ChartCard>
 
@@ -121,11 +122,11 @@ export default function ComparisonLab() {
               )}
             </ChartCard>
 
-            <ChartCard title="Logistics, rescue and technology costs" description="Absolute cost lines from the backend. D adds rescue (diversion) and higher agent/sensor cost.">
+            <ChartCard title="Logistics, rescue and technology costs" description={`Cost lines ${basis?.perPeriod ?? "per simulated period"}. D adds rescue (diversion) and higher agent/sensor cost.`}>
               <CostBreakdownChart metrics={run.metrics} />
             </ChartCard>
 
-            <ChartCard title="Spread across repetitions" description="Each dot is one seeded repetition; the tick is the backend's mean across repetitions.">
+            <ChartCard title="Spread across repetitions" description="Each dot is one seeded repetition (one simulated period); the tick is the mean across repetitions — an average, not a total.">
               <div className="space-y-6">
                 <div>
                   <p className="mb-2 text-sm font-medium text-slate-700">Operating profit</p>

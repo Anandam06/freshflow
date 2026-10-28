@@ -3,6 +3,7 @@
 Evidence workbook: `evidence/FreshFlow_Scenario_Validation.xlsx` · Live app: https://freshflow-tatz.onrender.com · API 1.4.0, commit b32cafa · 1140 paired fleet runs (30 seeds × scenario) + live shipment/agent tests.
 
 **All results are SIMULATED on SYNTHETIC data. None is an actual Mumbai operating outcome; no physical truck was rerouted.**
+**Reporting convention:** every fleet amount is per simulated 30-day period of 2,000 batches (~1,000 tonnes), averaged across 30 independent runs — never a total across runs. Spoilage rates are the average of the per-run rates. The dashboard uses the same convention and the same stored runs.
 Reference format: Scenario → Run ID(s) → Excel sheet/row → source or assumption.
 
 ## Slide 3 — Data & Validation
@@ -21,10 +22,10 @@ Suggested wording: *"34 scenarios defined; 26 run as 30-seed paired fleet experi
 
 | Claim | Value | Trace |
 |---|---|---|
-| Baseline spoilage A vs D (S01) | A 26.4% → D 9.5% (C 9.7%) | Spoilage_Comparison!row 3 · S01 · LOCAL-S01-60000…60029 |
-| Baseline profit A vs D (S01) | A ₹37.2 lakh → D ₹76.5 lakh per 30-day run (D − A ₹39.2 lakh; D > A in 100% of seeds) | Profit_Comparison!row 3 · S01 |
-| Incremental D vs C (S01, no disruptions) | ₹-52,883 (P05 ₹-89,241, P95 ₹2,132); D > C in 7% of seeds | Profit_Comparison!row 3 · S01 |
-| Incremental D vs C (X01, 30% disrupted) | ₹18.6 lakh (P05 ₹15.6 lakh, P95 ₹21.5 lakh); D > C in 100% of seeds; spoilage C 19.4% → D 12.2% | Profit_Comparison!row 29 · X01 (supplementary) |
+| Baseline spoilage A vs D (S01) | A 26.4% → D 9.5% (C 9.7%); average of per-run rates | Spoilage_Comparison!row 3 · S01 · LOCAL-S01-60000…60029 |
+| Baseline profit A vs D (S01) | A ₹37.2 lakh → D ₹76.5 lakh per simulated 30-day period, mean of runs (D − A ₹39.2 lakh; D > A in 100% of seeds) | Profit_Comparison!row 3 · S01 |
+| Incremental D vs C (S01, no disruptions) | ₹-52,883 per 30-day period (P05 ₹-89,241, P95 ₹2,132); D > C in 7% of seeds | Profit_Comparison!row 3 · S01 |
+| Incremental D vs C (X01, 30% disrupted) | ₹18.6 lakh per 30-day period (P05 ₹15.6 lakh, P95 ₹21.5 lakh); D > C in 100% of seeds; spoilage C 19.4% → D 12.2% | Profit_Comparison!row 29 · X01 (supplementary) |
 | Scenarios where D improves profit vs A | 26 of 26 executed fleet scenarios | Profit_Comparison · S-scenarios |
 | Scenarios where D does NOT beat C | 25 of 26 brief fleet scenarios (20 of 21 after removing 5 that reproduce S01 exactly: S02, S03, S04, S05, S15). All of these have zero disruption probability (app default); the only brief scenario with disruptions (S32) has D > C. With disruptions (X-family) D beats C in 12 of 12 | Profit_Comparison; Sensitivity_Analysis · — |
 | D − C on the live platform (X01) | Live Linux deployment, seeds 60000–60005: mean D − C ₹17.6 lakh (local Windows, same seeds: ₹17.0 lakh) | Live_vs_Local_Check · X01 live run IDs in Run_Register |
@@ -34,11 +35,11 @@ Suggested wording: *"34 scenarios defined; 26 run as 30-seed paired fleet experi
 
 ### What the numbers say (read before choosing headlines)
 
-1. **The big gain is optimization, not the agent alone.** In the baseline (S01), A → D cuts spoilage from 26.4% to 9.5% and raises 30-day profit from ₹37.2 lakh to ₹76.5 lakh — but C (optimization without the agent) already reaches 9.7% and ₹77.0 lakh. (Profit_Comparison row 3, Spoilage_Comparison row 3; S01 → LOCAL-S01-60000…60029)
-2. **Without disruptions the agent costs slightly more than it saves.** S01 D − C = ₹-52,883 per 30-day run (P05 ₹-89,241, P95 ₹2,132); D beats C in 7% of seeds. (Profit_Comparison row 3)
+1. **The big gain is optimization, not the agent alone.** In the baseline (S01), A → D cuts spoilage from 26.4% to 9.5% and raises profit per 30-day period from ₹37.2 lakh to ₹76.5 lakh — but C (optimization without the agent) already reaches 9.7% and ₹77.0 lakh. (Profit_Comparison row 3, Spoilage_Comparison row 3; S01 → LOCAL-S01-60000…60029)
+2. **Without disruptions the agent costs slightly more than it saves.** S01 D − C = ₹-52,883 per 30-day period (P05 ₹-89,241, P95 ₹2,132); D beats C in 7% of seeds. (Profit_Comparison row 3)
 3. **With disruptions the agent pays.** X01 (30% of lots disrupted, declared supplementary): D − C = ₹18.6 lakh (P05 ₹15.6 lakh, P95 ₹21.5 lakh), D beats C in 100% of seeds; spoilage C 19.4% → D 12.2%. (Profit_Comparison row 29, Spoilage_Comparison row 29)
 4. D beats A in 26 of 26 executed brief fleet scenarios. D does **not** beat C in 25 of 26 — 20 of 21 once the 5 scenarios that reproduce S01 exactly (S02, S03, S04, S05, S15) are removed. Every one of them has zero disruptions (the app default); the only brief scenario with disruptions, S32, has D > C. With disruptions, D beats C in 12 of 12 X-scenarios.
-4b. **Solver caveat on magnitudes.** ~82% of daily C/D allocations stop at the CP-SAT time limit (feasible, not proven optimal). On the live Linux deployment, X01 seeds 60000–60005 give mean D − C ₹17.6 lakh vs ₹17.0 lakh locally on the same seeds. Quote D − C as "about ₹15–20 lakh per 30-day run under 30% disruption", not as a precise figure.
+4b. **Solver caveat on magnitudes.** ~82% of daily C/D allocations stop at the CP-SAT time limit (feasible, not proven optimal). On the live Linux deployment, X01 seeds 60000–60005 give mean D − C ₹17.6 lakh vs ₹17.0 lakh locally on the same seeds. Quote D − C as "about ₹15–20 lakh per simulated 30-day period under 30% disruption", not as a precise figure.
 5. Largest agentic contribution: X03 Moderate traffic, p=0.30 (D − C ₹20.2 lakh); weakest: S33 Agent is not worth the cost (D − C ₹-9.9 lakh). See Sensitivity_Analysis.
 6. S02–S05 (traffic only) are identical to S01: the fleet engine applies traffic only to disrupted lots and the default disruption probability is 0. Do not cite S02–S05 as traffic evidence; use X02–X05.
 

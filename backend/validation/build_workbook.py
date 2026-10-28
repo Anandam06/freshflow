@@ -180,6 +180,8 @@ def main():
     n_ship = len([s for s in SCENARIOS if s[3] in ('shipment', 'shipment_dataset')])
     n_ni = len([s for s in SCENARIOS if s[3] == 'not_implemented'])
     reps = min(len(by[s]) for s in fleet_ids)
+    CONV = ('Every fleet amount is per simulated 30-day period of 2,000 batches (~1,000 tonnes), averaged across the paired runs '
+            '(30 independent seeds) — never a total across runs. Spoilage rates are the average of the per-run rates (spoiled kg ÷ input kg within each run). The dashboard (Advanced Analysis) uses the same convention and the same stored runs.')
     readme = [
         ('Purpose', 'Independent, reproducible validation of the FreshFlow simulation: 34 brief scenarios (S01–S34) plus a declared supplementary family (X01–X31), strategies A/B/C/D, financial audit, commodity and Mumbai-route checks, and live Claude agent traces.'),
         ('Generated (UTC)', now),
@@ -192,6 +194,7 @@ def main():
         ('Where fleet runs executed', 'Locally (Windows, Python 3.13, OR-Tools 9.15.6755) on the deployed commit, because 1,140 runs × ~25 s exceed what the free Render instance can serve. A and B match the live site exactly; C and D differ slightly because CP-SAT time-limited solves differ across OS builds (measured deviation in Live_vs_Local_Check).'),
         ('Scenario status', f'{n_fleet} executed in fleet engine · {n_ship} executed in shipment engine (live) · {n_ni} NOT IMPLEMENTED (S07, S13, S26) — see Failed_Tests.'),
         ('Key design caveat', 'Application default disruption_probability = 0. In the fleet generator traffic only delays disrupted batches, so S02–S05 (traffic alone) cannot change results. The X-family repeats them with disruption_probability 0.30 (the value the prespecified risk study uses). This is disclosed, not hidden.'),
+        ('Reporting convention', CONV),
         ('Statistics', 'Mean, median, min, max, SD and linearly interpolated 5th/95th percentiles over paired seeds. These describe simulation variability under assumed distributions — not confidence intervals or real-world bounds.'),
         ('How to reproduce', 'cd backend; python -m validation.run_fleet  (fleet matrix) · python -m validation.run_shipments_live · python -m validation.run_s21_live · python -m validation.build_workbook. Same seed + same parameters ⇒ identical events (dataset_sha256).'),
         ('Sheet guide', 'Blue headers = inputs/identifiers; green headers = results. Green/red cells = positive/negative differences. Money in INR (₹, Indian grouping), rates in %, quantities in kg, times in hours.'),
@@ -314,7 +317,7 @@ def main():
             ('On-time mean', PCT, 9), ('Rejection mean', PCT, 9), ('Rescued batches mean', NUM, 9), ('Realized ₹/sold kg', INR2, 10),
             ('Arrival RSL h (accepted)', HRS, 10), ('Safety violations (sum)', INT, 9)]
     bk.table('Scenario_Summary', cols, rows, input_cols=4,
-             note='Aggregates over paired seeds. P05/P95 = simulation percentiles under the assumed input distributions, not confidence intervals.')
+             note='Per simulated 30-day period, averaged over paired seeds (not totals); spoilage = average of per-run rates. P05/P95 = simulation percentiles under the assumed input distributions, not confidence intervals.')
     with (OUT / 'csv' / 'Scenario_Summary.csv').open('w', newline='', encoding='utf-8-sig') as fh:
         w = csv.writer(fh)
         w.writerow([c[0] for c in cols])
@@ -337,11 +340,11 @@ def main():
              ('Share of seeds D > A', PCT, 10), ('Share of seeds D > C', PCT, 10), ('Extra agent/tech cost D vs C', INR, 13),
              ('D diversion cost', INR, 12), ('Extra transport D vs C', INR, 12), ('Check: D − C (formula)', INR, 13), ('Check: D − A (formula)', INR, 13)]
     ws = bk.table('Profit_Comparison', pcols, rows, input_cols=2, delta_cols=(7, 8, 9, 10, 11, 12, 13, 14, 20, 21),
-                  note='Means over paired seeds (same events for all strategies). D − C isolates the value of event-driven agentic intervention over the same optimizer without it. The two formula columns recompute D − C and D − A from the mean columns.')
+                  note='Means per simulated 30-day period over paired seeds (same events for all strategies); not totals across runs. D − C isolates the value of event-driven agentic intervention over the same optimizer without it. The two formula columns recompute D − C and D − A from the mean columns.')
     ch = BarChart()
     ch.type = 'bar'
     ch.title = 'Mean D − C operating profit by scenario (₹)'
-    ch.y_axis.title = '₹ per 30-day run'
+    ch.y_axis.title = '₹ per 30-day period (mean of runs)'
     ch.add_data(Reference(ws, min_col=9, min_row=2, max_row=2 + len(rows)), titles_from_data=True)
     ch.set_categories(Reference(ws, min_col=1, min_row=3, max_row=2 + len(rows)))
     ch.height, ch.width, ch.legend = 16, 18, None
@@ -376,7 +379,7 @@ def main():
                                           ('Spoilage avoided D vs C kg', KG, 14), ('D rescue attempts (mean)', NUM, 10),
                                           ('D rescued batches (mean)', NUM, 10), ('D successful rescue rate', PCT, 10), ('D failed interventions (mean)', NUM, 10)],
                   rows, input_cols=2, delta_cols=(11, 12),
-                  note='Spoilage = written-off share of input kg (unsold lots are conservatively written off, including commercial rejection). Negative pp = D spoils less. Rescue rate = rescued and accepted ÷ rescue attempts.')
+                  note='Spoilage = average of per-run rates; each rate = written-off share of input kg in that run (unsold lots are conservatively written off, including commercial rejection). Negative pp = D spoils less. Rescue rate = rescued and accepted ÷ rescue attempts.')
     for c in (7, 8):
         col = get_column_letter(c)
         rng = f'{col}3:{col}{2 + len(rows)}'
@@ -656,10 +659,10 @@ def main():
         ('Slide 3', 'Scenarios executed', f"{n_fleet + n_ship} of 34 brief scenarios executed ({n_fleet} fleet, {n_ship} live shipment engine); {n_ni} not implemented; +{len(SUPPLEMENTARY)} declared supplementary", 'Scenario_Catalog', '—', 'VERIFIED'),
         ('Slide 3', 'Scale', f"2,000 batches × 30 days per run; {reps} paired seeds per scenario; {len(fleet)} fleet runs × 4 strategies = {len(fleet) * 4:,} strategy-runs; {len(ship)} live API shipment tests", 'Run_Register', '—', 'VERIFIED'),
         ('Slide 3', 'Reproducibility', f'Same seed + parameters ⇒ identical results on the same platform (S15 reproduced S01 seed-for-seed). Across Linux (live) and Windows (local): A/B exact; C/D differ by up to {max_dev:.1%} because time-limited CP-SAT solves are platform-sensitive', 'Live_vs_Local_Check', '—', 'VERIFIED'),
-        ('Slide 5', 'Baseline spoilage A vs D (S01)', f"A {S['M0']['spoil']['mean']:.1%} → D {S['M3']['spoil']['mean']:.1%} (C {S['M2']['spoil']['mean']:.1%})", rr('Spoilage_Comparison', 'S01'), 'S01 · LOCAL-S01-60000…60029', 'SIMULATED'),
-        ('Slide 5', 'Baseline profit A vs D (S01)', f"A ₹{S['M0']['profit']['mean'] / 1e5:,.1f} lakh → D ₹{S['M3']['profit']['mean'] / 1e5:,.1f} lakh per 30-day run (D − A ₹{S['DA']['mean'] / 1e5:,.1f} lakh; D > A in {S['P_DA']:.0%} of seeds)", rr('Profit_Comparison', 'S01'), 'S01', 'SIMULATED'),
-        ('Slide 5', 'Incremental D vs C (S01, no disruptions)', f"₹{S['DC']['mean']:,.0f} (P05 ₹{S['DC']['p05']:,.0f}, P95 ₹{S['DC']['p95']:,.0f}); D > C in {S['P_DC']:.0%} of seeds", rr('Profit_Comparison', 'S01'), 'S01', 'SIMULATED'),
-        ('Slide 5', 'Incremental D vs C (X01, 30% disrupted)', f"₹{X['DC']['mean'] / 1e5:,.1f} lakh (P05 ₹{X['DC']['p05'] / 1e5:,.1f} lakh, P95 ₹{X['DC']['p95'] / 1e5:,.1f} lakh); D > C in {X['P_DC']:.0%} of seeds; spoilage C {X['M2']['spoil']['mean']:.1%} → D {X['M3']['spoil']['mean']:.1%}", rr('Profit_Comparison', 'X01'), 'X01 (supplementary)', 'SIMULATED'),
+        ('Slide 5', 'Baseline spoilage A vs D (S01)', f"A {S['M0']['spoil']['mean']:.1%} → D {S['M3']['spoil']['mean']:.1%} (C {S['M2']['spoil']['mean']:.1%}); average of per-run rates", rr('Spoilage_Comparison', 'S01'), 'S01 · LOCAL-S01-60000…60029', 'SIMULATED'),
+        ('Slide 5', 'Baseline profit A vs D (S01)', f"A ₹{S['M0']['profit']['mean'] / 1e5:,.1f} lakh → D ₹{S['M3']['profit']['mean'] / 1e5:,.1f} lakh per simulated 30-day period, mean of runs (D − A ₹{S['DA']['mean'] / 1e5:,.1f} lakh; D > A in {S['P_DA']:.0%} of seeds)", rr('Profit_Comparison', 'S01'), 'S01', 'SIMULATED'),
+        ('Slide 5', 'Incremental D vs C (S01, no disruptions)', f"₹{S['DC']['mean']:,.0f} per 30-day period (P05 ₹{S['DC']['p05']:,.0f}, P95 ₹{S['DC']['p95']:,.0f}); D > C in {S['P_DC']:.0%} of seeds", rr('Profit_Comparison', 'S01'), 'S01', 'SIMULATED'),
+        ('Slide 5', 'Incremental D vs C (X01, 30% disrupted)', f"₹{X['DC']['mean'] / 1e5:,.1f} lakh per 30-day period (P05 ₹{X['DC']['p05'] / 1e5:,.1f} lakh, P95 ₹{X['DC']['p95'] / 1e5:,.1f} lakh); D > C in {X['P_DC']:.0%} of seeds; spoilage C {X['M2']['spoil']['mean']:.1%} → D {X['M3']['spoil']['mean']:.1%}", rr('Profit_Comparison', 'X01'), 'X01 (supplementary)', 'SIMULATED'),
         ('Slide 5', 'Scenarios where D improves profit vs A', f"{len(d_beats_a)} of {len(n_brief_fleet)} executed fleet scenarios", 'Profit_Comparison', 'S-scenarios', 'SIMULATED'),
         ('Slide 5', 'Scenarios where D does NOT beat C', f"{len(d_not_c)} of {len(n_brief_fleet)} brief fleet scenarios ({len(d_not_c_distinct)} of {len(distinct)} after removing {len(same_as_s01)} that reproduce S01 exactly: {', '.join(same_as_s01)}). All of these have zero disruption probability (app default); the only brief scenario with disruptions (S32) has D > C. With disruptions (X-family) D beats C in {len(x_beats_c)} of {len([s for s in fleet_ids if s.startswith('X')])}", 'Profit_Comparison; Sensitivity_Analysis', '—', 'SIMULATED'),
         ('Slide 5', 'D − C on the live platform (X01)', f"Live Linux deployment, seeds {seeds_x[0]}–{seeds_x[-1]}: mean D − C ₹{live_dc / 1e5:,.1f} lakh (local Windows, same seeds: ₹{local_dc / 1e5:,.1f} lakh)", 'Live_vs_Local_Check', 'X01 live run IDs in Run_Register', 'SIMULATED (live)'),
@@ -682,14 +685,16 @@ def main():
         ('Spoiled / written-off kg', 'Quantity not accepted (spoiled, rejected or unsold).', 'Input − Sold', 'kg'),
         ('Processor (salvage) kg / revenue', 'Accepted at Processor C (fleet) — a subset of sold/gross revenue.', '—', 'kg / ₹'),
         ('Mass residual', 'Input − Sold − Spoiled; must be 0.', '—', 'kg'),
-        ('Spoilage rate', 'Spoiled kg ÷ Input kg.', '—', '%'),
+        ('Spoilage rate', 'Spoiled kg ÷ Input kg within one run; scenario values are the average of the per-run rates.', 'mean over runs of (spoiled_kg ÷ input_kg)', '%'),
+        ('Reporting convention', CONV, '—', '—'),
+        ('Simulated period', 'One run = 2,000 batches spread over 30 days (66–67 per day), ~1,000 tonnes of input.', '—', 'run'),
         ('On-time rate', 'Accepted lots arriving ≤ 24 h after dispatch ÷ all lots.', '—', '%'),
         ('Buyer rejection rate', 'Attempted deliveries not accepted ÷ attempted deliveries.', '—', '%'),
         ('RSL', 'Remaining shelf life (hours) from Q10 thermal ageing; a quality estimate, not a safety certification.', 'thermal_age = h × Q10^((T−20)/10)', 'h'),
         ('Rescue attempt / rescued', 'D re-optimizes after an event; rescued = new destination and accepted.', '—', 'count'),
         ('Failed interventions', 'Rescue attempts − rescued.', '—', 'count'),
         ('Gross revenue', 'Σ accepted kg × realized price.', '—', '₹'),
-        ('Operating profit', 'Gross revenue − procurement − transport − handling − diversion − agent/technology.', '—', '₹'),
+        ('Operating profit', 'Gross revenue − procurement − transport − handling − diversion − agent/technology, per simulated 30-day period; scenario values are means over runs.', '—', '₹'),
         ('Operating margin', 'Operating profit ÷ gross revenue.', '—', '%'),
         ('Net realization ₹/input kg', '(Gross revenue − non-procurement costs) ÷ input kg.', '—', '₹/kg'),
         ('D − C', 'Value of agentic intervention over the same optimizer without it, paired by seed.', 'profit_D − profit_C', '₹'),
