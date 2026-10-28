@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { SimulationProvider } from "@/state/SimulationContext";
 
 const TABS = [
   { to: "/advanced", label: "Fleet results", end: true },
@@ -39,7 +40,10 @@ export default function AdvancedLayout() {
           </NavLink>
         ))}
       </nav>
-      <Outlet />
+      {/* The 2,000-batch fleet simulation loads only when Advanced Analysis is opened. */}
+      <SimulationProvider>
+        <Outlet />
+      </SimulationProvider>
     </div>
   );
 }

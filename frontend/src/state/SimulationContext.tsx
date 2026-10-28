@@ -161,6 +161,11 @@ export function SimulationProvider({ children, initialRequest }: { children: Rea
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 
+/** For pages outside Advanced Analysis: null when no fleet simulation has been loaded. */
+export function useOptionalSimulation(): SimulationState | null {
+  return useContext(Ctx);
+}
+
 export function useSimulation(): SimulationState {
   const v = useContext(Ctx);
   if (!v) throw new Error("useSimulation must be used inside <SimulationProvider>");

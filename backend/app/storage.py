@@ -117,6 +117,19 @@ class Store:
                 db.execute('UPDATE runs SET body=? WHERE id=?', (body, 'llm_usage'))
             else:
                 db.execute('INSERT INTO runs VALUES (?,?)', ('llm_usage', body))
+            day_key = 'llm_usage:' + datetime.now(timezone.utc).date().isoformat()
+            day = db.execute('SELECT body FROM runs WHERE id=?', (day_key,)).fetchone()
+            spent = (json.loads(day[0])['estimated_cost_usd'] if day else 0.0) + sum(e['result'].get('estimated_cost_usd') or 0 for e in entries)
+            if day:
+                db.execute('UPDATE runs SET body=? WHERE id=?', (json.dumps({'estimated_cost_usd': spent}), day_key))
+            else:
+                db.execute('INSERT INTO runs VALUES (?,?)', (day_key, json.dumps({'estimated_cost_usd': spent})))
+
+    def llm_spent_today(self):
+        try:
+            return self.get_run('llm_usage:' + datetime.now(timezone.utc).date().isoformat())['estimated_cost_usd']
+        except KeyError:
+            return 0.0
 
     def llm_usage(self):
         try:

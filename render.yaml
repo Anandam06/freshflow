@@ -1,29 +1,20 @@
+# Render Blueprint: one free web service (API + frontend). Pushes to main redeploy automatically.
 services:
   - type: web
-    name: freshflow-api
-    runtime: python
+    name: freshflow
+    runtime: docker
     plan: free
-    buildCommand: pip install -r backend/requirements.txt
-    startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
-    healthCheckPath: /health
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.13.9
-      - key: PYTHONPATH
-        value: backend
       - key: FRESHFLOW_ENV
-        value: production
-      - key: DATABASE_URL
-        fromDatabase:
-          name: freshflow-db
-          property: connectionString
-      - key: FRESHFLOW_OPERATOR_KEY
-        generateValue: true
-      - key: CORS_ORIGINS
-        sync: false
-databases:
-  - name: freshflow-db
-    plan: free
-    databaseName: freshflow
-    user: freshflow
-    ipAllowList: []
+        value: public-demo        # anyone can run the free deterministic workflows without a key
+      - key: FRESHFLOW_LLM_PROVIDER
+        value: anthropic
+      - key: ANTHROPIC_MODEL
+        value: claude-haiku-5-5
+      - key: FRESHFLOW_LLM_DAILY_BUDGET_USD
+        value: "1.00"             # live Claude runs stop for the day after ~$1 (~500 decisions)
+      - key: ANTHROPIC_API_KEY
+        sync: false               # entered once in the Render dashboard; never in Git

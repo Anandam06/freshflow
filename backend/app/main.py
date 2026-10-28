@@ -87,8 +87,14 @@ def create_app(db_path=None):
             import secrets
             if not x_operator_key or not secrets.compare_digest(x_operator_key, expected):
                 raise HTTPException(401, 'Operator key required')
-        elif os.getenv('FRESHFLOW_ENV', 'development') != 'development':
+        elif os.getenv('FRESHFLOW_ENV', 'development') not in ('development', 'public-demo'):
             raise HTTPException(503, 'Configure FRESHFLOW_OPERATOR_KEY before public deployment')
+
+    def check_llm_budget():
+        """Daily USD cap on live LLM runs (FRESHFLOW_LLM_DAILY_BUDGET_USD). Protects a public deployment's API credit."""
+        budget = os.getenv('FRESHFLOW_LLM_DAILY_BUDGET_USD')
+        if budget and store.llm_spent_today() >= float(budget):
+            raise HTTPException(429, f'Daily live-AI budget (${float(budget):g}) reached. Use the deterministic agent, or try again tomorrow.')
 
     default_ds = catalogue.default_dataset()
     register_dataset(default_ds)
@@ -103,6 +109,8 @@ def create_app(db_path=None):
     def run_shipment(req, batch_id=None):
         if req.mode == 'live' and not live_configured():
             raise HTTPException(409, 'Live AI mode is not configured on the backend (set ANTHROPIC_API_KEY); no silent fallback')
+        if req.mode == 'live':
+            check_llm_budget()
         ds = dataset(req.dataset_id)
         shipment_id = 'S-' + uuid4().hex[:10]
         try:
@@ -185,6 +193,8 @@ def create_app(db_path=None):
         version = state['version']
         if state['status'] != 'event_detected':
             raise HTTPException(409, 'A new event is required before investigation')
+        if request.mode == 'live':
+            check_llm_budget()
         try:
             investigate(state, request.mode)
             store.record_llm_usage([t for t in state['trace'] if t['tool'] == 'llm_usage'])
@@ -301,6 +311,13 @@ def create_app(db_path=None):
 
     @app.post('/api/v1/simulations', response_model=CreatedSimulation, dependencies=[Depends(operator)])
     def simulation(request: SimulationRequest):
+        import hashlib
+        cache_key = 'simcache:' + hashlib.sha256(request.model_dump_json().encode()).hexdigest()
+        try:  # same inputs + seed => identical outputs, so a stored run is reused instead of recomputed
+            cached_id = store.get_run(cache_key)['run_id']
+            return {'id': cached_id, 'result': store.get_run(cached_id)}
+        except KeyError:
+            pass
         result = SimulationResult.model_validate(simulate(request)).model_dump()
         id = str(uuid4())
         result['metadata'] = {'run_id': id, 'status': 'completed', 'currency': 'INR',
@@ -308,6 +325,7 @@ def create_app(db_path=None):
                               'batch_audit_repetition': 0, 'decision_scope': 'interactive replay of first repetition'}
         artifact = build_artifact(request)
         store.put_run_bundle(id, result, artifact)
+        store.put_run(cache_key, {'run_id': id})
         return {'id': id, 'result': result}
 
     @app.get('/api/v1/simulations/{run_id}', response_model=SimulationResult)
@@ -367,6 +385,20 @@ def create_app(db_path=None):
     @app.get('/api/v1/sources', response_model=list[dict[str, str]])
     def sources():
         return evidence()['sources']
+
+    static_dir = os.getenv('FRESHFLOW_STATIC_DIR')
+    if static_dir and Path(static_dir).is_dir():
+        from fastapi.responses import FileResponse
+        root_dir = Path(static_dir).resolve()
+
+        @app.get('/{full_path:path}', include_in_schema=False)
+        def spa(full_path: str):
+            if full_path.startswith('api/'):
+                raise HTTPException(404, 'Resource not found')
+            candidate = (root_dir / full_path).resolve()
+            if full_path and candidate.is_file() and root_dir in candidate.parents:
+                return FileResponse(candidate)
+            return FileResponse(root_dir / 'index.html')
 
     return app
 

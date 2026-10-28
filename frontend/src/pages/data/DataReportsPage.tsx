@@ -6,7 +6,7 @@ import { ErrorPanel, EmptyState } from "@/components/common";
 import { useClient } from "@/services/ClientContext";
 import { WorkbookValidationError } from "@/services/errors";
 import { usePlayground } from "@/state/PlaygroundContext";
-import { useSimulation } from "@/state/SimulationContext";
+import { useOptionalSimulation } from "@/state/SimulationContext";
 import { fileToBase64, saveBlob } from "@/lib/download";
 import { formatINR } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -16,7 +16,7 @@ import type { DownloadKind } from "@/services/client";
 export default function DataReportsPage() {
   const client = useClient();
   const pg = usePlayground();
-  const sim = useSimulation();
+  const sim = useOptionalSimulation();
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<unknown>(null);
   const [run, setRun] = useState<WorkbookRun | null>(null);
@@ -185,7 +185,7 @@ export default function DataReportsPage() {
               No test yet. <Link to="/playground" className="font-semibold text-fresh hover:underline">Run one in the Scenario Playground</Link>.
             </p>
           )}
-          {sim.runId && (
+          {sim?.runId && (
             <Button className="mt-3" size="lg" variant="outline" disabled={busy === "fleet"} onClick={() => void download("fleet", { type: "fleet", id: sim.runId! }, `freshflow-fleet-${sim.runId}.xlsx`)}>
               <Download /> Export fleet simulation ({sim.runId.slice(0, 8)})
             </Button>

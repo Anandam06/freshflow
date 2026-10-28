@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LoadingBlock } from "@/components/common";
 import { ClientProvider } from "@/services/ClientContext";
 import type { ApiClient } from "@/services/client";
-import { SimulationProvider } from "@/state/SimulationContext";
 import { PlaygroundProvider } from "@/state/PlaygroundContext";
 import { AppShell } from "./AppShell";
 
@@ -60,9 +59,7 @@ export function Providers({ client, children }: { client?: ApiClient; children: 
   return (
     <ClientProvider client={client}>
       <TooltipProvider delayDuration={150}>
-        <SimulationProvider>
-          <PlaygroundProvider>{children}</PlaygroundProvider>
-        </SimulationProvider>
+        <PlaygroundProvider>{children}</PlaygroundProvider>
       </TooltipProvider>
     </ClientProvider>
   );

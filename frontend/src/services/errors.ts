@@ -59,6 +59,8 @@ export function describeError(err: unknown): { title: string; detail: string } {
         return { title: "Not found", detail: `${err.path}: ${err.message}` };
       case 409:
         return { title: "Batch state changed", detail: `${err.message}. Reload the batch before acting again.` };
+      case 429:
+        return { title: "Daily AI budget reached", detail: `${err.message}` };
       case 422:
         return { title: "Input rejected by backend", detail: err.message };
       case 502:
