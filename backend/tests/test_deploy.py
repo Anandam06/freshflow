@@ -28,6 +28,16 @@ def test_frontend_routes_assets_and_no_traversal(tmp_path, monkeypatch):
     assert 'do-not-serve' not in c.get('/assets/..%2f..%2fsecret.txt').text
 
 
+def test_head_requests_mirror_get_without_body(tmp_path, monkeypatch):
+    c = make(tmp_path, monkeypatch)
+    for path in ['/', '/playground', '/assets/app.js', '/api/v1/health']:
+        get, head = c.get(path), c.head(path)
+        assert head.status_code == 200 and head.content == b''
+        assert head.headers['content-type'] == get.headers['content-type']
+    assert c.head('/api/v1/unknown').status_code == 404
+    assert c.head('/api/v1/excel/upload').status_code in (404, 405)  # POST-only routes are never served to HEAD/GET
+
+
 def test_public_demo_needs_no_key_but_production_does(tmp_path, monkeypatch):
     c = make(tmp_path, monkeypatch)
     assert c.post('/api/v1/shipments', json={}).status_code == 200

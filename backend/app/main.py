@@ -72,6 +72,23 @@ def m3_summary(row):
             'revenue_inr': row['revenue_inr'], 'realized_arrival_rsl_hours': row['realized_arrival_rsl_hours']}
 
 
+class HeadAsGet:
+    """Answer HEAD like the matching GET without a body (link checkers and fetchers probe with HEAD)."""
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope['type'] != 'http' or scope['method'] != 'HEAD':
+            return await self.app(scope, receive, send)
+
+        async def no_body(message):
+            if message['type'] == 'http.response.body':
+                message = {**message, 'body': b''}
+            await send(message)
+        await self.app({**scope, 'method': 'GET'}, receive, no_body)
+
+
 def create_app(db_path=None):
     app = FastAPI(title='FreshFlow API', version='1.4.0', description='Synthetic demonstration. All currency INR, mass kg, durations hours. Ratios are fractions, not percentages.')
     default_db = str(Path(__file__).resolve().parents[2] / 'data/freshflow.sqlite')
@@ -80,6 +97,7 @@ def create_app(db_path=None):
     store.seed()
     app.add_middleware(CORSMiddleware, allow_origins=os.getenv('CORS_ORIGINS', 'http://localhost:5173').split(','),
                        allow_methods=['GET', 'POST'], allow_headers=['Content-Type', 'X-Operator-Key'], expose_headers=['Content-Disposition'])
+    app.add_middleware(HeadAsGet)
 
     def operator(x_operator_key: str | None = Header(default=None)):
         expected = os.getenv('FRESHFLOW_OPERATOR_KEY')
