@@ -1,0 +1,6040 @@
+[
+ {
+  "case": "AG1",
+  "shipment_id": "S-13424dda08",
+  "classification": "LIVE CLAUDE AGENT",
+  "request": {
+   "commodity_id": "tomato",
+   "origin_id": "H1",
+   "buyer_id": "B02",
+   "quantity_kg": 800,
+   "quality_grade": "A",
+   "disruptions": [
+    {
+     "type": "buyer_cancellation",
+     "severity": "high"
+    }
+   ],
+   "settings": {},
+   "mode": "live",
+   "dataset_id": "default"
+  },
+  "decision_status_before_approval": "proposed_awaiting_approval",
+  "human_decision": true,
+  "decision_status_after": "executed",
+  "state_after": {
+   "status": "monitoring",
+   "destination": "B05",
+   "version": 1
+  },
+  "trace": [
+   {
+    "sequence": 1,
+    "timestamp": "2026-10-28T10:28:43.300454+00:00",
+    "tool": "plan_shipment",
+    "inputs": {
+     "committed_buyer": "B02"
+    },
+    "result": {
+     "planned_buyer": "B02",
+     "changed_at_planning": false,
+     "basis": "Plan-time optimization on forecast conditions (strategy C)"
+    }
+   },
+   {
+    "sequence": 2,
+    "timestamp": "2026-10-28T10:28:43.300466+00:00",
+    "tool": "sense_event",
+    "inputs": {
+     "disruptions": [
+      {
+       "type": "buyer_cancellation",
+       "severity": "high"
+      }
+     ],
+     "detected_at": "checkpoint"
+    },
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "elapsed_hours": 0.819,
+     "location": "checkpoint",
+     "conditions": {
+      "severity": {
+       "buyer_cancellation": "high"
+      },
+      "traffic": 2.0,
+      "closure_hours": 0.0,
+      "hub_temp_c": 20.0,
+      "truck_temp_c": 20.0,
+      "humidity_loss_fraction": 0.0,
+      "quantity_after_damage_kg": 800.0,
+      "grade": "A",
+      "committed_capacity_left": 0.0,
+      "committed_price_factor": 1.0
+     }
+    }
+   },
+   {
+    "sequence": 3,
+    "timestamp": "2026-10-28T10:28:45.125996+00:00",
+    "tool": "get_batch_state",
+    "inputs": {},
+    "result": {
+     "id": "S-13424dda08",
+     "destination": "B02",
+     "quantity_kg": 800.0,
+     "event": {
+      "disruptions": [
+       {
+        "type": "buyer_cancellation",
+        "severity": "high"
+       }
+      ],
+      "detected_at": "checkpoint"
+     },
+     "safety_hold": false,
+     "current_location": "checkpoint"
+    }
+   },
+   {
+    "sequence": 4,
+    "timestamp": "2026-10-28T10:28:45.126087+00:00",
+    "tool": "predict_remaining_shelf_life",
+    "inputs": {},
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "interpretation": "Synthetic quality estimate; safety hold is separate"
+    }
+   },
+   {
+    "sequence": 5,
+    "timestamp": "2026-10-28T10:28:45.126257+00:00",
+    "tool": "get_buyer_options",
+    "inputs": {},
+    "result": {
+     "buyers": [
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "offer_inr_kg": 36.69,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "offer_inr_kg": 35.36,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "offer_inr_kg": 33.82,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "offer_inr_kg": 33.23,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 30.6,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 29.1,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 28.5,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 16.5,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 15.84,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "offer_inr_kg": 44.55,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "offer_inr_kg": 42.54,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "offer_inr_kg": 36.07,
+       "minimum_rsl_hours": 28.8
+      }
+     ],
+     "unavailable_buyers": [
+      "B02"
+     ],
+     "price_factors": {
+      "B02": 1.0
+     },
+     "source": "SYNTHETIC buyer offers (built-in synthetic dataset); not live market quotes"
+    }
+   },
+   {
+    "sequence": 6,
+    "timestamp": "2026-10-28T10:28:45.126362+00:00",
+    "tool": "check_buyer_capacity",
+    "inputs": {},
+    "result": {
+     "available_capacity_kg": {
+      "B01": 3250.0,
+      "B02": 0.0,
+      "B03": 2000.0,
+      "B04": 2750.0,
+      "B05": 1750.0,
+      "B06": 8000.0,
+      "B07": 7200.0,
+      "B08": 9600.0,
+      "B09": 600.0,
+      "B10": 480.0,
+      "B11": 12000.0,
+      "B12": 14400.0
+     }
+    }
+   },
+   {
+    "sequence": 7,
+    "timestamp": "2026-10-28T10:28:45.126499+00:00",
+    "tool": "calculate_route_eta",
+    "inputs": {},
+    "result": {
+     "routes": [
+      {
+       "origin": "checkpoint",
+       "destination": "B05",
+       "reachable": true,
+       "travel_hours": 0.76,
+       "distance_km": 15.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B03",
+       "reachable": true,
+       "travel_hours": 0.68,
+       "distance_km": 11.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B01",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 33.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B04",
+       "reachable": true,
+       "travel_hours": 0.91,
+       "distance_km": 22.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B06",
+       "reachable": true,
+       "travel_hours": 0.69,
+       "distance_km": 14.2,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B07",
+       "reachable": true,
+       "travel_hours": 0.8,
+       "distance_km": 17.9,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B08",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 30.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B11",
+       "reachable": true,
+       "travel_hours": 1.15,
+       "distance_km": 27.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B12",
+       "reachable": true,
+       "travel_hours": 0.9,
+       "distance_km": 18.6,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B10",
+       "reachable": true,
+       "travel_hours": 1.03,
+       "distance_km": 24.7,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B09",
+       "reachable": true,
+       "travel_hours": 0.77,
+       "distance_km": 16.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B02",
+       "reachable": true,
+       "travel_hours": 0.59,
+       "distance_km": 19.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 8,
+    "timestamp": "2026-10-28T10:28:46.076728+00:00",
+    "tool": "optimize_destination",
+    "inputs": {},
+    "result": {
+     "options": [
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "price_inr_kg": 36.68506494221093,
+       "travel_hours": 0.7566666666666666,
+       "distance_km": 15.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 1750,
+       "available_capacity_kg": 1750.0,
+       "transport_inr_kg": 0.7172499999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.557190974129604,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 27274.251953768744,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B05",
+        "reachable": true,
+        "travel_hours": 0.7566666666666666,
+        "path": [
+         "checkpoint",
+         "B05"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "price_inr_kg": 35.35615049990682,
+       "travel_hours": 0.6833333333333333,
+       "distance_km": 11.47,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2000,
+       "available_capacity_kg": 2000.0,
+       "transport_inr_kg": 0.544825,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.630524307462938,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 26349.060399925453,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B03",
+        "reachable": true,
+        "travel_hours": 0.6833333333333333,
+        "path": [
+         "checkpoint",
+         "B03"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "price_inr_kg": 33.81661105760271,
+       "travel_hours": 1.1433333333333333,
+       "distance_km": 33.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 3250,
+       "available_capacity_kg": 3250.0,
+       "transport_inr_kg": 1.57225,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.170524307462937,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 24295.488846082168,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B01",
+        "reachable": true,
+        "travel_hours": 1.1433333333333333,
+        "path": [
+         "checkpoint",
+         "B01"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "price_inr_kg": 33.23087779478399,
+       "travel_hours": 0.9066666666666666,
+       "distance_km": 22.42,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2750,
+       "available_capacity_kg": 2750.0,
+       "transport_inr_kg": 1.06495,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.407190974129605,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 24232.742235827194,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B04",
+        "reachable": true,
+        "travel_hours": 0.9066666666666666,
+        "path": [
+         "checkpoint",
+         "B04"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "price_inr_kg": 30.6,
+       "travel_hours": 0.69,
+       "distance_km": 14.17,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 8000,
+       "available_capacity_kg": 8000.0,
+       "transport_inr_kg": 0.6730750000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.62385764079627,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 22441.54,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B06",
+        "reachable": true,
+        "travel_hours": 0.69,
+        "path": [
+         "checkpoint",
+         "B06"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "price_inr_kg": 29.099999999999998,
+       "travel_hours": 0.8033333333333333,
+       "distance_km": 17.85,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 7200,
+       "available_capacity_kg": 7200.0,
+       "transport_inr_kg": 0.847875,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.510524307462937,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 21101.7,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B07",
+        "reachable": true,
+        "travel_hours": 0.8033333333333333,
+        "path": [
+         "checkpoint",
+         "B07"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "price_inr_kg": 28.5,
+       "travel_hours": 1.1400000000000001,
+       "distance_km": 30.84,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 9600,
+       "available_capacity_kg": 9600.0,
+       "transport_inr_kg": 1.4649,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.17385764079627,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 20128.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B08",
+        "reachable": true,
+        "travel_hours": 1.1400000000000001,
+        "path": [
+         "checkpoint",
+         "B08"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "price_inr_kg": 16.5,
+       "travel_hours": 1.1533333333333333,
+       "distance_km": 27.41,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 12000,
+       "available_capacity_kg": 12000.0,
+       "transport_inr_kg": 1.3019749999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.16052430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10658.42,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B11",
+        "reachable": true,
+        "travel_hours": 1.1533333333333333,
+        "path": [
+         "checkpoint",
+         "B11"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "price_inr_kg": 15.84,
+       "travel_hours": 0.9033333333333334,
+       "distance_km": 18.59,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 14400,
+       "available_capacity_kg": 14400.0,
+       "transport_inr_kg": 0.883025,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.41052430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10465.58,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B12",
+        "reachable": true,
+        "travel_hours": 0.9033333333333334,
+        "path": [
+         "checkpoint",
+         "B12"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "price_inr_kg": 44.550000000000004,
+       "travel_hours": 1.0266666666666668,
+       "distance_km": 24.7,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 480,
+       "available_capacity_kg": 480.0,
+       "transport_inr_kg": 1.1732500000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.287190974129604,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 33201.4,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B10",
+        "reachable": true,
+        "travel_hours": 1.0266666666666668,
+        "path": [
+         "checkpoint",
+         "B10"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "price_inr_kg": 42.54,
+       "travel_hours": 0.7733333333333333,
+       "distance_km": 16.84,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 600,
+       "available_capacity_kg": 600.0,
+       "transport_inr_kg": 0.7998999999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.54052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 31892.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B09",
+        "reachable": true,
+        "travel_hours": 0.7733333333333333,
+        "path": [
+         "checkpoint",
+         "B09"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "price_inr_kg": 36.074101210642205,
+       "travel_hours": 0.5915,
+       "distance_km": 19.5455,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2250,
+       "available_capacity_kg": 0.0,
+       "transport_inr_kg": 0.92841125,
+       "rescue_cost_inr_kg": 0.0,
+       "arrival_rsl_lower_hours": 30.72235764079627,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled",
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 28116.551968513766,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B02",
+        "reachable": true,
+        "travel_hours": 0.5915,
+        "path": [
+         "checkpoint",
+         "B02"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 9,
+    "timestamp": "2026-10-28T10:28:47.618775+00:00",
+    "tool": "validate_constraints",
+    "inputs": {
+     "destination": "B05"
+    },
+    "result": {
+     "allowed": true,
+     "requires_human_approval": true,
+     "reasons": [],
+     "destination": "B05"
+    }
+   },
+   {
+    "sequence": 10,
+    "timestamp": "2026-10-28T10:28:49.234189+00:00",
+    "tool": "request_human_approval",
+    "inputs": {
+     "destination": "B05"
+    },
+    "result": {
+     "status": "awaiting_approval",
+     "destination": "B05"
+    }
+   },
+   {
+    "sequence": 11,
+    "timestamp": "2026-10-28T10:28:50.570146+00:00",
+    "tool": "agent_explanation",
+    "inputs": {
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "text": "Proposed reroute of S-13424dda08 (800 kg) from the cancelled Andheri West buyer to Supermarket · Bandra West, which has the highest feasible net proceeds (₹27,274.25) and arrives with about 30.6 hours of shelf life, above its 28.8-hour minimum. The proposal is awaiting human approval.",
+     "note": "Written by the language model; every number comes from tool results"
+    }
+   },
+   {
+    "sequence": 12,
+    "timestamp": "2026-10-28T10:28:50.570172+00:00",
+    "tool": "llm_usage",
+    "inputs": {
+     "provider": "anthropic",
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "requests": 5,
+     "input_tokens": 23579,
+     "output_tokens": 466,
+     "cache_read_input_tokens": 0,
+     "tool_calls": 8,
+     "estimated_cost_usd": 0.002591,
+     "pricing_basis": "list price per million tokens; estimate only"
+    }
+   },
+   {
+    "sequence": 13,
+    "timestamp": "2026-10-28T10:28:50.885419+00:00",
+    "tool": "human_approved",
+    "inputs": {},
+    "result": {
+     "destination": "B05"
+    }
+   },
+   {
+    "sequence": 14,
+    "timestamp": "2026-10-28T10:28:50.885438+00:00",
+    "tool": "execute_destination_change",
+    "inputs": {
+     "previous_destination": "B02"
+    },
+    "result": {
+     "destination": "B05",
+     "estimated_incremental_net_proceeds_inr": 27274.251953768744,
+     "evidence_category": "SIMULATED RESULT",
+     "scope": "estimated future proceeds; excludes sunk procurement and original transport"
+    }
+   },
+   {
+    "sequence": 15,
+    "timestamp": "2026-10-28T10:28:50.885443+00:00",
+    "tool": "verify",
+    "inputs": {},
+    "result": {
+     "destination_persisted_on_commit": "B05",
+     "monitoring_resumed": true,
+     "physical_delivery_verified": false
+    }
+   },
+   {
+    "sequence": 16,
+    "timestamp": "2026-10-28T10:28:50.885447+00:00",
+    "tool": "execute_reroute",
+    "inputs": {
+     "origin": "checkpoint"
+    },
+    "result": {
+     "destination": "B05",
+     "approval_enforced": true
+    }
+   },
+   {
+    "sequence": 17,
+    "timestamp": "2026-10-28T10:28:50.885450+00:00",
+    "tool": "verify_execution",
+    "inputs": {},
+    "result": {
+     "persistent_state_verified_on_commit": true,
+     "buyer_acceptance_verified": false
+    }
+   }
+  ]
+ },
+ {
+  "case": "AG2",
+  "shipment_id": "S-9703480bac",
+  "classification": "LIVE CLAUDE AGENT",
+  "request": {
+   "commodity_id": "tomato",
+   "origin_id": "H1",
+   "buyer_id": "B02",
+   "quantity_kg": 800,
+   "quality_grade": "A",
+   "disruptions": [
+    {
+     "type": "refrigeration_failure",
+     "severity": "high"
+    }
+   ],
+   "settings": {},
+   "mode": "live",
+   "dataset_id": "default"
+  },
+  "decision_status_before_approval": "no_intervention_needed",
+  "human_decision": null,
+  "decision_status_after": "no_intervention_needed",
+  "state_after": {
+   "status": "monitoring",
+   "destination": "B02",
+   "version": 0
+  },
+  "trace": [
+   {
+    "sequence": 1,
+    "timestamp": "2026-10-28T10:28:51.749844+00:00",
+    "tool": "plan_shipment",
+    "inputs": {
+     "committed_buyer": "B02"
+    },
+    "result": {
+     "planned_buyer": "B02",
+     "changed_at_planning": false,
+     "basis": "Plan-time optimization on forecast conditions (strategy C)"
+    }
+   },
+   {
+    "sequence": 2,
+    "timestamp": "2026-10-28T10:28:51.749859+00:00",
+    "tool": "sense_event",
+    "inputs": {
+     "disruptions": [
+      {
+       "type": "refrigeration_failure",
+       "severity": "high"
+      }
+     ],
+     "detected_at": "checkpoint"
+    },
+    "result": {
+     "rsl_hours": 34.391857640796275,
+     "rsl_lower_hours": 30.791857640796273,
+     "elapsed_hours": 0.819,
+     "location": "checkpoint",
+     "conditions": {
+      "severity": {
+       "refrigeration_failure": "high"
+      },
+      "traffic": 2.0,
+      "closure_hours": 0.0,
+      "hub_temp_c": 20.0,
+      "truck_temp_c": 34.0,
+      "humidity_loss_fraction": 0.0,
+      "quantity_after_damage_kg": 800.0,
+      "grade": "A",
+      "committed_capacity_left": 1.0,
+      "committed_price_factor": 1.0
+     }
+    }
+   },
+   {
+    "sequence": 3,
+    "timestamp": "2026-10-28T10:28:53.231979+00:00",
+    "tool": "get_batch_state",
+    "inputs": {},
+    "result": {
+     "id": "S-9703480bac",
+     "destination": "B02",
+     "quantity_kg": 800.0,
+     "event": {
+      "disruptions": [
+       {
+        "type": "refrigeration_failure",
+        "severity": "high"
+       }
+      ],
+      "detected_at": "checkpoint"
+     },
+     "safety_hold": false,
+     "current_location": "checkpoint"
+    }
+   },
+   {
+    "sequence": 4,
+    "timestamp": "2026-10-28T10:28:53.232058+00:00",
+    "tool": "predict_remaining_shelf_life",
+    "inputs": {},
+    "result": {
+     "rsl_hours": 34.391857640796275,
+     "rsl_lower_hours": 30.791857640796273,
+     "interpretation": "Synthetic quality estimate; safety hold is separate"
+    }
+   },
+   {
+    "sequence": 5,
+    "timestamp": "2026-10-28T10:28:53.232240+00:00",
+    "tool": "get_buyer_options",
+    "inputs": {},
+    "result": {
+     "buyers": [
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "offer_inr_kg": 35.46,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "offer_inr_kg": 34.69,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 30.6,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 29.1,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 28.5,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 16.5,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 15.84,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "offer_inr_kg": 44.11,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "offer_inr_kg": 42.51,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "offer_inr_kg": 35.94,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "offer_inr_kg": 32.46,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "offer_inr_kg": 32.88,
+       "minimum_rsl_hours": 28.8
+      }
+     ],
+     "unavailable_buyers": [],
+     "price_factors": {
+      "B02": 1.0
+     },
+     "source": "SYNTHETIC buyer offers (built-in synthetic dataset); not live market quotes"
+    }
+   },
+   {
+    "sequence": 6,
+    "timestamp": "2026-10-28T10:28:53.232347+00:00",
+    "tool": "check_buyer_capacity",
+    "inputs": {},
+    "result": {
+     "available_capacity_kg": {
+      "B01": 3250.0,
+      "B02": 2250.0,
+      "B03": 2000.0,
+      "B04": 2750.0,
+      "B05": 1750.0,
+      "B06": 8000.0,
+      "B07": 7200.0,
+      "B08": 9600.0,
+      "B09": 600.0,
+      "B10": 480.0,
+      "B11": 12000.0,
+      "B12": 14400.0
+     }
+    }
+   },
+   {
+    "sequence": 7,
+    "timestamp": "2026-10-28T10:28:53.232494+00:00",
+    "tool": "calculate_route_eta",
+    "inputs": {},
+    "result": {
+     "routes": [
+      {
+       "origin": "checkpoint",
+       "destination": "B02",
+       "reachable": true,
+       "travel_hours": 0.59,
+       "distance_km": 19.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B03",
+       "reachable": true,
+       "travel_hours": 0.68,
+       "distance_km": 11.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B06",
+       "reachable": true,
+       "travel_hours": 0.69,
+       "distance_km": 14.2,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B07",
+       "reachable": true,
+       "travel_hours": 0.8,
+       "distance_km": 17.9,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B08",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 30.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B11",
+       "reachable": true,
+       "travel_hours": 1.15,
+       "distance_km": 27.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B12",
+       "reachable": true,
+       "travel_hours": 0.9,
+       "distance_km": 18.6,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B10",
+       "reachable": true,
+       "travel_hours": 1.03,
+       "distance_km": 24.7,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B09",
+       "reachable": true,
+       "travel_hours": 0.77,
+       "distance_km": 16.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B05",
+       "reachable": true,
+       "travel_hours": 0.76,
+       "distance_km": 15.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B04",
+       "reachable": true,
+       "travel_hours": 0.91,
+       "distance_km": 22.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B01",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 33.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 8,
+    "timestamp": "2026-10-28T10:28:53.989711+00:00",
+    "tool": "optimize_destination",
+    "inputs": {},
+    "result": {
+     "options": [
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "price_inr_kg": 35.4565361598801,
+       "travel_hours": 0.5915,
+       "distance_km": 19.5455,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2250,
+       "available_capacity_kg": 2250.0,
+       "transport_inr_kg": 0.92841125,
+       "rescue_cost_inr_kg": 0.0,
+       "arrival_rsl_lower_hours": 29.230879782351938,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 27622.499927904082,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B02",
+        "reachable": true,
+        "travel_hours": 0.5915,
+        "path": [
+         "checkpoint",
+         "B02"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "price_inr_kg": 34.689090378613116,
+       "travel_hours": 0.6833333333333333,
+       "distance_km": 11.47,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2000,
+       "available_capacity_kg": 2000.0,
+       "transport_inr_kg": 0.544825,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.988530162739984,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 25815.412302890494,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B03",
+        "reachable": true,
+        "travel_hours": 0.6833333333333333,
+        "path": [
+         "checkpoint",
+         "B03"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "price_inr_kg": 30.6,
+       "travel_hours": 0.69,
+       "distance_km": 14.17,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 8000,
+       "available_capacity_kg": 8000.0,
+       "transport_inr_kg": 0.6730750000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.97093672392968,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 22441.54,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B06",
+        "reachable": true,
+        "travel_hours": 0.69,
+        "path": [
+         "checkpoint",
+         "B06"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "price_inr_kg": 29.099999999999998,
+       "travel_hours": 0.8033333333333333,
+       "distance_km": 17.85,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 7200,
+       "available_capacity_kg": 7200.0,
+       "transport_inr_kg": 0.847875,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.67184826415449,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 21101.7,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B07",
+        "reachable": true,
+        "travel_hours": 0.8033333333333333,
+        "path": [
+         "checkpoint",
+         "B07"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "price_inr_kg": 28.5,
+       "travel_hours": 1.1400000000000001,
+       "distance_km": 30.84,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 9600,
+       "available_capacity_kg": 9600.0,
+       "transport_inr_kg": 1.4649,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 27.783379604234074,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 20128.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B08",
+        "reachable": true,
+        "travel_hours": 1.1400000000000001,
+        "path": [
+         "checkpoint",
+         "B08"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "price_inr_kg": 16.5,
+       "travel_hours": 1.1533333333333333,
+       "distance_km": 27.41,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 12000,
+       "available_capacity_kg": 12000.0,
+       "transport_inr_kg": 1.3019749999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 27.748192726613464,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10658.42,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B11",
+        "reachable": true,
+        "travel_hours": 1.1533333333333333,
+        "path": [
+         "checkpoint",
+         "B11"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "price_inr_kg": 15.84,
+       "travel_hours": 0.9033333333333334,
+       "distance_km": 18.59,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 14400,
+       "available_capacity_kg": 14400.0,
+       "transport_inr_kg": 0.883025,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.40794668199991,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10465.58,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B12",
+        "reachable": true,
+        "travel_hours": 0.9033333333333334,
+        "path": [
+         "checkpoint",
+         "B12"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "price_inr_kg": 44.10602711460574,
+       "travel_hours": 1.0266666666666668,
+       "distance_km": 24.7,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 480,
+       "available_capacity_kg": 480.0,
+       "transport_inr_kg": 1.1732500000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.082468064009262,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 32846.221691684594,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B10",
+        "reachable": true,
+        "travel_hours": 1.0266666666666668,
+        "path": [
+         "checkpoint",
+         "B10"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "price_inr_kg": 42.51106023817485,
+       "travel_hours": 0.7733333333333333,
+       "distance_km": 16.84,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 600,
+       "available_capacity_kg": 600.0,
+       "transport_inr_kg": 0.7998999999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.751018738800862,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 31868.928190539882,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B09",
+        "reachable": true,
+        "travel_hours": 0.7733333333333333,
+        "path": [
+         "checkpoint",
+         "B09"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "price_inr_kg": 35.941641610426856,
+       "travel_hours": 0.7566666666666666,
+       "distance_km": 15.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 1750,
+       "available_capacity_kg": 1750.0,
+       "transport_inr_kg": 0.7172499999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.795002335826627,
+       "feasible": false,
+       "reasons": [
+        "Insufficient conservative arrival shelf life"
+       ],
+       "net_proceeds_inr": 26679.513288341484,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B05",
+        "reachable": true,
+        "travel_hours": 0.7566666666666666,
+        "path": [
+         "checkpoint",
+         "B05"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "price_inr_kg": 32.46217459505581,
+       "travel_hours": 0.9066666666666666,
+       "distance_km": 22.42,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2750,
+       "available_capacity_kg": 2750.0,
+       "transport_inr_kg": 1.06495,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.39914996259476,
+       "feasible": false,
+       "reasons": [
+        "Insufficient conservative arrival shelf life"
+       ],
+       "net_proceeds_inr": 23617.779676044647,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B04",
+        "reachable": true,
+        "travel_hours": 0.9066666666666666,
+        "path": [
+         "checkpoint",
+         "B04"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "price_inr_kg": 32.8806964393863,
+       "travel_hours": 1.1433333333333333,
+       "distance_km": 33.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 3250,
+       "available_capacity_kg": 3250.0,
+       "transport_inr_kg": 1.57225,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 27.774582884828924,
+       "feasible": false,
+       "reasons": [
+        "Insufficient conservative arrival shelf life"
+       ],
+       "net_proceeds_inr": 23546.75715150904,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B01",
+        "reachable": true,
+        "travel_hours": 1.1433333333333333,
+        "path": [
+         "checkpoint",
+         "B01"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 9,
+    "timestamp": "2026-10-28T10:28:56.148295+00:00",
+    "tool": "agent_explanation",
+    "inputs": {
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "text": "Keep the current destination: Supermarket · Andheri West (B02) is the best feasible option, with net proceeds of INR 27,622.50 and arrival shelf life of 29.23 hours against a 28.8-hour minimum. No approval was requested because the batch is already routed there. Restaurants · Colaba would pay more, but its 480 kg capacity cannot take the 800 kg batch.",
+     "note": "Written by the language model; every number comes from tool results"
+    }
+   },
+   {
+    "sequence": 10,
+    "timestamp": "2026-10-28T10:28:56.148321+00:00",
+    "tool": "llm_usage",
+    "inputs": {
+     "provider": "anthropic",
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "requests": 3,
+     "input_tokens": 11003,
+     "output_tokens": 418,
+     "cache_read_input_tokens": 0,
+     "tool_calls": 6,
+     "estimated_cost_usd": 0.001309,
+     "pricing_basis": "list price per million tokens; estimate only"
+    }
+   },
+   {
+    "sequence": 11,
+    "timestamp": "2026-10-28T10:28:56.148366+00:00",
+    "tool": "no_intervention_required",
+    "inputs": {},
+    "result": {
+     "destination": "B02",
+     "net_proceeds_inr": 27622.499927904082,
+     "reason": "Current plan remains the best feasible option; verified against the optimizer ranking"
+    }
+   }
+  ]
+ },
+ {
+  "case": "AG3",
+  "shipment_id": "S-c195615428",
+  "classification": "LIVE CLAUDE AGENT",
+  "request": {
+   "commodity_id": "tomato",
+   "origin_id": "H1",
+   "buyer_id": "B02",
+   "quantity_kg": 800,
+   "quality_grade": "A",
+   "disruptions": [
+    {
+     "type": "road_closure",
+     "severity": "high"
+    },
+    {
+     "type": "heavy_traffic",
+     "severity": "high"
+    }
+   ],
+   "settings": {},
+   "mode": "live",
+   "dataset_id": "default"
+  },
+  "decision_status_before_approval": "proposed_awaiting_approval",
+  "human_decision": false,
+  "decision_status_after": "rejected_kept_plan",
+  "state_after": {
+   "status": "manual_review",
+   "destination": "B02",
+   "version": 1
+  },
+  "trace": [
+   {
+    "sequence": 1,
+    "timestamp": "2026-10-28T10:28:56.463452+00:00",
+    "tool": "plan_shipment",
+    "inputs": {
+     "committed_buyer": "B02"
+    },
+    "result": {
+     "planned_buyer": "B02",
+     "changed_at_planning": false,
+     "basis": "Plan-time optimization on forecast conditions (strategy C)"
+    }
+   },
+   {
+    "sequence": 2,
+    "timestamp": "2026-10-28T10:28:56.463469+00:00",
+    "tool": "sense_event",
+    "inputs": {
+     "disruptions": [
+      {
+       "type": "road_closure",
+       "severity": "high"
+      },
+      {
+       "type": "heavy_traffic",
+       "severity": "high"
+      }
+     ],
+     "detected_at": "checkpoint"
+    },
+    "result": {
+     "rsl_hours": 34.531857640796275,
+     "rsl_lower_hours": 30.931857640796274,
+     "elapsed_hours": 1.201,
+     "location": "checkpoint",
+     "conditions": {
+      "severity": {
+       "road_closure": "high",
+       "heavy_traffic": "high"
+      },
+      "traffic": 4.4,
+      "closure_hours": 5.0,
+      "hub_temp_c": 20.0,
+      "truck_temp_c": 20.0,
+      "humidity_loss_fraction": 0.0,
+      "quantity_after_damage_kg": 800.0,
+      "grade": "A",
+      "committed_capacity_left": 1.0,
+      "committed_price_factor": 1.0
+     }
+    }
+   },
+   {
+    "sequence": 3,
+    "timestamp": "2026-10-28T10:28:57.661359+00:00",
+    "tool": "get_batch_state",
+    "inputs": {},
+    "result": {
+     "id": "S-c195615428",
+     "destination": "B02",
+     "quantity_kg": 800.0,
+     "event": {
+      "disruptions": [
+       {
+        "type": "road_closure",
+        "severity": "high"
+       },
+       {
+        "type": "heavy_traffic",
+        "severity": "high"
+       }
+      ],
+      "detected_at": "checkpoint"
+     },
+     "safety_hold": false,
+     "current_location": "checkpoint"
+    }
+   },
+   {
+    "sequence": 4,
+    "timestamp": "2026-10-28T10:28:57.661423+00:00",
+    "tool": "predict_remaining_shelf_life",
+    "inputs": {},
+    "result": {
+     "rsl_hours": 34.531857640796275,
+     "rsl_lower_hours": 30.931857640796274,
+     "interpretation": "Synthetic quality estimate; safety hold is separate"
+    }
+   },
+   {
+    "sequence": 5,
+    "timestamp": "2026-10-28T10:28:57.661580+00:00",
+    "tool": "get_buyer_options",
+    "inputs": {},
+    "result": {
+     "buyers": [
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "offer_inr_kg": 36.27,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "offer_inr_kg": 34.99,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "offer_inr_kg": 32.78,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 30.6,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 29.1,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 28.5,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 16.5,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 15.84,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "offer_inr_kg": 44.55,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "offer_inr_kg": 42.54,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "offer_inr_kg": 33.25,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "offer_inr_kg": 33.79,
+       "minimum_rsl_hours": 28.8
+      }
+     ],
+     "unavailable_buyers": [],
+     "price_factors": {
+      "B02": 1.0
+     },
+     "source": "SYNTHETIC buyer offers (built-in synthetic dataset); not live market quotes"
+    }
+   },
+   {
+    "sequence": 6,
+    "timestamp": "2026-10-28T10:28:57.661670+00:00",
+    "tool": "check_buyer_capacity",
+    "inputs": {},
+    "result": {
+     "available_capacity_kg": {
+      "B01": 3250.0,
+      "B02": 2250.0,
+      "B03": 2000.0,
+      "B04": 2750.0,
+      "B05": 1750.0,
+      "B06": 8000.0,
+      "B07": 7200.0,
+      "B08": 9600.0,
+      "B09": 600.0,
+      "B10": 480.0,
+      "B11": 12000.0,
+      "B12": 14400.0
+     }
+    }
+   },
+   {
+    "sequence": 7,
+    "timestamp": "2026-10-28T10:28:57.661788+00:00",
+    "tool": "calculate_route_eta",
+    "inputs": {},
+    "result": {
+     "routes": [
+      {
+       "origin": "checkpoint",
+       "destination": "B05",
+       "reachable": true,
+       "travel_hours": 1.36,
+       "distance_km": 15.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B03",
+       "reachable": true,
+       "travel_hours": 1.2,
+       "distance_km": 11.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B04",
+       "reachable": true,
+       "travel_hours": 1.69,
+       "distance_km": 22.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B06",
+       "reachable": true,
+       "travel_hours": 1.22,
+       "distance_km": 14.2,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B07",
+       "reachable": true,
+       "travel_hours": 1.47,
+       "distance_km": 17.9,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B08",
+       "reachable": true,
+       "travel_hours": 2.21,
+       "distance_km": 30.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B11",
+       "reachable": true,
+       "travel_hours": 2.24,
+       "distance_km": 27.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B12",
+       "reachable": true,
+       "travel_hours": 1.69,
+       "distance_km": 18.6,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B10",
+       "reachable": true,
+       "travel_hours": 1.96,
+       "distance_km": 24.7,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B09",
+       "reachable": true,
+       "travel_hours": 1.4,
+       "distance_km": 16.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B01",
+       "reachable": true,
+       "travel_hours": 2.22,
+       "distance_km": 33.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B02",
+       "reachable": true,
+       "travel_hours": 6.3,
+       "distance_km": 94.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 8,
+    "timestamp": "2026-10-28T10:28:58.762421+00:00",
+    "tool": "optimize_destination",
+    "inputs": {},
+    "result": {
+     "options": [
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "price_inr_kg": 36.26740869221093,
+       "travel_hours": 1.3646666666666667,
+       "distance_km": 15.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 1750,
+       "available_capacity_kg": 1750.0,
+       "transport_inr_kg": 0.7172499999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 29.567190974129606,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 26940.126953768744,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B05",
+        "reachable": true,
+        "travel_hours": 1.3646666666666667,
+        "path": [
+         "checkpoint",
+         "B05"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "price_inr_kg": 34.98971299990682,
+       "travel_hours": 1.2033333333333336,
+       "distance_km": 11.47,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2000,
+       "available_capacity_kg": 2000.0,
+       "transport_inr_kg": 0.544825,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 29.72852430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 26055.910399925455,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B03",
+        "reachable": true,
+        "travel_hours": 1.2033333333333336,
+        "path": [
+         "checkpoint",
+         "B03"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "price_inr_kg": 32.782987169783986,
+       "travel_hours": 1.6946666666666668,
+       "distance_km": 22.42,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2750,
+       "available_capacity_kg": 2750.0,
+       "transport_inr_kg": 1.06495,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 29.237190974129607,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 23874.42973582719,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B04",
+        "reachable": true,
+        "travel_hours": 1.6946666666666668,
+        "path": [
+         "checkpoint",
+         "B04"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "price_inr_kg": 30.6,
+       "travel_hours": 1.218,
+       "distance_km": 14.17,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 8000,
+       "available_capacity_kg": 8000.0,
+       "transport_inr_kg": 0.6730750000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 29.713857640796274,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 22441.54,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B06",
+        "reachable": true,
+        "travel_hours": 1.218,
+        "path": [
+         "checkpoint",
+         "B06"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "price_inr_kg": 29.099999999999998,
+       "travel_hours": 1.4673333333333334,
+       "distance_km": 17.85,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 7200,
+       "available_capacity_kg": 7200.0,
+       "transport_inr_kg": 0.847875,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 29.46452430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 21101.7,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B07",
+        "reachable": true,
+        "travel_hours": 1.4673333333333334,
+        "path": [
+         "checkpoint",
+         "B07"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "price_inr_kg": 28.5,
+       "travel_hours": 2.208,
+       "distance_km": 30.84,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 9600,
+       "available_capacity_kg": 9600.0,
+       "transport_inr_kg": 1.4649,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.723857640796275,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 20128.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B08",
+        "reachable": true,
+        "travel_hours": 2.208,
+        "path": [
+         "checkpoint",
+         "B08"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "price_inr_kg": 16.5,
+       "travel_hours": 2.237333333333334,
+       "distance_km": 27.41,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 12000,
+       "available_capacity_kg": 12000.0,
+       "transport_inr_kg": 1.3019749999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.69452430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10658.42,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B11",
+        "reachable": true,
+        "travel_hours": 2.237333333333334,
+        "path": [
+         "checkpoint",
+         "B11"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "price_inr_kg": 15.84,
+       "travel_hours": 1.6873333333333336,
+       "distance_km": 18.59,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 14400,
+       "available_capacity_kg": 14400.0,
+       "transport_inr_kg": 0.883025,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 29.24452430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10465.58,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B12",
+        "reachable": true,
+        "travel_hours": 1.6873333333333336,
+        "path": [
+         "checkpoint",
+         "B12"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "price_inr_kg": 44.550000000000004,
+       "travel_hours": 1.958666666666667,
+       "distance_km": 24.7,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 480,
+       "available_capacity_kg": 480.0,
+       "transport_inr_kg": 1.1732500000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.973190974129608,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 33201.4,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B10",
+        "reachable": true,
+        "travel_hours": 1.958666666666667,
+        "path": [
+         "checkpoint",
+         "B10"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "price_inr_kg": 42.54,
+       "travel_hours": 1.4013333333333333,
+       "distance_km": 16.84,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 600,
+       "available_capacity_kg": 600.0,
+       "transport_inr_kg": 0.7998999999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 29.53052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 31892.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B09",
+        "reachable": true,
+        "travel_hours": 1.4013333333333333,
+        "path": [
+         "checkpoint",
+         "B09"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "price_inr_kg": 33.24864230760271,
+       "travel_hours": 2.2153333333333336,
+       "distance_km": 33.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 3250,
+       "available_capacity_kg": 3250.0,
+       "transport_inr_kg": 1.57225,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 28.71652430746294,
+       "feasible": false,
+       "reasons": [
+        "Insufficient conservative arrival shelf life"
+       ],
+       "net_proceeds_inr": 23841.113846082168,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B01",
+        "reachable": true,
+        "travel_hours": 2.2153333333333336,
+        "path": [
+         "checkpoint",
+         "B01"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "price_inr_kg": 33.7875,
+       "travel_hours": 6.3013,
+       "distance_km": 94.5455,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2250,
+       "available_capacity_kg": 2250.0,
+       "transport_inr_kg": 4.49091125,
+       "rescue_cost_inr_kg": 0.0,
+       "arrival_rsl_lower_hours": 24.630557640796273,
+       "feasible": false,
+       "reasons": [
+        "Insufficient conservative arrival shelf life"
+       ],
+       "net_proceeds_inr": 23437.271,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B02",
+        "reachable": true,
+        "travel_hours": 6.3013,
+        "path": [
+         "checkpoint",
+         "B02"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 9,
+    "timestamp": "2026-10-28T10:28:59.969804+00:00",
+    "tool": "validate_constraints",
+    "inputs": {
+     "destination": "B05"
+    },
+    "result": {
+     "allowed": true,
+     "requires_human_approval": true,
+     "reasons": [],
+     "destination": "B05"
+    }
+   },
+   {
+    "sequence": 10,
+    "timestamp": "2026-10-28T10:29:01.030062+00:00",
+    "tool": "request_human_approval",
+    "inputs": {
+     "destination": "B05"
+    },
+    "result": {
+     "status": "awaiting_approval",
+     "destination": "B05"
+    }
+   },
+   {
+    "sequence": 11,
+    "timestamp": "2026-10-28T10:29:04.410808+00:00",
+    "tool": "agent_explanation",
+    "inputs": {
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "text": "I've sent a proposal to reroute S-c195615428 (800 kg) from Andheri West to Supermarket · Bandra West (B05), which is now awaiting human approval. Andheri West is 6.3 hours away and would arrive with too little conservative shelf life (24.6 h against a 28.8 h minimum), while Bandra West is 1.36 hours away, arrives with 29.6 h, and has the highest net proceeds of the feasible options (₹26,940). Bandra West's 1,750 kg capacity is enough for the full batch.",
+     "note": "Written by the language model; every number comes from tool results"
+    }
+   },
+   {
+    "sequence": 12,
+    "timestamp": "2026-10-28T10:29:04.410835+00:00",
+    "tool": "llm_usage",
+    "inputs": {
+     "provider": "anthropic",
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "requests": 5,
+     "input_tokens": 23838,
+     "output_tokens": 571,
+     "cache_read_input_tokens": 0,
+     "tool_calls": 8,
+     "estimated_cost_usd": 0.002669,
+     "pricing_basis": "list price per million tokens; estimate only"
+    }
+   },
+   {
+    "sequence": 13,
+    "timestamp": "2026-10-28T10:29:05.286400+00:00",
+    "tool": "human_rejected",
+    "inputs": {},
+    "result": {
+     "destination": "B02"
+    }
+   }
+  ]
+ },
+ {
+  "case": "AG4",
+  "shipment_id": "S-28f77a86f1",
+  "classification": "LIVE CLAUDE AGENT",
+  "request": {
+   "commodity_id": "tomato",
+   "origin_id": "H1",
+   "buyer_id": "B02",
+   "quantity_kg": 800,
+   "quality_grade": "A",
+   "disruptions": [
+    {
+     "type": "price_drop",
+     "severity": "high"
+    }
+   ],
+   "settings": {},
+   "mode": "live",
+   "dataset_id": "default"
+  },
+  "decision_status_before_approval": "proposed_awaiting_approval",
+  "human_decision": true,
+  "decision_status_after": "executed",
+  "state_after": {
+   "status": "monitoring",
+   "destination": "B05",
+   "version": 1
+  },
+  "trace": [
+   {
+    "sequence": 1,
+    "timestamp": "2026-10-28T10:29:06.174751+00:00",
+    "tool": "plan_shipment",
+    "inputs": {
+     "committed_buyer": "B02"
+    },
+    "result": {
+     "planned_buyer": "B02",
+     "changed_at_planning": false,
+     "basis": "Plan-time optimization on forecast conditions (strategy C)"
+    }
+   },
+   {
+    "sequence": 2,
+    "timestamp": "2026-10-28T10:29:06.174765+00:00",
+    "tool": "sense_event",
+    "inputs": {
+     "disruptions": [
+      {
+       "type": "price_drop",
+       "severity": "high"
+      }
+     ],
+     "detected_at": "checkpoint"
+    },
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "elapsed_hours": 0.819,
+     "location": "checkpoint",
+     "conditions": {
+      "severity": {
+       "price_drop": "high"
+      },
+      "traffic": 2.0,
+      "closure_hours": 0.0,
+      "hub_temp_c": 20.0,
+      "truck_temp_c": 20.0,
+      "humidity_loss_fraction": 0.0,
+      "quantity_after_damage_kg": 800.0,
+      "grade": "A",
+      "committed_capacity_left": 1.0,
+      "committed_price_factor": 0.65
+     }
+    }
+   },
+   {
+    "sequence": 3,
+    "timestamp": "2026-10-28T10:29:07.879373+00:00",
+    "tool": "get_batch_state",
+    "inputs": {},
+    "result": {
+     "id": "S-28f77a86f1",
+     "destination": "B02",
+     "quantity_kg": 800.0,
+     "event": {
+      "disruptions": [
+       {
+        "type": "price_drop",
+        "severity": "high"
+       }
+      ],
+      "detected_at": "checkpoint"
+     },
+     "safety_hold": false,
+     "current_location": "checkpoint"
+    }
+   },
+   {
+    "sequence": 4,
+    "timestamp": "2026-10-28T10:29:07.879424+00:00",
+    "tool": "predict_remaining_shelf_life",
+    "inputs": {},
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "interpretation": "Synthetic quality estimate; safety hold is separate"
+    }
+   },
+   {
+    "sequence": 5,
+    "timestamp": "2026-10-28T10:29:07.879564+00:00",
+    "tool": "get_buyer_options",
+    "inputs": {},
+    "result": {
+     "buyers": [
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "offer_inr_kg": 36.69,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "offer_inr_kg": 35.36,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "offer_inr_kg": 33.82,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "offer_inr_kg": 33.23,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 30.6,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 29.1,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 28.5,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "offer_inr_kg": 23.45,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 16.5,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 15.84,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "offer_inr_kg": 44.55,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "offer_inr_kg": 42.54,
+       "minimum_rsl_hours": 21.6
+      }
+     ],
+     "unavailable_buyers": [],
+     "price_factors": {
+      "B02": 0.65
+     },
+     "source": "SYNTHETIC buyer offers (built-in synthetic dataset); not live market quotes"
+    }
+   },
+   {
+    "sequence": 6,
+    "timestamp": "2026-10-28T10:29:07.879633+00:00",
+    "tool": "check_buyer_capacity",
+    "inputs": {},
+    "result": {
+     "available_capacity_kg": {
+      "B01": 3250.0,
+      "B02": 2250.0,
+      "B03": 2000.0,
+      "B04": 2750.0,
+      "B05": 1750.0,
+      "B06": 8000.0,
+      "B07": 7200.0,
+      "B08": 9600.0,
+      "B09": 600.0,
+      "B10": 480.0,
+      "B11": 12000.0,
+      "B12": 14400.0
+     }
+    }
+   },
+   {
+    "sequence": 7,
+    "timestamp": "2026-10-28T10:29:07.879751+00:00",
+    "tool": "calculate_route_eta",
+    "inputs": {},
+    "result": {
+     "routes": [
+      {
+       "origin": "checkpoint",
+       "destination": "B05",
+       "reachable": true,
+       "travel_hours": 0.76,
+       "distance_km": 15.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B03",
+       "reachable": true,
+       "travel_hours": 0.68,
+       "distance_km": 11.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B01",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 33.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B04",
+       "reachable": true,
+       "travel_hours": 0.91,
+       "distance_km": 22.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B06",
+       "reachable": true,
+       "travel_hours": 0.69,
+       "distance_km": 14.2,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B07",
+       "reachable": true,
+       "travel_hours": 0.8,
+       "distance_km": 17.9,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B08",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 30.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B02",
+       "reachable": true,
+       "travel_hours": 0.59,
+       "distance_km": 19.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B11",
+       "reachable": true,
+       "travel_hours": 1.15,
+       "distance_km": 27.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B12",
+       "reachable": true,
+       "travel_hours": 0.9,
+       "distance_km": 18.6,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B10",
+       "reachable": true,
+       "travel_hours": 1.03,
+       "distance_km": 24.7,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B09",
+       "reachable": true,
+       "travel_hours": 0.77,
+       "distance_km": 16.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 8,
+    "timestamp": "2026-10-28T10:29:09.690288+00:00",
+    "tool": "optimize_destination",
+    "inputs": {},
+    "result": {
+     "options": [
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "price_inr_kg": 36.68506494221093,
+       "travel_hours": 0.7566666666666666,
+       "distance_km": 15.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 1750,
+       "available_capacity_kg": 1750.0,
+       "transport_inr_kg": 0.7172499999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.557190974129604,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 27274.251953768744,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B05",
+        "reachable": true,
+        "travel_hours": 0.7566666666666666,
+        "path": [
+         "checkpoint",
+         "B05"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "price_inr_kg": 35.35615049990682,
+       "travel_hours": 0.6833333333333333,
+       "distance_km": 11.47,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2000,
+       "available_capacity_kg": 2000.0,
+       "transport_inr_kg": 0.544825,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.630524307462938,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 26349.060399925453,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B03",
+        "reachable": true,
+        "travel_hours": 0.6833333333333333,
+        "path": [
+         "checkpoint",
+         "B03"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "price_inr_kg": 33.81661105760271,
+       "travel_hours": 1.1433333333333333,
+       "distance_km": 33.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 3250,
+       "available_capacity_kg": 3250.0,
+       "transport_inr_kg": 1.57225,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.170524307462937,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 24295.488846082168,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B01",
+        "reachable": true,
+        "travel_hours": 1.1433333333333333,
+        "path": [
+         "checkpoint",
+         "B01"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "price_inr_kg": 33.23087779478399,
+       "travel_hours": 0.9066666666666666,
+       "distance_km": 22.42,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2750,
+       "available_capacity_kg": 2750.0,
+       "transport_inr_kg": 1.06495,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.407190974129605,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 24232.742235827194,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B04",
+        "reachable": true,
+        "travel_hours": 0.9066666666666666,
+        "path": [
+         "checkpoint",
+         "B04"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "price_inr_kg": 30.6,
+       "travel_hours": 0.69,
+       "distance_km": 14.17,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 8000,
+       "available_capacity_kg": 8000.0,
+       "transport_inr_kg": 0.6730750000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.62385764079627,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 22441.54,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B06",
+        "reachable": true,
+        "travel_hours": 0.69,
+        "path": [
+         "checkpoint",
+         "B06"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "price_inr_kg": 29.099999999999998,
+       "travel_hours": 0.8033333333333333,
+       "distance_km": 17.85,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 7200,
+       "available_capacity_kg": 7200.0,
+       "transport_inr_kg": 0.847875,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.510524307462937,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 21101.7,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B07",
+        "reachable": true,
+        "travel_hours": 0.8033333333333333,
+        "path": [
+         "checkpoint",
+         "B07"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "price_inr_kg": 28.5,
+       "travel_hours": 1.1400000000000001,
+       "distance_km": 30.84,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 9600,
+       "available_capacity_kg": 9600.0,
+       "transport_inr_kg": 1.4649,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.17385764079627,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 20128.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B08",
+        "reachable": true,
+        "travel_hours": 1.1400000000000001,
+        "path": [
+         "checkpoint",
+         "B08"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "price_inr_kg": 23.448165786917436,
+       "travel_hours": 0.5915,
+       "distance_km": 19.5455,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2250,
+       "available_capacity_kg": 2250.0,
+       "transport_inr_kg": 0.92841125,
+       "rescue_cost_inr_kg": 0.0,
+       "arrival_rsl_lower_hours": 30.72235764079627,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 18015.803629533948,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B02",
+        "reachable": true,
+        "travel_hours": 0.5915,
+        "path": [
+         "checkpoint",
+         "B02"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "price_inr_kg": 16.5,
+       "travel_hours": 1.1533333333333333,
+       "distance_km": 27.41,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 12000,
+       "available_capacity_kg": 12000.0,
+       "transport_inr_kg": 1.3019749999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.16052430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10658.42,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B11",
+        "reachable": true,
+        "travel_hours": 1.1533333333333333,
+        "path": [
+         "checkpoint",
+         "B11"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "price_inr_kg": 15.84,
+       "travel_hours": 0.9033333333333334,
+       "distance_km": 18.59,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 14400,
+       "available_capacity_kg": 14400.0,
+       "transport_inr_kg": 0.883025,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.41052430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10465.58,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B12",
+        "reachable": true,
+        "travel_hours": 0.9033333333333334,
+        "path": [
+         "checkpoint",
+         "B12"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "price_inr_kg": 44.550000000000004,
+       "travel_hours": 1.0266666666666668,
+       "distance_km": 24.7,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 480,
+       "available_capacity_kg": 480.0,
+       "transport_inr_kg": 1.1732500000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.287190974129604,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 33201.4,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B10",
+        "reachable": true,
+        "travel_hours": 1.0266666666666668,
+        "path": [
+         "checkpoint",
+         "B10"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "price_inr_kg": 42.54,
+       "travel_hours": 0.7733333333333333,
+       "distance_km": 16.84,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 600,
+       "available_capacity_kg": 600.0,
+       "transport_inr_kg": 0.7998999999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.54052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 31892.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B09",
+        "reachable": true,
+        "travel_hours": 0.7733333333333333,
+        "path": [
+         "checkpoint",
+         "B09"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 9,
+    "timestamp": "2026-10-28T10:29:11.166737+00:00",
+    "tool": "validate_constraints",
+    "inputs": {
+     "destination": "B05"
+    },
+    "result": {
+     "allowed": true,
+     "requires_human_approval": true,
+     "reasons": [],
+     "destination": "B05"
+    }
+   },
+   {
+    "sequence": 10,
+    "timestamp": "2026-10-28T10:29:12.578737+00:00",
+    "tool": "request_human_approval",
+    "inputs": {
+     "destination": "B05"
+    },
+    "result": {
+     "status": "awaiting_approval",
+     "destination": "B05"
+    }
+   },
+   {
+    "sequence": 11,
+    "timestamp": "2026-10-28T10:29:14.446294+00:00",
+    "tool": "agent_explanation",
+    "inputs": {
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "text": "I've sent a proposal to reroute S-28f77a86f1 (800 kg) from Andheri West to Supermarket · Bandra West, which has the best feasible net proceeds (₹27,274). It is awaiting human approval. Andheri West's offer fell to ₹23.45/kg, and Bandra West arrives with about 30.6 hours of shelf life, above its 28.8-hour minimum.",
+     "note": "Written by the language model; every number comes from tool results"
+    }
+   },
+   {
+    "sequence": 12,
+    "timestamp": "2026-10-28T10:29:14.446324+00:00",
+    "tool": "llm_usage",
+    "inputs": {
+     "provider": "anthropic",
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "requests": 5,
+     "input_tokens": 23834,
+     "output_tokens": 608,
+     "cache_read_input_tokens": 0,
+     "tool_calls": 8,
+     "estimated_cost_usd": 0.002687,
+     "pricing_basis": "list price per million tokens; estimate only"
+    }
+   },
+   {
+    "sequence": 13,
+    "timestamp": "2026-10-28T10:29:14.772696+00:00",
+    "tool": "human_approved",
+    "inputs": {},
+    "result": {
+     "destination": "B05"
+    }
+   },
+   {
+    "sequence": 14,
+    "timestamp": "2026-10-28T10:29:14.772716+00:00",
+    "tool": "execute_destination_change",
+    "inputs": {
+     "previous_destination": "B02"
+    },
+    "result": {
+     "destination": "B05",
+     "estimated_incremental_net_proceeds_inr": 9258.448324234796,
+     "evidence_category": "SIMULATED RESULT",
+     "scope": "estimated future proceeds; excludes sunk procurement and original transport"
+    }
+   },
+   {
+    "sequence": 15,
+    "timestamp": "2026-10-28T10:29:14.772722+00:00",
+    "tool": "verify",
+    "inputs": {},
+    "result": {
+     "destination_persisted_on_commit": "B05",
+     "monitoring_resumed": true,
+     "physical_delivery_verified": false
+    }
+   },
+   {
+    "sequence": 16,
+    "timestamp": "2026-10-28T10:29:14.772728+00:00",
+    "tool": "execute_reroute",
+    "inputs": {
+     "origin": "checkpoint"
+    },
+    "result": {
+     "destination": "B05",
+     "approval_enforced": true
+    }
+   },
+   {
+    "sequence": 17,
+    "timestamp": "2026-10-28T10:29:14.772733+00:00",
+    "tool": "verify_execution",
+    "inputs": {},
+    "result": {
+     "persistent_state_verified_on_commit": true,
+     "buyer_acceptance_verified": false
+    }
+   }
+  ]
+ },
+ {
+  "case": "AG5",
+  "shipment_id": "S-9a5509552d",
+  "classification": "LIVE CLAUDE AGENT",
+  "request": {
+   "commodity_id": "tomato",
+   "origin_id": "H1",
+   "buyer_id": "B02",
+   "quantity_kg": 800,
+   "quality_grade": "A",
+   "disruptions": [
+    {
+     "type": "buyer_cancellation",
+     "severity": "high"
+    }
+   ],
+   "settings": {
+    "buyer_availability": 0.0
+   },
+   "mode": "live",
+   "dataset_id": "default"
+  },
+  "decision_status_before_approval": "no_feasible_alternative",
+  "human_decision": null,
+  "decision_status_after": "no_feasible_alternative",
+  "state_after": {
+   "status": "manual_review",
+   "destination": "B02",
+   "version": 0
+  },
+  "trace": [
+   {
+    "sequence": 1,
+    "timestamp": "2026-10-28T10:29:15.627275+00:00",
+    "tool": "plan_shipment",
+    "inputs": {
+     "committed_buyer": "B02"
+    },
+    "result": {
+     "planned_buyer": "B02",
+     "changed_at_planning": false,
+     "basis": "Plan-time optimization on forecast conditions (strategy C)"
+    }
+   },
+   {
+    "sequence": 2,
+    "timestamp": "2026-10-28T10:29:15.627291+00:00",
+    "tool": "sense_event",
+    "inputs": {
+     "disruptions": [
+      {
+       "type": "buyer_cancellation",
+       "severity": "high"
+      }
+     ],
+     "detected_at": "checkpoint"
+    },
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "elapsed_hours": 0.819,
+     "location": "checkpoint",
+     "conditions": {
+      "severity": {
+       "buyer_cancellation": "high"
+      },
+      "traffic": 2.0,
+      "closure_hours": 0.0,
+      "hub_temp_c": 20.0,
+      "truck_temp_c": 20.0,
+      "humidity_loss_fraction": 0.0,
+      "quantity_after_damage_kg": 800.0,
+      "grade": "A",
+      "committed_capacity_left": 0.0,
+      "committed_price_factor": 1.0
+     }
+    }
+   },
+   {
+    "sequence": 3,
+    "timestamp": "2026-10-28T10:29:17.366014+00:00",
+    "tool": "get_batch_state",
+    "inputs": {},
+    "result": {
+     "id": "S-9a5509552d",
+     "destination": "B02",
+     "quantity_kg": 800.0,
+     "event": {
+      "disruptions": [
+       {
+        "type": "buyer_cancellation",
+        "severity": "high"
+       }
+      ],
+      "detected_at": "checkpoint"
+     },
+     "safety_hold": false,
+     "current_location": "checkpoint"
+    }
+   },
+   {
+    "sequence": 4,
+    "timestamp": "2026-10-28T10:29:17.366091+00:00",
+    "tool": "predict_remaining_shelf_life",
+    "inputs": {},
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "interpretation": "Synthetic quality estimate; safety hold is separate"
+    }
+   },
+   {
+    "sequence": 5,
+    "timestamp": "2026-10-28T10:29:17.366219+00:00",
+    "tool": "get_buyer_options",
+    "inputs": {},
+    "result": {
+     "buyers": [
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "offer_inr_kg": 44.55,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "offer_inr_kg": 42.54,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "offer_inr_kg": 36.07,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "offer_inr_kg": 36.69,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "offer_inr_kg": 35.36,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "offer_inr_kg": 33.82,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "offer_inr_kg": 33.23,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 30.6,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 29.1,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 28.5,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 16.5,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 15.84,
+       "minimum_rsl_hours": 3.6
+      }
+     ],
+     "unavailable_buyers": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12"
+     ],
+     "price_factors": {
+      "B02": 1.0
+     },
+     "source": "SYNTHETIC buyer offers (built-in synthetic dataset); not live market quotes"
+    }
+   },
+   {
+    "sequence": 6,
+    "timestamp": "2026-10-28T10:29:17.366284+00:00",
+    "tool": "check_buyer_capacity",
+    "inputs": {},
+    "result": {
+     "available_capacity_kg": {
+      "B01": 3250.0,
+      "B02": 0.0,
+      "B03": 2000.0,
+      "B04": 2750.0,
+      "B05": 1750.0,
+      "B06": 8000.0,
+      "B07": 7200.0,
+      "B08": 9600.0,
+      "B09": 600.0,
+      "B10": 480.0,
+      "B11": 12000.0,
+      "B12": 14400.0
+     }
+    }
+   },
+   {
+    "sequence": 7,
+    "timestamp": "2026-10-28T10:29:17.366372+00:00",
+    "tool": "calculate_route_eta",
+    "inputs": {},
+    "result": {
+     "routes": [
+      {
+       "origin": "checkpoint",
+       "destination": "B10",
+       "reachable": true,
+       "travel_hours": 1.03,
+       "distance_km": 24.7,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B09",
+       "reachable": true,
+       "travel_hours": 0.77,
+       "distance_km": 16.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B02",
+       "reachable": true,
+       "travel_hours": 0.59,
+       "distance_km": 19.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B05",
+       "reachable": true,
+       "travel_hours": 0.76,
+       "distance_km": 15.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B03",
+       "reachable": true,
+       "travel_hours": 0.68,
+       "distance_km": 11.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B01",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 33.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B04",
+       "reachable": true,
+       "travel_hours": 0.91,
+       "distance_km": 22.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B06",
+       "reachable": true,
+       "travel_hours": 0.69,
+       "distance_km": 14.2,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B07",
+       "reachable": true,
+       "travel_hours": 0.8,
+       "distance_km": 17.9,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B08",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 30.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B11",
+       "reachable": true,
+       "travel_hours": 1.15,
+       "distance_km": 27.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B12",
+       "reachable": true,
+       "travel_hours": 0.9,
+       "distance_km": 18.6,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 8,
+    "timestamp": "2026-10-28T10:29:18.218012+00:00",
+    "tool": "optimize_destination",
+    "inputs": {},
+    "result": {
+     "options": [
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "price_inr_kg": 44.550000000000004,
+       "travel_hours": 1.0266666666666668,
+       "distance_km": 24.7,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 480,
+       "available_capacity_kg": 480.0,
+       "transport_inr_kg": 1.1732500000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.287190974129604,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled",
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 33201.4,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B10",
+        "reachable": true,
+        "travel_hours": 1.0266666666666668,
+        "path": [
+         "checkpoint",
+         "B10"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "price_inr_kg": 42.54,
+       "travel_hours": 0.7733333333333333,
+       "distance_km": 16.84,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 600,
+       "available_capacity_kg": 600.0,
+       "transport_inr_kg": 0.7998999999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.54052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled",
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 31892.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B09",
+        "reachable": true,
+        "travel_hours": 0.7733333333333333,
+        "path": [
+         "checkpoint",
+         "B09"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "price_inr_kg": 36.074101210642205,
+       "travel_hours": 0.5915,
+       "distance_km": 19.5455,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2250,
+       "available_capacity_kg": 0.0,
+       "transport_inr_kg": 0.92841125,
+       "rescue_cost_inr_kg": 0.0,
+       "arrival_rsl_lower_hours": 30.72235764079627,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled",
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 28116.551968513766,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B02",
+        "reachable": true,
+        "travel_hours": 0.5915,
+        "path": [
+         "checkpoint",
+         "B02"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "price_inr_kg": 36.68506494221093,
+       "travel_hours": 0.7566666666666666,
+       "distance_km": 15.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 1750,
+       "available_capacity_kg": 1750.0,
+       "transport_inr_kg": 0.7172499999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.557190974129604,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 27274.251953768744,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B05",
+        "reachable": true,
+        "travel_hours": 0.7566666666666666,
+        "path": [
+         "checkpoint",
+         "B05"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "price_inr_kg": 35.35615049990682,
+       "travel_hours": 0.6833333333333333,
+       "distance_km": 11.47,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2000,
+       "available_capacity_kg": 2000.0,
+       "transport_inr_kg": 0.544825,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.630524307462938,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 26349.060399925453,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B03",
+        "reachable": true,
+        "travel_hours": 0.6833333333333333,
+        "path": [
+         "checkpoint",
+         "B03"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "price_inr_kg": 33.81661105760271,
+       "travel_hours": 1.1433333333333333,
+       "distance_km": 33.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 3250,
+       "available_capacity_kg": 3250.0,
+       "transport_inr_kg": 1.57225,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.170524307462937,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 24295.488846082168,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B01",
+        "reachable": true,
+        "travel_hours": 1.1433333333333333,
+        "path": [
+         "checkpoint",
+         "B01"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "price_inr_kg": 33.23087779478399,
+       "travel_hours": 0.9066666666666666,
+       "distance_km": 22.42,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2750,
+       "available_capacity_kg": 2750.0,
+       "transport_inr_kg": 1.06495,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.407190974129605,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 24232.742235827194,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B04",
+        "reachable": true,
+        "travel_hours": 0.9066666666666666,
+        "path": [
+         "checkpoint",
+         "B04"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "price_inr_kg": 30.6,
+       "travel_hours": 0.69,
+       "distance_km": 14.17,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 8000,
+       "available_capacity_kg": 8000.0,
+       "transport_inr_kg": 0.6730750000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.62385764079627,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 22441.54,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B06",
+        "reachable": true,
+        "travel_hours": 0.69,
+        "path": [
+         "checkpoint",
+         "B06"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "price_inr_kg": 29.099999999999998,
+       "travel_hours": 0.8033333333333333,
+       "distance_km": 17.85,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 7200,
+       "available_capacity_kg": 7200.0,
+       "transport_inr_kg": 0.847875,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.510524307462937,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 21101.7,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B07",
+        "reachable": true,
+        "travel_hours": 0.8033333333333333,
+        "path": [
+         "checkpoint",
+         "B07"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "price_inr_kg": 28.5,
+       "travel_hours": 1.1400000000000001,
+       "distance_km": 30.84,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 9600,
+       "available_capacity_kg": 9600.0,
+       "transport_inr_kg": 1.4649,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.17385764079627,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 20128.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B08",
+        "reachable": true,
+        "travel_hours": 1.1400000000000001,
+        "path": [
+         "checkpoint",
+         "B08"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "price_inr_kg": 16.5,
+       "travel_hours": 1.1533333333333333,
+       "distance_km": 27.41,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 12000,
+       "available_capacity_kg": 12000.0,
+       "transport_inr_kg": 1.3019749999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.16052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 10658.42,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B11",
+        "reachable": true,
+        "travel_hours": 1.1533333333333333,
+        "path": [
+         "checkpoint",
+         "B11"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "price_inr_kg": 15.84,
+       "travel_hours": 0.9033333333333334,
+       "distance_km": 18.59,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 14400,
+       "available_capacity_kg": 14400.0,
+       "transport_inr_kg": 0.883025,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.41052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 10465.58,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B12",
+        "reachable": true,
+        "travel_hours": 0.9033333333333334,
+        "path": [
+         "checkpoint",
+         "B12"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 9,
+    "timestamp": "2026-10-28T10:29:20.474618+00:00",
+    "tool": "agent_explanation",
+    "inputs": {
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "text": "I found no feasible destination, so I have not requested approval. Every buyer is flagged unavailable, and the current destination, Supermarket · Andheri West, has cancelled its contract and has zero capacity. The 800 kg batch has about 34.9 hours of estimated shelf life (31.3 lower bound) and needs a manual reroute decision or a buyer contract review.",
+     "note": "Written by the language model; every number comes from tool results"
+    }
+   },
+   {
+    "sequence": 10,
+    "timestamp": "2026-10-28T10:29:20.474650+00:00",
+    "tool": "llm_usage",
+    "inputs": {
+     "provider": "anthropic",
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "requests": 3,
+     "input_tokens": 11267,
+     "output_tokens": 512,
+     "cache_read_input_tokens": 0,
+     "tool_calls": 6,
+     "estimated_cost_usd": 0.001383,
+     "pricing_basis": "list price per million tokens; estimate only"
+    }
+   },
+   {
+    "sequence": 11,
+    "timestamp": "2026-10-28T10:29:20.474695+00:00",
+    "tool": "escalate",
+    "inputs": {},
+    "result": {
+     "reason": "No proposal; human review required; destination unchanged"
+    }
+   }
+  ]
+ },
+ {
+  "case": "AG6",
+  "shipment_id": "S-4937f5821f",
+  "classification": "LIVE CLAUDE AGENT",
+  "request": {
+   "commodity_id": "tomato",
+   "origin_id": "H1",
+   "buyer_id": "B02",
+   "quantity_kg": 800,
+   "quality_grade": "A",
+   "disruptions": [],
+   "settings": {},
+   "mode": "live",
+   "dataset_id": "default"
+  },
+  "decision_status_before_approval": "no_intervention_needed",
+  "human_decision": null,
+  "decision_status_after": "no_intervention_needed",
+  "state_after": {
+   "status": "monitoring",
+   "destination": "B02",
+   "version": 0
+  },
+  "trace": [
+   {
+    "sequence": 1,
+    "timestamp": "2026-10-28T10:29:20.789658+00:00",
+    "tool": "plan_shipment",
+    "inputs": {
+     "committed_buyer": "B02"
+    },
+    "result": {
+     "planned_buyer": "B02",
+     "changed_at_planning": false,
+     "basis": "Plan-time optimization on forecast conditions (strategy C)"
+    }
+   },
+   {
+    "sequence": 2,
+    "timestamp": "2026-10-28T10:29:20.789671+00:00",
+    "tool": "sense_event",
+    "inputs": {
+     "disruptions": [],
+     "detected_at": "checkpoint"
+    },
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "elapsed_hours": 0.819,
+     "location": "checkpoint",
+     "conditions": {
+      "severity": {},
+      "traffic": 2.0,
+      "closure_hours": 0.0,
+      "hub_temp_c": 20.0,
+      "truck_temp_c": 20.0,
+      "humidity_loss_fraction": 0.0,
+      "quantity_after_damage_kg": 800.0,
+      "grade": "A",
+      "committed_capacity_left": 1.0,
+      "committed_price_factor": 1.0
+     }
+    }
+   },
+   {
+    "sequence": 3,
+    "timestamp": "2026-10-28T10:29:24.108633+00:00",
+    "tool": "get_batch_state",
+    "inputs": {},
+    "result": {
+     "id": "S-4937f5821f",
+     "destination": "B02",
+     "quantity_kg": 800.0,
+     "event": {
+      "disruptions": [],
+      "detected_at": "checkpoint"
+     },
+     "safety_hold": false,
+     "current_location": "checkpoint"
+    }
+   },
+   {
+    "sequence": 4,
+    "timestamp": "2026-10-28T10:29:24.108690+00:00",
+    "tool": "predict_remaining_shelf_life",
+    "inputs": {},
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "interpretation": "Synthetic quality estimate; safety hold is separate"
+    }
+   },
+   {
+    "sequence": 5,
+    "timestamp": "2026-10-28T10:29:24.108839+00:00",
+    "tool": "get_buyer_options",
+    "inputs": {},
+    "result": {
+     "buyers": [
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "offer_inr_kg": 36.07,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "offer_inr_kg": 36.69,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "offer_inr_kg": 35.36,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "offer_inr_kg": 33.82,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "offer_inr_kg": 33.23,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 30.6,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 29.1,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 28.5,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 16.5,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 15.84,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "offer_inr_kg": 44.55,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "offer_inr_kg": 42.54,
+       "minimum_rsl_hours": 21.6
+      }
+     ],
+     "unavailable_buyers": [],
+     "price_factors": {
+      "B02": 1.0
+     },
+     "source": "SYNTHETIC buyer offers (built-in synthetic dataset); not live market quotes"
+    }
+   },
+   {
+    "sequence": 6,
+    "timestamp": "2026-10-28T10:29:24.108915+00:00",
+    "tool": "check_buyer_capacity",
+    "inputs": {},
+    "result": {
+     "available_capacity_kg": {
+      "B01": 3250.0,
+      "B02": 2250.0,
+      "B03": 2000.0,
+      "B04": 2750.0,
+      "B05": 1750.0,
+      "B06": 8000.0,
+      "B07": 7200.0,
+      "B08": 9600.0,
+      "B09": 600.0,
+      "B10": 480.0,
+      "B11": 12000.0,
+      "B12": 14400.0
+     }
+    }
+   },
+   {
+    "sequence": 7,
+    "timestamp": "2026-10-28T10:29:24.109112+00:00",
+    "tool": "calculate_route_eta",
+    "inputs": {},
+    "result": {
+     "routes": [
+      {
+       "origin": "checkpoint",
+       "destination": "B02",
+       "reachable": true,
+       "travel_hours": 0.59,
+       "distance_km": 19.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B05",
+       "reachable": true,
+       "travel_hours": 0.76,
+       "distance_km": 15.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B03",
+       "reachable": true,
+       "travel_hours": 0.68,
+       "distance_km": 11.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B01",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 33.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B04",
+       "reachable": true,
+       "travel_hours": 0.91,
+       "distance_km": 22.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B06",
+       "reachable": true,
+       "travel_hours": 0.69,
+       "distance_km": 14.2,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B07",
+       "reachable": true,
+       "travel_hours": 0.8,
+       "distance_km": 17.9,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B08",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 30.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B11",
+       "reachable": true,
+       "travel_hours": 1.15,
+       "distance_km": 27.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B12",
+       "reachable": true,
+       "travel_hours": 0.9,
+       "distance_km": 18.6,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B10",
+       "reachable": true,
+       "travel_hours": 1.03,
+       "distance_km": 24.7,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B09",
+       "reachable": true,
+       "travel_hours": 0.77,
+       "distance_km": 16.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 8,
+    "timestamp": "2026-10-28T10:29:25.785845+00:00",
+    "tool": "optimize_destination",
+    "inputs": {},
+    "result": {
+     "options": [
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "price_inr_kg": 36.074101210642205,
+       "travel_hours": 0.5915,
+       "distance_km": 19.5455,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2250,
+       "available_capacity_kg": 2250.0,
+       "transport_inr_kg": 0.92841125,
+       "rescue_cost_inr_kg": 0.0,
+       "arrival_rsl_lower_hours": 30.72235764079627,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 28116.551968513766,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B02",
+        "reachable": true,
+        "travel_hours": 0.5915,
+        "path": [
+         "checkpoint",
+         "B02"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "price_inr_kg": 36.68506494221093,
+       "travel_hours": 0.7566666666666666,
+       "distance_km": 15.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 1750,
+       "available_capacity_kg": 1750.0,
+       "transport_inr_kg": 0.7172499999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.557190974129604,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 27274.251953768744,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B05",
+        "reachable": true,
+        "travel_hours": 0.7566666666666666,
+        "path": [
+         "checkpoint",
+         "B05"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "price_inr_kg": 35.35615049990682,
+       "travel_hours": 0.6833333333333333,
+       "distance_km": 11.47,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2000,
+       "available_capacity_kg": 2000.0,
+       "transport_inr_kg": 0.544825,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.630524307462938,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 26349.060399925453,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B03",
+        "reachable": true,
+        "travel_hours": 0.6833333333333333,
+        "path": [
+         "checkpoint",
+         "B03"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "price_inr_kg": 33.81661105760271,
+       "travel_hours": 1.1433333333333333,
+       "distance_km": 33.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 3250,
+       "available_capacity_kg": 3250.0,
+       "transport_inr_kg": 1.57225,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.170524307462937,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 24295.488846082168,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B01",
+        "reachable": true,
+        "travel_hours": 1.1433333333333333,
+        "path": [
+         "checkpoint",
+         "B01"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "price_inr_kg": 33.23087779478399,
+       "travel_hours": 0.9066666666666666,
+       "distance_km": 22.42,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2750,
+       "available_capacity_kg": 2750.0,
+       "transport_inr_kg": 1.06495,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.407190974129605,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 24232.742235827194,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B04",
+        "reachable": true,
+        "travel_hours": 0.9066666666666666,
+        "path": [
+         "checkpoint",
+         "B04"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "price_inr_kg": 30.6,
+       "travel_hours": 0.69,
+       "distance_km": 14.17,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 8000,
+       "available_capacity_kg": 8000.0,
+       "transport_inr_kg": 0.6730750000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.62385764079627,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 22441.54,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B06",
+        "reachable": true,
+        "travel_hours": 0.69,
+        "path": [
+         "checkpoint",
+         "B06"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "price_inr_kg": 29.099999999999998,
+       "travel_hours": 0.8033333333333333,
+       "distance_km": 17.85,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 7200,
+       "available_capacity_kg": 7200.0,
+       "transport_inr_kg": 0.847875,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.510524307462937,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 21101.7,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B07",
+        "reachable": true,
+        "travel_hours": 0.8033333333333333,
+        "path": [
+         "checkpoint",
+         "B07"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "price_inr_kg": 28.5,
+       "travel_hours": 1.1400000000000001,
+       "distance_km": 30.84,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 9600,
+       "available_capacity_kg": 9600.0,
+       "transport_inr_kg": 1.4649,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.17385764079627,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 20128.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B08",
+        "reachable": true,
+        "travel_hours": 1.1400000000000001,
+        "path": [
+         "checkpoint",
+         "B08"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "price_inr_kg": 16.5,
+       "travel_hours": 1.1533333333333333,
+       "distance_km": 27.41,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 12000,
+       "available_capacity_kg": 12000.0,
+       "transport_inr_kg": 1.3019749999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.16052430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10658.42,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B11",
+        "reachable": true,
+        "travel_hours": 1.1533333333333333,
+        "path": [
+         "checkpoint",
+         "B11"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "price_inr_kg": 15.84,
+       "travel_hours": 0.9033333333333334,
+       "distance_km": 18.59,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 14400,
+       "available_capacity_kg": 14400.0,
+       "transport_inr_kg": 0.883025,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.41052430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10465.58,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B12",
+        "reachable": true,
+        "travel_hours": 0.9033333333333334,
+        "path": [
+         "checkpoint",
+         "B12"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "price_inr_kg": 44.550000000000004,
+       "travel_hours": 1.0266666666666668,
+       "distance_km": 24.7,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 480,
+       "available_capacity_kg": 480.0,
+       "transport_inr_kg": 1.1732500000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.287190974129604,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 33201.4,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B10",
+        "reachable": true,
+        "travel_hours": 1.0266666666666668,
+        "path": [
+         "checkpoint",
+         "B10"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "price_inr_kg": 42.54,
+       "travel_hours": 0.7733333333333333,
+       "distance_km": 16.84,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 600,
+       "available_capacity_kg": 600.0,
+       "transport_inr_kg": 0.7998999999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.54052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 31892.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B09",
+        "reachable": true,
+        "travel_hours": 0.7733333333333333,
+        "path": [
+         "checkpoint",
+         "B09"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 9,
+    "timestamp": "2026-10-28T10:29:27.908918+00:00",
+    "tool": "agent_explanation",
+    "inputs": {
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "text": "Keep the shipment on its current route to Supermarket · Andheri West (B02). It has the highest net proceeds of the feasible options (INR 28,116.55) and arrives with about 30.7 hours of shelf life against a 28.8-hour minimum. No change was proposed, so no approval request was filed.",
+     "note": "Written by the language model; every number comes from tool results"
+    }
+   },
+   {
+    "sequence": 10,
+    "timestamp": "2026-10-28T10:29:27.908948+00:00",
+    "tool": "llm_usage",
+    "inputs": {
+     "provider": "anthropic",
+     "model": "claude-haiku-5-5"
+    },
+    "result": {
+     "requests": 3,
+     "input_tokens": 10847,
+     "output_tokens": 375,
+     "cache_read_input_tokens": 0,
+     "tool_calls": 6,
+     "estimated_cost_usd": 0.001272,
+     "pricing_basis": "list price per million tokens; estimate only"
+    }
+   },
+   {
+    "sequence": 11,
+    "timestamp": "2026-10-28T10:29:27.909008+00:00",
+    "tool": "no_intervention_required",
+    "inputs": {},
+    "result": {
+     "destination": "B02",
+     "net_proceeds_inr": 28116.551968513766,
+     "reason": "Current plan remains the best feasible option; verified against the optimizer ranking"
+    }
+   }
+  ]
+ },
+ {
+  "case": "S06",
+  "shipment_id": "S-0c397cfb23",
+  "classification": "DETERMINISTIC FALLBACK",
+  "request": {
+   "commodity_id": "tomato",
+   "origin_id": "H1",
+   "buyer_id": "B02",
+   "quantity_kg": 800,
+   "quality_grade": "A",
+   "disruptions": [
+    {
+     "type": "road_closure",
+     "severity": "high"
+    }
+   ],
+   "settings": {},
+   "mode": "deterministic",
+   "dataset_id": "default"
+  },
+  "decision_status_before_approval": "proposed_awaiting_approval",
+  "human_decision": null,
+  "decision_status_after": "proposed_awaiting_approval",
+  "state_after": {
+   "status": "awaiting_approval",
+   "destination": "B02",
+   "version": 0
+  },
+  "trace": [
+   {
+    "sequence": 1,
+    "timestamp": "2026-10-28T10:28:41.470289+00:00",
+    "tool": "plan_shipment",
+    "inputs": {
+     "committed_buyer": "B02"
+    },
+    "result": {
+     "planned_buyer": "B02",
+     "changed_at_planning": false,
+     "basis": "Plan-time optimization on forecast conditions (strategy C)"
+    }
+   },
+   {
+    "sequence": 2,
+    "timestamp": "2026-10-28T10:28:41.470305+00:00",
+    "tool": "sense_event",
+    "inputs": {
+     "disruptions": [
+      {
+       "type": "road_closure",
+       "severity": "high"
+      }
+     ],
+     "detected_at": "checkpoint"
+    },
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "elapsed_hours": 0.819,
+     "location": "checkpoint",
+     "conditions": {
+      "severity": {
+       "road_closure": "high"
+      },
+      "traffic": 2.0,
+      "closure_hours": 5.0,
+      "hub_temp_c": 20.0,
+      "truck_temp_c": 20.0,
+      "humidity_loss_fraction": 0.0,
+      "quantity_after_damage_kg": 800.0,
+      "grade": "A",
+      "committed_capacity_left": 1.0,
+      "committed_price_factor": 1.0
+     }
+    }
+   },
+   {
+    "sequence": 3,
+    "timestamp": "2026-10-28T10:28:41.470315+00:00",
+    "tool": "get_batch_state",
+    "inputs": {},
+    "result": {
+     "id": "S-0c397cfb23",
+     "destination": "B02",
+     "quantity_kg": 800.0,
+     "event": {
+      "disruptions": [
+       {
+        "type": "road_closure",
+        "severity": "high"
+       }
+      ],
+      "detected_at": "checkpoint"
+     },
+     "safety_hold": false,
+     "current_location": "checkpoint"
+    }
+   },
+   {
+    "sequence": 4,
+    "timestamp": "2026-10-28T10:28:41.470319+00:00",
+    "tool": "predict_remaining_shelf_life",
+    "inputs": {},
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "interpretation": "Synthetic quality estimate; safety hold is separate"
+    }
+   },
+   {
+    "sequence": 5,
+    "timestamp": "2026-10-28T10:28:41.470411+00:00",
+    "tool": "get_buyer_options",
+    "inputs": {},
+    "result": {
+     "buyers": [
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "offer_inr_kg": 36.69,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "offer_inr_kg": 35.36,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "offer_inr_kg": 33.82,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "offer_inr_kg": 33.23,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 30.6,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 29.1,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 28.5,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 16.5,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 15.84,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "offer_inr_kg": 44.55,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "offer_inr_kg": 42.54,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "offer_inr_kg": 34.0,
+       "minimum_rsl_hours": 28.8
+      }
+     ],
+     "unavailable_buyers": [],
+     "price_factors": {
+      "B02": 1.0
+     },
+     "source": "SYNTHETIC buyer offers (built-in synthetic dataset); not live market quotes"
+    }
+   },
+   {
+    "sequence": 6,
+    "timestamp": "2026-10-28T10:28:41.470416+00:00",
+    "tool": "check_buyer_capacity",
+    "inputs": {},
+    "result": {
+     "available_capacity_kg": {
+      "B01": 3250.0,
+      "B02": 2250.0,
+      "B03": 2000.0,
+      "B04": 2750.0,
+      "B05": 1750.0,
+      "B06": 8000.0,
+      "B07": 7200.0,
+      "B08": 9600.0,
+      "B09": 600.0,
+      "B10": 480.0,
+      "B11": 12000.0,
+      "B12": 14400.0
+     }
+    }
+   },
+   {
+    "sequence": 7,
+    "timestamp": "2026-10-28T10:28:41.470498+00:00",
+    "tool": "calculate_route_eta",
+    "inputs": {},
+    "result": {
+     "routes": [
+      {
+       "origin": "checkpoint",
+       "destination": "B05",
+       "reachable": true,
+       "travel_hours": 0.76,
+       "distance_km": 15.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B03",
+       "reachable": true,
+       "travel_hours": 0.68,
+       "distance_km": 11.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B01",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 33.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B04",
+       "reachable": true,
+       "travel_hours": 0.91,
+       "distance_km": 22.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B06",
+       "reachable": true,
+       "travel_hours": 0.69,
+       "distance_km": 14.2,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B07",
+       "reachable": true,
+       "travel_hours": 0.8,
+       "distance_km": 17.9,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B08",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 30.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B11",
+       "reachable": true,
+       "travel_hours": 1.15,
+       "distance_km": 27.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B12",
+       "reachable": true,
+       "travel_hours": 0.9,
+       "distance_km": 18.6,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B10",
+       "reachable": true,
+       "travel_hours": 1.03,
+       "distance_km": 24.7,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B09",
+       "reachable": true,
+       "travel_hours": 0.77,
+       "distance_km": 16.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B02",
+       "reachable": true,
+       "travel_hours": 5.59,
+       "distance_km": 94.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 8,
+    "timestamp": "2026-10-28T10:28:41.470549+00:00",
+    "tool": "optimize_destination",
+    "inputs": {},
+    "result": {
+     "options": [
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "price_inr_kg": 36.68506494221093,
+       "travel_hours": 0.7566666666666666,
+       "distance_km": 15.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 1750,
+       "available_capacity_kg": 1750.0,
+       "transport_inr_kg": 0.7172499999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.557190974129604,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 27274.251953768744,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B05",
+        "reachable": true,
+        "travel_hours": 0.7566666666666666,
+        "path": [
+         "checkpoint",
+         "B05"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "price_inr_kg": 35.35615049990682,
+       "travel_hours": 0.6833333333333333,
+       "distance_km": 11.47,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2000,
+       "available_capacity_kg": 2000.0,
+       "transport_inr_kg": 0.544825,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.630524307462938,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 26349.060399925453,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B03",
+        "reachable": true,
+        "travel_hours": 0.6833333333333333,
+        "path": [
+         "checkpoint",
+         "B03"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "price_inr_kg": 33.81661105760271,
+       "travel_hours": 1.1433333333333333,
+       "distance_km": 33.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 3250,
+       "available_capacity_kg": 3250.0,
+       "transport_inr_kg": 1.57225,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.170524307462937,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 24295.488846082168,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B01",
+        "reachable": true,
+        "travel_hours": 1.1433333333333333,
+        "path": [
+         "checkpoint",
+         "B01"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "price_inr_kg": 33.23087779478399,
+       "travel_hours": 0.9066666666666666,
+       "distance_km": 22.42,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2750,
+       "available_capacity_kg": 2750.0,
+       "transport_inr_kg": 1.06495,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.407190974129605,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 24232.742235827194,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B04",
+        "reachable": true,
+        "travel_hours": 0.9066666666666666,
+        "path": [
+         "checkpoint",
+         "B04"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "price_inr_kg": 30.6,
+       "travel_hours": 0.69,
+       "distance_km": 14.17,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 8000,
+       "available_capacity_kg": 8000.0,
+       "transport_inr_kg": 0.6730750000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.62385764079627,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 22441.54,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B06",
+        "reachable": true,
+        "travel_hours": 0.69,
+        "path": [
+         "checkpoint",
+         "B06"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "price_inr_kg": 29.099999999999998,
+       "travel_hours": 0.8033333333333333,
+       "distance_km": 17.85,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 7200,
+       "available_capacity_kg": 7200.0,
+       "transport_inr_kg": 0.847875,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.510524307462937,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 21101.7,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B07",
+        "reachable": true,
+        "travel_hours": 0.8033333333333333,
+        "path": [
+         "checkpoint",
+         "B07"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "price_inr_kg": 28.5,
+       "travel_hours": 1.1400000000000001,
+       "distance_km": 30.84,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 9600,
+       "available_capacity_kg": 9600.0,
+       "transport_inr_kg": 1.4649,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.17385764079627,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 20128.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B08",
+        "reachable": true,
+        "travel_hours": 1.1400000000000001,
+        "path": [
+         "checkpoint",
+         "B08"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "price_inr_kg": 16.5,
+       "travel_hours": 1.1533333333333333,
+       "distance_km": 27.41,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 12000,
+       "available_capacity_kg": 12000.0,
+       "transport_inr_kg": 1.3019749999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.16052430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10658.42,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B11",
+        "reachable": true,
+        "travel_hours": 1.1533333333333333,
+        "path": [
+         "checkpoint",
+         "B11"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "price_inr_kg": 15.84,
+       "travel_hours": 0.9033333333333334,
+       "distance_km": 18.59,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 14400,
+       "available_capacity_kg": 14400.0,
+       "transport_inr_kg": 0.883025,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.41052430746294,
+       "feasible": true,
+       "reasons": [],
+       "net_proceeds_inr": 10465.58,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B12",
+        "reachable": true,
+        "travel_hours": 0.9033333333333334,
+        "path": [
+         "checkpoint",
+         "B12"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "price_inr_kg": 44.550000000000004,
+       "travel_hours": 1.0266666666666668,
+       "distance_km": 24.7,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 480,
+       "available_capacity_kg": 480.0,
+       "transport_inr_kg": 1.1732500000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.287190974129604,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 33201.4,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B10",
+        "reachable": true,
+        "travel_hours": 1.0266666666666668,
+        "path": [
+         "checkpoint",
+         "B10"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "price_inr_kg": 42.54,
+       "travel_hours": 0.7733333333333333,
+       "distance_km": 16.84,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 600,
+       "available_capacity_kg": 600.0,
+       "transport_inr_kg": 0.7998999999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.54052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 31892.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B09",
+        "reachable": true,
+        "travel_hours": 0.7733333333333333,
+        "path": [
+         "checkpoint",
+         "B09"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "price_inr_kg": 34.003788710642205,
+       "travel_hours": 5.5915,
+       "distance_km": 94.5455,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2250,
+       "available_capacity_kg": 2250.0,
+       "transport_inr_kg": 4.49091125,
+       "rescue_cost_inr_kg": 0.0,
+       "arrival_rsl_lower_hours": 25.72235764079627,
+       "feasible": false,
+       "reasons": [
+        "Insufficient conservative arrival shelf life"
+       ],
+       "net_proceeds_inr": 23610.301968513766,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B02",
+        "reachable": true,
+        "travel_hours": 5.5915,
+        "path": [
+         "checkpoint",
+         "B02"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 9,
+    "timestamp": "2026-10-28T10:28:41.470568+00:00",
+    "tool": "validate_constraints",
+    "inputs": {
+     "destination": "B05"
+    },
+    "result": {
+     "allowed": true,
+     "requires_human_approval": true,
+     "reasons": [],
+     "destination": "B05"
+    }
+   },
+   {
+    "sequence": 10,
+    "timestamp": "2026-10-28T10:28:41.470576+00:00",
+    "tool": "request_human_approval",
+    "inputs": {
+     "destination": "B05"
+    },
+    "result": {
+     "status": "awaiting_approval",
+     "destination": "B05"
+    }
+   }
+  ]
+ },
+ {
+  "case": "S34",
+  "shipment_id": "S-d686898656",
+  "classification": "DETERMINISTIC FALLBACK",
+  "request": {
+   "commodity_id": "tomato",
+   "origin_id": "H1",
+   "buyer_id": "B02",
+   "quantity_kg": 800,
+   "quality_grade": "A",
+   "disruptions": [
+    {
+     "type": "buyer_cancellation",
+     "severity": "high"
+    }
+   ],
+   "settings": {
+    "buyer_availability": 0.0
+   },
+   "mode": "deterministic",
+   "dataset_id": "default"
+  },
+  "decision_status_before_approval": "no_feasible_alternative",
+  "human_decision": null,
+  "decision_status_after": "no_feasible_alternative",
+  "state_after": {
+   "status": "manual_review",
+   "destination": "B02",
+   "version": 0
+  },
+  "trace": [
+   {
+    "sequence": 1,
+    "timestamp": "2026-10-28T10:28:42.379659+00:00",
+    "tool": "plan_shipment",
+    "inputs": {
+     "committed_buyer": "B02"
+    },
+    "result": {
+     "planned_buyer": "B02",
+     "changed_at_planning": false,
+     "basis": "Plan-time optimization on forecast conditions (strategy C)"
+    }
+   },
+   {
+    "sequence": 2,
+    "timestamp": "2026-10-28T10:28:42.379679+00:00",
+    "tool": "sense_event",
+    "inputs": {
+     "disruptions": [
+      {
+       "type": "buyer_cancellation",
+       "severity": "high"
+      }
+     ],
+     "detected_at": "checkpoint"
+    },
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "elapsed_hours": 0.819,
+     "location": "checkpoint",
+     "conditions": {
+      "severity": {
+       "buyer_cancellation": "high"
+      },
+      "traffic": 2.0,
+      "closure_hours": 0.0,
+      "hub_temp_c": 20.0,
+      "truck_temp_c": 20.0,
+      "humidity_loss_fraction": 0.0,
+      "quantity_after_damage_kg": 800.0,
+      "grade": "A",
+      "committed_capacity_left": 0.0,
+      "committed_price_factor": 1.0
+     }
+    }
+   },
+   {
+    "sequence": 3,
+    "timestamp": "2026-10-28T10:28:42.379692+00:00",
+    "tool": "get_batch_state",
+    "inputs": {},
+    "result": {
+     "id": "S-d686898656",
+     "destination": "B02",
+     "quantity_kg": 800.0,
+     "event": {
+      "disruptions": [
+       {
+        "type": "buyer_cancellation",
+        "severity": "high"
+       }
+      ],
+      "detected_at": "checkpoint"
+     },
+     "safety_hold": false,
+     "current_location": "checkpoint"
+    }
+   },
+   {
+    "sequence": 4,
+    "timestamp": "2026-10-28T10:28:42.379699+00:00",
+    "tool": "predict_remaining_shelf_life",
+    "inputs": {},
+    "result": {
+     "rsl_hours": 34.91385764079627,
+     "rsl_lower_hours": 31.31385764079627,
+     "interpretation": "Synthetic quality estimate; safety hold is separate"
+    }
+   },
+   {
+    "sequence": 5,
+    "timestamp": "2026-10-28T10:28:42.379840+00:00",
+    "tool": "get_buyer_options",
+    "inputs": {},
+    "result": {
+     "buyers": [
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "offer_inr_kg": 44.55,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "offer_inr_kg": 42.54,
+       "minimum_rsl_hours": 21.6
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "offer_inr_kg": 36.07,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "offer_inr_kg": 36.69,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "offer_inr_kg": 35.36,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "offer_inr_kg": 33.82,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "offer_inr_kg": 33.23,
+       "minimum_rsl_hours": 28.8
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 30.6,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 29.1,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "offer_inr_kg": 28.5,
+       "minimum_rsl_hours": 10.8
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 16.5,
+       "minimum_rsl_hours": 3.6
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "offer_inr_kg": 15.84,
+       "minimum_rsl_hours": 3.6
+      }
+     ],
+     "unavailable_buyers": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12"
+     ],
+     "price_factors": {
+      "B02": 1.0
+     },
+     "source": "SYNTHETIC buyer offers (built-in synthetic dataset); not live market quotes"
+    }
+   },
+   {
+    "sequence": 6,
+    "timestamp": "2026-10-28T10:28:42.379847+00:00",
+    "tool": "check_buyer_capacity",
+    "inputs": {},
+    "result": {
+     "available_capacity_kg": {
+      "B01": 3250.0,
+      "B02": 0.0,
+      "B03": 2000.0,
+      "B04": 2750.0,
+      "B05": 1750.0,
+      "B06": 8000.0,
+      "B07": 7200.0,
+      "B08": 9600.0,
+      "B09": 600.0,
+      "B10": 480.0,
+      "B11": 12000.0,
+      "B12": 14400.0
+     }
+    }
+   },
+   {
+    "sequence": 7,
+    "timestamp": "2026-10-28T10:28:42.379947+00:00",
+    "tool": "calculate_route_eta",
+    "inputs": {},
+    "result": {
+     "routes": [
+      {
+       "origin": "checkpoint",
+       "destination": "B10",
+       "reachable": true,
+       "travel_hours": 1.03,
+       "distance_km": 24.7,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B09",
+       "reachable": true,
+       "travel_hours": 0.77,
+       "distance_km": 16.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B02",
+       "reachable": true,
+       "travel_hours": 0.59,
+       "distance_km": 19.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B05",
+       "reachable": true,
+       "travel_hours": 0.76,
+       "distance_km": 15.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B03",
+       "reachable": true,
+       "travel_hours": 0.68,
+       "distance_km": 11.5,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B01",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 33.1,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B04",
+       "reachable": true,
+       "travel_hours": 0.91,
+       "distance_km": 22.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B06",
+       "reachable": true,
+       "travel_hours": 0.69,
+       "distance_km": 14.2,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B07",
+       "reachable": true,
+       "travel_hours": 0.8,
+       "distance_km": 17.9,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B08",
+       "reachable": true,
+       "travel_hours": 1.14,
+       "distance_km": 30.8,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B11",
+       "reachable": true,
+       "travel_hours": 1.15,
+       "distance_km": 27.4,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      },
+      {
+       "origin": "checkpoint",
+       "destination": "B12",
+       "reachable": true,
+       "travel_hours": 0.9,
+       "distance_km": 18.6,
+       "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 8,
+    "timestamp": "2026-10-28T10:28:42.380020+00:00",
+    "tool": "optimize_destination",
+    "inputs": {},
+    "result": {
+     "options": [
+      {
+       "id": "B10",
+       "name": "Restaurants · Colaba",
+       "channel": "horeca",
+       "price_inr_kg": 44.550000000000004,
+       "travel_hours": 1.0266666666666668,
+       "distance_km": 24.7,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 480,
+       "available_capacity_kg": 480.0,
+       "transport_inr_kg": 1.1732500000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.287190974129604,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled",
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 33201.4,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B10",
+        "reachable": true,
+        "travel_hours": 1.0266666666666668,
+        "path": [
+         "checkpoint",
+         "B10"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B09",
+       "name": "Hotels · Lower Parel",
+       "channel": "horeca",
+       "price_inr_kg": 42.54,
+       "travel_hours": 0.7733333333333333,
+       "distance_km": 16.84,
+       "minimum_rsl_hours": 21.599999999999998,
+       "capacity_kg": 600,
+       "available_capacity_kg": 600.0,
+       "transport_inr_kg": 0.7998999999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.54052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled",
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 31892.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B09",
+        "reachable": true,
+        "travel_hours": 0.7733333333333333,
+        "path": [
+         "checkpoint",
+         "B09"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B02",
+       "name": "Supermarket · Andheri West",
+       "channel": "retail",
+       "price_inr_kg": 36.074101210642205,
+       "travel_hours": 0.5915,
+       "distance_km": 19.5455,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2250,
+       "available_capacity_kg": 0.0,
+       "transport_inr_kg": 0.92841125,
+       "rescue_cost_inr_kg": 0.0,
+       "arrival_rsl_lower_hours": 30.72235764079627,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled",
+        "Buyer capacity exceeded"
+       ],
+       "net_proceeds_inr": 28116.551968513766,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B02",
+        "reachable": true,
+        "travel_hours": 0.5915,
+        "path": [
+         "checkpoint",
+         "B02"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B05",
+       "name": "Supermarket · Bandra West",
+       "channel": "retail",
+       "price_inr_kg": 36.68506494221093,
+       "travel_hours": 0.7566666666666666,
+       "distance_km": 15.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 1750,
+       "available_capacity_kg": 1750.0,
+       "transport_inr_kg": 0.7172499999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.557190974129604,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 27274.251953768744,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B05",
+        "reachable": true,
+        "travel_hours": 0.7566666666666666,
+        "path": [
+         "checkpoint",
+         "B05"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B03",
+       "name": "Supermarket · Powai",
+       "channel": "retail",
+       "price_inr_kg": 35.35615049990682,
+       "travel_hours": 0.6833333333333333,
+       "distance_km": 11.47,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2000,
+       "available_capacity_kg": 2000.0,
+       "transport_inr_kg": 0.544825,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.630524307462938,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 26349.060399925453,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B03",
+        "reachable": true,
+        "travel_hours": 0.6833333333333333,
+        "path": [
+         "checkpoint",
+         "B03"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B01",
+       "name": "Retail DC · Bhiwandi",
+       "channel": "retail",
+       "price_inr_kg": 33.81661105760271,
+       "travel_hours": 1.1433333333333333,
+       "distance_km": 33.1,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 3250,
+       "available_capacity_kg": 3250.0,
+       "transport_inr_kg": 1.57225,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.170524307462937,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 24295.488846082168,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B01",
+        "reachable": true,
+        "travel_hours": 1.1433333333333333,
+        "path": [
+         "checkpoint",
+         "B01"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B04",
+       "name": "Supermarket · Thane West",
+       "channel": "retail",
+       "price_inr_kg": 33.23087779478399,
+       "travel_hours": 0.9066666666666666,
+       "distance_km": 22.42,
+       "minimum_rsl_hours": 28.8,
+       "capacity_kg": 2750,
+       "available_capacity_kg": 2750.0,
+       "transport_inr_kg": 1.06495,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.407190974129605,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 24232.742235827194,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B04",
+        "reachable": true,
+        "travel_hours": 0.9066666666666666,
+        "path": [
+         "checkpoint",
+         "B04"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B06",
+       "name": "Wholesale · Dadar Market",
+       "channel": "wholesale",
+       "price_inr_kg": 30.6,
+       "travel_hours": 0.69,
+       "distance_km": 14.17,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 8000,
+       "available_capacity_kg": 8000.0,
+       "transport_inr_kg": 0.6730750000000001,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.62385764079627,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 22441.54,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B06",
+        "reachable": true,
+        "travel_hours": 0.69,
+        "path": [
+         "checkpoint",
+         "B06"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B07",
+       "name": "Wholesale · Byculla Market",
+       "channel": "wholesale",
+       "price_inr_kg": 29.099999999999998,
+       "travel_hours": 0.8033333333333333,
+       "distance_km": 17.85,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 7200,
+       "available_capacity_kg": 7200.0,
+       "transport_inr_kg": 0.847875,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.510524307462937,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 21101.7,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B07",
+        "reachable": true,
+        "travel_hours": 0.8033333333333333,
+        "path": [
+         "checkpoint",
+         "B07"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B08",
+       "name": "Wholesale · Borivali Market",
+       "channel": "wholesale",
+       "price_inr_kg": 28.5,
+       "travel_hours": 1.1400000000000001,
+       "distance_km": 30.84,
+       "minimum_rsl_hours": 10.799999999999999,
+       "capacity_kg": 9600,
+       "available_capacity_kg": 9600.0,
+       "transport_inr_kg": 1.4649,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.17385764079627,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 20128.08,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B08",
+        "reachable": true,
+        "travel_hours": 1.1400000000000001,
+        "path": [
+         "checkpoint",
+         "B08"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B11",
+       "name": "Food Processor · Taloja MIDC",
+       "channel": "processor",
+       "price_inr_kg": 16.5,
+       "travel_hours": 1.1533333333333333,
+       "distance_km": 27.41,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 12000,
+       "available_capacity_kg": 12000.0,
+       "transport_inr_kg": 1.3019749999999999,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.16052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 10658.42,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B11",
+        "reachable": true,
+        "travel_hours": 1.1533333333333333,
+        "path": [
+         "checkpoint",
+         "B11"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      },
+      {
+       "id": "B12",
+       "name": "Food Processor · Rabale MIDC",
+       "channel": "processor",
+       "price_inr_kg": 15.84,
+       "travel_hours": 0.9033333333333334,
+       "distance_km": 18.59,
+       "minimum_rsl_hours": 3.6,
+       "capacity_kg": 14400,
+       "available_capacity_kg": 14400.0,
+       "transport_inr_kg": 0.883025,
+       "rescue_cost_inr_kg": 1.875,
+       "arrival_rsl_lower_hours": 30.41052430746294,
+       "feasible": false,
+       "reasons": [
+        "Buyer unavailable or contract cancelled"
+       ],
+       "net_proceeds_inr": 10465.58,
+       "route": {
+        "origin": "checkpoint",
+        "destination": "B12",
+        "reachable": true,
+        "travel_hours": 0.9033333333333334,
+        "path": [
+         "checkpoint",
+         "B12"
+        ],
+        "source": "OSRM road distance (OpenStreetMap); simulated traffic"
+       }
+      }
+     ]
+    }
+   },
+   {
+    "sequence": 9,
+    "timestamp": "2026-10-28T10:28:42.380050+00:00",
+    "tool": "escalate",
+    "inputs": {},
+    "result": {
+     "reason": "No proposal; human review required; destination unchanged"
+    }
+   }
+  ]
+ }
+]

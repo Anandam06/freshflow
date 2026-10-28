@@ -1,0 +1,18 @@
+{
+ "executions": 8,
+ "requests": 32,
+ "input_tokens": 139214,
+ "output_tokens": 3771,
+ "tool_calls": 56,
+ "estimated_cost_usd": 0.015806,
+ "by_model": {
+  "claude-haiku-5-5": {
+   "executions": 8,
+   "input_tokens": 139214,
+   "output_tokens": 3771,
+   "estimated_cost_usd": 0.015806
+  }
+ },
+ "average_cost_per_execution_usd": 0.001976,
+ "average_tokens_per_execution": 17873
+}
